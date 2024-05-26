@@ -1,0 +1,3 @@
+{
+  imports = [./whatsapp-web];
+}

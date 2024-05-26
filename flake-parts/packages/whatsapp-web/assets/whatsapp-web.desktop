@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=WhatsApp Web
+Exec=whatsapp-web
+Icon=whatsapp-web
+Type=Application
+Categories=Network;InstantMessaging;
+StartupWMClass=com.whatsapp.web

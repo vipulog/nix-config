@@ -1,0 +1,35 @@
+[
+	{
+		"id": "Layout 1",
+		"tiles": [{ "x": 0, "y": 0, "width": 1, "height": 1, "groups": [] }]
+	},
+	{
+		"id": "Layout 2",
+		"tiles": [
+			{ "x": 0, "y": 0, "width": 0.5, "height": 1, "groups": [1] },
+			{ "x": 0.5, "y": 0, "width": 0.5, "height": 1, "groups": [1] }
+		]
+	},
+	{
+		"id": "Layout 3",
+		"tiles": [
+			{ "x": 0, "y": 0, "width": 0.5, "height": 1, "groups": [1] },
+			{ "x": 0.5, "y": 0, "width": 0.5, "height": 0.5, "groups": [2, 1] },
+			{ "x": 0.5, "y": 0.5, "width": 0.5, "height": 0.5, "groups": [2, 1] }
+		]
+	},
+	{
+		"id": "Layout 4",
+		"tiles": [
+			{ "x": 0, "y": 0, "width": 0.67, "height": 1, "groups": [1] },
+			{ "x": 0.67, "y": 0, "width": 0.33, "height": 1, "groups": [1] }
+		]
+	},
+	{
+		"id": "Layout 5",
+		"tiles": [
+			{ "x": 0, "y": 0, "width": 1, "height": 0.6, "groups": [1] },
+			{ "x": 0, "y": 0.6, "width": 1, "height": 0.4, "groups": [1] }
+		]
+	}
+]

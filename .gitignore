@@ -1,0 +1,6 @@
+.direnv/
+result
+result-*
+*.qcow2
+.env
+.pre-commit-config.yaml
