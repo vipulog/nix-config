@@ -4,6 +4,7 @@
 
     ../../programs/kitty.nix
     ../../programs/vscode.nix
+    ../../virtualization/virt-manager.nix
   ];
 
   #----Host specific config ----
