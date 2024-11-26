@@ -5,7 +5,6 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
 
-    pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
     stylix.url = "github:danth/stylix";
 
     disko = {
@@ -32,22 +31,6 @@
       forAllSystems = inputs.nixpkgs.lib.genAttrs supportedSystems;
     in
     {
-      checks = forAllSystems (system: {
-        pre-commit-check = inputs.pre-commit-hooks.lib.${system}.run {
-          src = ./.;
-          hooks = {
-            nixpkgs-fmt.enable = true;
-          };
-        };
-      });
-
-      devShells = forAllSystems (system: {
-        default = inputs.nixpkgs.legacyPackages.${system}.mkShell {
-          inherit (self.checks.${system}.pre-commit-check) shellHook;
-          buildInputs = self.checks.${system}.pre-commit-check.enabledPackages;
-        };
-      });
-
       nixosConfigurations =
         let mylib = import ./lib { inherit inputs; }; in {
           desktop = mylib.nixosSystem {
