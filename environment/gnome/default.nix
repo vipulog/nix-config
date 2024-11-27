@@ -27,7 +27,6 @@
     epiphany
     simple-scan
     yelp
-  ]) ++ (with pkgs.gnome; [
     gnome-contacts
     gnome-maps
     gnome-music
