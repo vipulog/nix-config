@@ -4,6 +4,7 @@
 
     ../../programs/kitty.nix
     ../../programs/vscode.nix
+    ../../programs/obs.nix
     ../../virtualization/virt-manager.nix
   ];
 
@@ -19,4 +20,6 @@
       gimp
     ];
   };
+
+  obs.droidcam.enable = true;
 }
