@@ -30,11 +30,6 @@ let lib = inputs.nixpkgs.lib; in {
         config.allowUnfree = true;
       };
 
-      pkgs-stable = import inputs.nixpkgs-stable {
-        system = args.system;
-        config.allowUnfree = true;
-      };
-
     } // (if args ? specialArgs then args.specialArgs else { });
 
     modules = [

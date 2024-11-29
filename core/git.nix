@@ -1,4 +1,4 @@
-{ pkgs, pkgs-stable, username, home-manager, ... }:
+{ pkgs, username, home-manager, ... }:
 
 {
   home-manager.users.${username} = { lib, config, ... }: {
@@ -38,7 +38,7 @@
 
       # A syntax-highlighting pager in Rust
       delta = {
-        package = pkgs-stable.delta;
+        package = pkgs.delta;
         enable = true;
         options = {
           diff-so-fancy = true;
