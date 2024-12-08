@@ -68,6 +68,7 @@
         "org.gnome.Nautilus.desktop"
         "org.gnome.Geary.desktop"
         "brave-browser.desktop"
+        "android-studio.desktop"
         "android-studio-dev.desktop"
         "android-studio-beta.desktop"
       ];

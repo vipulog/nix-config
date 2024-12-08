@@ -14,7 +14,7 @@
 
   home-manager.users.${username} = {
     home.packages = with pkgs; [
-      androidStudioPackages.beta
+      androidStudioPackages.stable
       brave
       librewolf
       gimp
