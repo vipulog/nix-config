@@ -37,7 +37,6 @@ let lib = inputs.nixpkgs.lib; in {
       inputs.home-manager.nixosModules.home-manager
       ../disk-config.nix
       { _module.args.device = args.disk_device; }
-      inputs.nix-ld.nixosModules.nix-ld
       ../host
       ../user
       ../core
