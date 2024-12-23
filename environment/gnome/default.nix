@@ -1,4 +1,6 @@
 { pkgs, username, lib, ... }: {
+  imports = [ ./rdp.nix ];
+
   # ---- Home Configuration ----
   home-manager.users.${username} = { config, ... }: {
     home.packages = [ pkgs.pop-launcher ];
