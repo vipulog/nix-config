@@ -1,10 +1,10 @@
 { pkgs, home-manager, username, config, lib, ... }:
 
 let
-  cfg = config.obs.droidcam;
+  cfg = config.obs;
 in
 {
-  options.obs.droidcam = {
+  options.obs.plugins.droidcam = {
     enable = lib.mkEnableOption "Virtual webcam using droidcam and v4l2loopback";
   };
 
@@ -12,15 +12,13 @@ in
     home-manager.users.${username} = {
       programs.obs-studio = {
         enable = true;
-        plugins = with pkgs.obs-studio-plugins; [
-          wlrobs
-          obs-pipewire-audio-capture
-        ] ++ lib.optional cfg.enable droidcam-obs; # Only add droidcam plugin when enabled
+        plugins = with pkgs.obs-studio-plugins; []
+          ++ lib.optional cfg.plugins.droidcam.enable droidcam-obs;
       };
     };
 
     # Droidcam-specific configuration - only when enabled
-    boot = lib.mkIf cfg.enable {
+    boot = lib.mkIf cfg.plugins.droidcam.enable {
       extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
       kernelModules = [ "v4l2loopback" ];
       extraModprobeConfig = ''

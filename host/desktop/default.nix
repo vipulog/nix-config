@@ -4,7 +4,6 @@
 
     ../../programs/kitty.nix
     ../../programs/vscode.nix
-    ../../programs/obs.nix
 
     ../../services/tailscale.nix
 
@@ -23,6 +22,4 @@
       gimp
     ];
   };
-
-  obs.droidcam.enable = true;
 }
