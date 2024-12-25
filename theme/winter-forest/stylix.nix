@@ -3,7 +3,11 @@
   imports = [ inputs.stylix.nixosModules.stylix ];
 
   # ---- Home Configuration ----
-  home-manager.users.${username} = {
+  home-manager.users.${username} = { lib, config, ... }: {
+    home.activation.removeExistingGTKConfig = lib.hm.dag.entryBefore [ "checkLinkTargets" ] ''
+      rm -rf ${config.home.homeDirectory}/.config/gtk-*
+    '';
+
     stylix = {
       enable = true;
       targets = {
