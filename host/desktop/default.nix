@@ -5,6 +5,9 @@
     ../../programs/kitty.nix
     ../../programs/vscode.nix
     ../../programs/obs.nix
+
+    ../../services/tailscale.nix
+
     ../../virtualization/virt-manager.nix
   ];
 
