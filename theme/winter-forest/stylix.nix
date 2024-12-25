@@ -12,6 +12,7 @@
       enable = true;
       targets = {
         gnome.enable = true;
+        zellij.enable = true;
         gtk.enable = true;
         gtk.extraCss = ''
           decoration, window, window.background, window.titlebar, .titlebar {
