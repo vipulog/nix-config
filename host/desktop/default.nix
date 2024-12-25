@@ -7,8 +7,6 @@
     ../../programs/vscode.nix
 
     ../../services/tailscale.nix
-
-    ../../virtualization/virt-manager.nix
   ];
 
   #----Host specific config ----
