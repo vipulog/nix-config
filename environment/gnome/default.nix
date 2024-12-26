@@ -1,10 +1,11 @@
 { pkgs, username, lib, ... }: {
+
   imports = [ ./rdp.nix ];
 
   # ---- Home Configuration ----
   home-manager.users.${username} = { config, ... }: {
-    home.packages = [ pkgs.pop-launcher ];
     imports = [ ./keybindings.nix ./extensions.nix ./preferences.nix ];
+    home.packages = with pkgs; [ pop-launcher gnome-tweaks dconf-editor ];
   };
 
   # ---- System Configuration ----
@@ -15,11 +16,6 @@
   };
 
   programs.dconf.enable = true;
-
-  environment.systemPackages = with pkgs; [
-    gnome-tweaks
-    dconf-editor
-  ];
 
   environment.gnome.excludePackages = (with pkgs; [
     gnome-photos

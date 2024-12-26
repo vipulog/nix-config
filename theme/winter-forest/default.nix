@@ -1,3 +1,7 @@
-{ mylib, ... }: {
-  imports = mylib.scanPaths ./.;
+{
+  imports = [
+    ./fonts.nix
+    ./gtk.nix
+    ./stylix.nix
+  ];
 }

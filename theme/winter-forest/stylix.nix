@@ -1,4 +1,4 @@
-{ pkgs, username, mylib, theme, inputs, ... }: {
+{ pkgs, username, inputs, ... }: {
 
   imports = [ inputs.stylix.nixosModules.stylix ];
 
@@ -28,7 +28,7 @@
     enable = true;
     autoEnable = false;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/brewer.yaml";
-    image = mylib.relativeToRoot "assets/backgrounds/${theme}.jpg";
+    image = ../../assets/backgrounds/winter-forest.jpg;
     polarity = "dark";
   };
 }

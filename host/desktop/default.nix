@@ -1,10 +1,17 @@
-{ mylib, pkgs, home-manager, username, ... }: {
+{ pkgs, home-manager, username, ... }: {
+
   imports = [
     ./hardware-configuration.nix
+    ./disk-config.nix
 
-    ../../programs/git.nix
-    ../../programs/kitty.nix
-    ../../programs/vscode.nix
+    ../../environment/gnome
+    ../../theme/winter-forest
+
+    ../../extras/awesome_nix.nix
+    ../../extras/awesome_shell.nix
+    ../../extras/common_cli_tools.nix
+    ../../extras/cool_cli_tools.nix
+    ../../extras/dev_tools.nix
 
     ../../services/tailscale.nix
 

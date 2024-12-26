@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{ pkgs, ... }: {
   environment.systemPackages = with pkgs; [ gnome-remote-desktop ];
   services.gnome.gnome-remote-desktop.enable = true;
 

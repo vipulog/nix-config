@@ -1,9 +1,5 @@
-{ pkgs, home-manager, username, config, lib, ... }:
+{ pkgs, home-manager, username, config, lib, ... }: let cfg = config.obs; in {
 
-let
-  cfg = config.obs;
-in
-{
   options.obs.plugins.droidcam = {
     enable = lib.mkEnableOption "Virtual webcam using droidcam and v4l2loopback";
   };

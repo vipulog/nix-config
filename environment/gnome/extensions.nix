@@ -1,6 +1,5 @@
-{ lib, config, pkgs, ... }:
+{ lib, config, pkgs, ... }: let
 
-let
   pop-shell-no-icon = pkgs.gnomeExtensions.pop-shell.overrideAttrs (oldAttrs: {
     postInstall = ''
       ${oldAttrs.postInstall or ""}
@@ -22,9 +21,9 @@ let
     user-themes
   ];
 
-in
-{
+in {
   home.packages = gnomeExtensionsList;
+
   dconf.settings = with lib.gvariant; {
     "org/gnome/shell" = {
       enabled-extensions = (map (extension: extension.extensionUuid) gnomeExtensionsList);

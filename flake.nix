@@ -27,22 +27,15 @@
     # };
   };
 
-  outputs = inputs@{ self, ... }:
-    let
-      supportedSystems = [ "x86_64-linux" ];
-      forAllSystems = inputs.nixpkgs.lib.genAttrs supportedSystems;
-    in
-    {
-      nixosConfigurations =
-        let mylib = import ./lib { inherit inputs; }; in {
-          desktop = mylib.nixosSystem {
-            system = "x86_64-linux";
-            disk_device = "/dev/sdb";
-            username = "vipul";
-            hostname = "desktop";
-            de = "gnome";
-            theme = "winter-forest";
-          };
-        };
+  outputs = inputs@{ self, ... }: let
+    inherit (import ./lib/mk_nixos_system.nix { inherit inputs; }) mkNixosSystem;
+  in {
+    nixosConfigurations = {
+      desktop = mkNixosSystem {
+        system = "x86_64-linux";
+        hostname = "desktop";
+        username = "vipul";
+      };
     };
+  };
 }

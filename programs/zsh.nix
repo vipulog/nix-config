@@ -1,6 +1,5 @@
-{ username, home-manager, ... }:
+{ username, home-manager, ... }: {
 
-{
   programs.zsh.enable = true;
 
   home-manager.users.${username} = { config, ... }: {

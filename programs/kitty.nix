@@ -1,6 +1,5 @@
-{ home-manager, username, pkgs, lib, ... }:
+{ home-manager, username, pkgs, lib, ... }: {
 
-{
   home-manager.users.${username} = {
 
     home.packages = with pkgs; [

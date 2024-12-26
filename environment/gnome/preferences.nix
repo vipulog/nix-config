@@ -1,6 +1,4 @@
-{ lib, ... }:
-
-{
+{ lib, ... }: {
   dconf.settings = with lib.gvariant; {
     "org/gnome/GWeather4" = {
       temperature-unit = "centigrade";
