@@ -1,0 +1,16 @@
+[language-server]
+
+  [language-server.nil]
+  command = "nil"
+
+  [language-server.nil.config.nil]
+  formatting.command = "nixfmt"
+  nix.maxMemoryMB = 2560
+  nix.autoEvalInputs = true
+
+[[languages]]
+name = "nix"
+auto-format = true
+
+  [[languages.language-servers]]
+  name = "nil"
