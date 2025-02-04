@@ -6,7 +6,7 @@
       enable_audio_bell = "no";
       cursor_stop_blinking_after = "5.0";
       mouse_hide_wait = "3";
-      background_opacity = "1";
+      background_opacity = "0.92";
       window_border_width = "20px";
     };
 
