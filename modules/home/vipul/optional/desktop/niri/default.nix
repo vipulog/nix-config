@@ -41,7 +41,7 @@ in {
     };
 
     layout = {
-      gaps = 0;
+      gaps = 8;
 
       border = {
         enable = true;
