@@ -4,7 +4,7 @@
   command = "nil"
 
   [language-server.nil.config.nil]
-  formatting.command = "nixfmt"
+  formatting.command = ["nixfmt"]
   nix.maxMemoryMB = 2560
   nix.autoEvalInputs = true
 
