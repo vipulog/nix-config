@@ -6,6 +6,8 @@
         "modules/home/vipul/optional/desktop/niri"
         "modules/home/vipul/optional/browsers"
         "modules/home/vipul/optional/btop.nix"
+        "modules/home/vipul/optional/nnn.nix"
+        "modules/home/vipul/optional/direnv.nix"
       ])
     ];
 
