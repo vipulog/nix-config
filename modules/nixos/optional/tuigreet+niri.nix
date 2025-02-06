@@ -5,7 +5,7 @@
   ...
 }: let
   greeterExe = lib.getExe pkgs.greetd.tuigreet;
-  sessionExe = lib.getExe pkgs.niri;
+  sessionExe = lib.getExe' pkgs.niri "niri-session";
 in {
   imports = [
     ./greetd.nix
