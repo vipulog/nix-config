@@ -11,6 +11,7 @@ in {
   imports = [
     ./tofi.nix
     ./wpaperd.nix
+    ./mako.nix
   ];
 
   programs.niri.settings = {
