@@ -1,12 +1,8 @@
-{
-  pkgs,
-  lib,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     ./fonts.nix
     ./zsh.nix
-    ./kitty.nix
+    ./ghostty.nix
     ./helix.nix
     ./git.nix
   ];
@@ -16,7 +12,6 @@
 
     sessionVariables = {
       FLAKE = "$HOME/nixos-config";
-      TERMINAL = lib.getExe pkgs.kitty;
       EDITOR = "hx";
 
       # enable scrolling in git diff

@@ -11,7 +11,7 @@
       hint-font = false;
       ascii-input = true;
       late-keyboard-init = true;
-      terminal = "${lib.getExe pkgs.kitty}";
+      terminal = "${lib.getExe pkgs.ghostty} -e";
       anchor = "bottom";
       width = "100%";
       height = 46;

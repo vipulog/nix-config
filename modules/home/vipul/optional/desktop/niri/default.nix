@@ -128,10 +128,10 @@ in {
           "Mod+Shift+S".action = screenshot;
         }
         {
-          "Mod+V".action = sh "${getExe pkgs.kitty} -e '${getExe pkgs.clipse}'";
+          "Mod+V".action = sh "${getExe pkgs.ghostty} -e '${getExe pkgs.clipse}'";
           "Mod+Space".action = sh "${getExe' pkgs.tofi "tofi-drun"} | xargs niri msg action spawn --";
           "Mod+Shift+Space".action = sh "${getExe' pkgs.tofi "tofi-run"} | xargs niri msg action spawn --";
-          "Mod+Return".action = spawn "${getExe pkgs.kitty}";
+          "Mod+Return".action = spawn "${getExe pkgs.ghostty}";
           "Mod+Period".action = spawn "${getExe bemoji-tofi}";
         }
         {
@@ -143,7 +143,7 @@ in {
       ];
 
     spawn-at-startup = [
-      {command = ["sh" "-c" "${getExe pkgs.kitty} -e '${getExe pkgs.btop}'"];}
+      {command = ["sh" "-c" "${getExe pkgs.ghostty} -e '${getExe pkgs.btop}'"];}
       {command = ["${getExe pkgs.wpaperd}" "--daemon"];}
       {command = ["${getExe pkgs.xwayland-satellite}"];}
       {command = ["${getExe pkgs.clipse}" "-listen"];}
