@@ -15,9 +15,10 @@
   };
 
   home.packages = with pkgs; [
-    noto-fonts-emoji # For Noto Color Emoji and Noto Emoji
-    jetbrains-mono # For JetbrainsMono
-    inter # For Inter
-    merriweather # For Merriweather
+    noto-fonts-emoji
+    jetbrains-mono
+    nerd-fonts.jetbrains-mono
+    inter
+    merriweather
   ];
 }
