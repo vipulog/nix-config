@@ -12,6 +12,7 @@ in {
     ./tofi.nix
     ./wpaperd.nix
     ./mako.nix
+    ./waybar.nix
   ];
 
   programs.niri.settings = {
@@ -93,6 +94,8 @@ in {
           "Mod+Q".action = close-window;
           "Mod+F".action = maximize-column;
           "Mod+C".action = center-column;
+          "Mod+Escape".action = switch-focus-between-floating-and-tiling;
+          "Mod+Ctrl+Escape".action = toggle-window-floating;
 
           "Mod+Shift+Right".action = move-column-right;
           "Mod+Shift+Left".action = move-column-left;
@@ -130,6 +133,7 @@ in {
         {
           "Mod+V".action = sh "${getExe pkgs.ghostty} -e '${getExe pkgs.clipse}'";
           "Mod+Space".action = sh "${getExe' pkgs.tofi "tofi-drun"} | xargs niri msg action spawn --";
+          "Alt+Space".action = sh "if pidof waybar > /dev/null; then kill $(pidof waybar); else waybar; fi";
           "Mod+Shift+Space".action = sh "${getExe' pkgs.tofi "tofi-run"} | xargs niri msg action spawn --";
           "Mod+Return".action = spawn "${getExe pkgs.ghostty}";
           "Mod+Period".action = spawn "${getExe bemoji-tofi}";
@@ -143,7 +147,6 @@ in {
       ];
 
     spawn-at-startup = [
-      {command = ["sh" "-c" "${getExe pkgs.ghostty} -e '${getExe pkgs.btop}'"];}
       {command = ["${getExe pkgs.wpaperd}" "--daemon"];}
       {command = ["${getExe pkgs.xwayland-satellite}"];}
       {command = ["${getExe pkgs.clipse}" "-listen"];}
