@@ -6,7 +6,10 @@
         path = "/home/vipul/Pictures/Wallpapers/";
         sorting = "random";
         duration = "10m";
-        transition.colour-distance = {};
+        transition-time = 3000;
+        transition.colour-distance = {
+          power = 1000;
+        };
       };
     };
   };
