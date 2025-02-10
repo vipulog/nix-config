@@ -30,7 +30,9 @@ in {
 
         modules-left = [
           "custom/app-launcher"
-          "custom/divider"
+          "temperature"
+          "memory"
+          "disk"
         ];
 
         modules-center = [
@@ -39,16 +41,11 @@ in {
 
         modules-right = [
           "tray"
-          "custom/divider"
+          "privacy"
           "network"
-          "custom/divider"
           "pulseaudio"
-          "custom/divider"
-          "custom/battery-placeholder"
           "battery"
-          "custom/divider"
           "clock"
-          "custom/divider"
           "custom/power"
         ];
 
@@ -80,14 +77,32 @@ in {
           on-scroll-down = volume-down;
         };
 
-        tray = {
-          icon-size = 16;
-          spacing = 2;
+        temperature = {
+          format = " {temperatureC}°C";
         };
 
-        "custom/divider" = {
-          format = "│";
-          tooltip = false;
+        memory = {
+          format = "  {percentage}%";
+        };
+
+        disk = {
+          format = "  {percentage_used}%";
+        };
+
+        tray = {
+          icon-size = 12;
+          spacing = 8;
+        };
+
+        privacy = {
+          icon-spacing = 8;
+          icon-size = 12;
+          transition-duration = 250;
+          modules = [
+            {type = "audio-in";}
+            {type = "audio-out";}
+            {type = "screenshare";}
+          ];
         };
 
         "custom/app-launcher" = {
@@ -100,12 +115,6 @@ in {
           format = "⏻ ";
           on-click = power-tofi;
           tooltip-format = "Power Menu";
-        };
-
-        "custom/battery-placeholder" = {
-          exec = "if [ ! -d /sys/class/power_supply/BAT0 ]; then echo '󰁽 NA'; fi";
-          interval = 10;
-          tooltip = false;
         };
       };
     };
@@ -121,6 +130,7 @@ in {
             font-family: ${fontFamily};
             font-size: ${fontSize};
             min-height: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.75);
         }
 
         window#waybar {
@@ -128,33 +138,23 @@ in {
             color: ${textColor};
         }
 
+        window#waybar.empty {
+            background-color: transparent;
+        }
+
         #clock,
         #network,
         #battery,
         #pulseaudio,
         #tray,
+        #privacy,
+        #temperature,
+        #memory,
+        #disk,
         #custom-app-launcher,
-        #custom-power,
-        #custom-battery-placeholder,
-        #custom-tray-placeholder {
+        #custom-power {
             padding: ${padding};
             margin: ${margin};
-        }
-
-        #custom-app-launcher {
-          font-size: 16px;
-          padding: 0;
-          margin: 0;
-        }
-
-        #custom-power {
-            font-weight: bold;
-            color: ${textColor};
-        }
-
-        #custom-divider {
-            font-size: 10px;
-            opacity: 0.5;
         }
       '';
   };
