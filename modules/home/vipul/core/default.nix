@@ -16,10 +16,10 @@
       # enable scrolling in git diff
       DELTA_PAGER = "less -R";
     };
-  };
 
-  home.packages = with pkgs; [
-    # Packages that don't have custom configs go here
-    coreutils # basic gnu utils
-  ];
+    packages = with pkgs; [
+      # Packages that don't have custom configs go here
+      coreutils # basic gnu utils
+    ];
+  };
 }
