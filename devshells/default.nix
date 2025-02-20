@@ -10,7 +10,7 @@
     packages = with pkgs; [
       helix
       nil
-      nixfmt
+      nixfmt-rfc-style
     ];
   };
 }
