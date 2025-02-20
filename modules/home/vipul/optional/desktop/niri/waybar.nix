@@ -12,12 +12,8 @@
   volume-up = "${lib.getExe' pkgs.pulseaudio "pactl"} set-sink-volume @DEFAULT_SINK@ +5%";
   volume-down = "${lib.getExe' pkgs.pulseaudio "pactl"} set-sink-volume @DEFAULT_SINK@ -5%";
 
-  fontFamily = "JetBrainsMono Nerd Font";
-  fontSize = "14px";
   padding = "2px 4px";
   margin = "2px 4px";
-  background = "#000000";
-  textColor = "#ffffff";
 in {
   programs.waybar = {
     enable = true;
@@ -127,15 +123,8 @@ in {
         * {
             border: none;
             border-radius: 0;
-            font-family: ${fontFamily};
-            font-size: ${fontSize};
             min-height: 0;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.75);
-        }
-
-        window#waybar {
-            background: ${background};
-            color: ${textColor};
         }
 
         window#waybar.empty {

@@ -10,6 +10,7 @@
 in {
   imports = [
     ./tofi.nix
+    ./stylix.nix
     ./wpaperd.nix
     ./mako.nix
     ./waybar.nix
@@ -18,7 +19,6 @@ in {
   programs.niri.settings = {
     outputs."HDMI-A-1" = {
       scale = 1.0;
-      background-color = "#000000";
 
       mode = {
         width = 1920;
@@ -44,18 +44,19 @@ in {
 
     layout = {
       gaps = 8;
-
-      border = {
-        enable = true;
-        active = {color = "#7fc8ff";};
-        inactive = {color = "#7c7c7c";};
-        width = 4;
-      };
-
-      focus-ring = {
-        enable = false;
-      };
     };
+
+    window-rules = [
+      {
+        clip-to-geometry = true;
+        geometry-corner-radius = {
+          top-left = 8.0;
+          top-right = 8.0;
+          bottom-left = 8.0;
+          bottom-right = 8.0;
+        };
+      }
+    ];
 
     binds = with config.lib.niri.actions; let
       sh = spawn "sh" "-c";
@@ -151,12 +152,5 @@ in {
       {command = ["${getExe pkgs.xwayland-satellite}"];}
       {command = ["${getExe pkgs.clipse}" "-listen"];}
     ];
-  };
-
-  home = {
-    pointerCursor = {
-      package = pkgs.simp1e-cursors;
-      name = "Simp1e";
-    };
   };
 }

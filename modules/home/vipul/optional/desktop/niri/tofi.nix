@@ -16,7 +16,6 @@
     enable = true;
 
     settings = {
-      font = "${pkgs.jetbrains-mono}/share/fonts/truetype/JetBrainsMono-Regular.ttf";
       hint-font = false;
       ascii-input = true;
       late-keyboard-init = true;
@@ -25,14 +24,9 @@
       width = "100%";
       height = 36;
       horizontal = true;
-      font-size = 12;
       prompt-text = " run: ";
       outline-width = 0;
       border-width = 2;
-      border-color = "#7fc8ff";
-      selection-color = "#ffffff";
-      default-result-color = "#7c7c7c";
-      background-color = "#000000";
       min-input-width = 20;
       result-spacing = 20;
       padding-top = 4;
