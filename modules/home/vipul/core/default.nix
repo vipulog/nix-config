@@ -11,8 +11,6 @@
 
     sessionVariables = {
       FLAKE = "$HOME/nixos-config";
-      EDITOR = "hx";
-
       # enable scrolling in git diff
       DELTA_PAGER = "less -R";
     };
