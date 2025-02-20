@@ -10,6 +10,7 @@
         "modules/home/vipul/optional/nnn.nix"
         "modules/home/vipul/optional/direnv.nix"
         "modules/home/vipul/optional/zoxide.nix"
+        "modules/home/vipul/optional/lazygit.nix"
       ])
     ];
 
