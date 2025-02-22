@@ -8,7 +8,6 @@
     inputs.disko.nixosModules.disko
     ./disk-config.nix
     ./homes
-    ./virtualization/qemu.nix
 
     (map lib.custom.relativeToRoot [
       "modules/nixos/core"

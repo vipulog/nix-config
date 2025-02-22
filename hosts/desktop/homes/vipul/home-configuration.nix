@@ -1,8 +1,6 @@
 {lib, ...}: {
   home-manager.users.vipul = {
     imports = lib.flatten [
-      ./virtualization/qemu.nix
-
       (map lib.custom.relativeToRoot [
         "modules/home/vipul/core"
         "modules/home/vipul/optional/desktop/niri"
