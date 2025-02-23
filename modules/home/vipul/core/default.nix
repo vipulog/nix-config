@@ -3,7 +3,11 @@
     ./zsh.nix
     ./helix.nix
     ./git.nix
+    ./lazygit.nix
     ./starship
+    ./atuin.nix
+    ./zoxide.nix
+    ./nnn.nix
   ];
 
   home = {

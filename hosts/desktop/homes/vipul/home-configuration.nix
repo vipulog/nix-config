@@ -7,11 +7,7 @@
         "modules/home/vipul/optional/browsers"
         "modules/home/vipul/optional/ghostty.nix"
         "modules/home/vipul/optional/btop.nix"
-        "modules/home/vipul/optional/nnn.nix"
         "modules/home/vipul/optional/direnv.nix"
-        "modules/home/vipul/optional/zoxide.nix"
-        "modules/home/vipul/optional/lazygit.nix"
-        "modules/home/vipul/optional/atuin.nix"
       ])
     ];
 
