@@ -6,6 +6,7 @@
 }: let
   greeterExe = lib.getExe pkgs.greetd.tuigreet;
   sessionExe = lib.getExe' pkgs.niri "niri-session";
+  autoLoginCfg = config.customOptions.autoLogin or {};
 in {
   imports = [
     ./greetd.nix
@@ -21,7 +22,7 @@ in {
       '';
     };
 
-    initial_session = lib.mkIf config.autoLogin.enable {
+    initial_session = lib.mkIf (autoLoginCfg.enable or false) {
       command = "${sessionExe}";
     };
   };

@@ -15,6 +15,7 @@
       "modules/nixos/optional/tuigreet+niri.nix" # greeter + window manager
       "modules/nixos/optional/openssh.nix" # allow remote SSH access
       "modules/nixos/optional/audio.nix" # pipewire and cli controls
+      "modules/custom/options/auto-login.nix"
     ])
   ];
 
@@ -30,10 +31,14 @@
     timeout = 3;
   };
 
-  autoLogin.enable = true;
-  autoLogin.username = "vipul";
-
   services.tailscale.enable = true;
+
+  customOptions = {
+    autoLogin = {
+      enable = true;
+      username = "vipul";
+    };
+  };
 
   # https://wiki.nixos.org/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "24.05";
