@@ -2,14 +2,26 @@
   config,
   lib,
   ...
-}: let
-  autoLoginCfg = config.customOptions.autoLogin or {};
-in {
-  services.greetd = {
-    enable = true;
+}: {
+  options.autoLogin = {
+    enable = lib.mkEnableOption "Enable automatic login";
 
-    settings = lib.mkIf (autoLoginCfg.enable or false) {
-      initial_session.user = autoLoginCfg.username;
+    username = lib.mkOption {
+      type = lib.types.str;
+      default = "guest";
+      description = "User to automatically login";
+    };
+  };
+
+  config = {
+    services.greetd = {
+      enable = true;
+
+      settings = {
+        initial_session = lib.mkIf config.autoLogin.enable {
+          user = "${config.autoLogin.username}";
+        };
+      };
     };
   };
 }

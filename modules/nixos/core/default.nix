@@ -1,11 +1,6 @@
-{
-  inputs,
-  lib,
-  ...
-}: {
+{inputs, ...}: {
   imports = [
     inputs.home-manager.nixosModules.home-manager
-    (lib.custom.relativeToRoot "modules/custom/options")
 
     ./nix.nix
     ./localization.nix
