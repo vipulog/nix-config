@@ -3,6 +3,7 @@
     ./zsh.nix
     ./helix.nix
     ./git.nix
+    ./starship
   ];
 
   home = {
