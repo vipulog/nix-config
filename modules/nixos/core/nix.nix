@@ -17,8 +17,8 @@
       # See https://jackson.dev/post/nix-reasonable-defaults/
       connect-timeout = 5;
       log-lines = 25;
-      min-free = 128000000; # 128MB
-      max-free = 1000000000; # 1GB
+      min-free = 10 * 1024 * 1024 * 1024; # 10GB
+      max-free = 50 * 1024 * 1024 * 1024; # 50GB
 
       auto-optimise-store = true;
       warn-dirty = false;
@@ -32,13 +32,6 @@
         "root"
         "@wheel"
       ];
-    };
-
-    gc = {
-      automatic = true;
-      dates = "weekly";
-      # Keep the last 10 generations
-      options = "--delete-older-than +10";
     };
   };
 }
