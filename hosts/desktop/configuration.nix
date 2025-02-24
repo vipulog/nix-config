@@ -11,7 +11,7 @@
 
     (map lib.custom.relativeToRoot [
       "modules/nixos/core"
-      "modules/nixos/users/vipul.nix"
+      "modules/nixos/optional/users/vipul"
       "modules/nixos/optional/tuigreet+niri.nix" # greeter + window manager
       "modules/nixos/optional/openssh.nix" # allow remote SSH access
       "modules/nixos/optional/audio.nix" # pipewire and cli controls
