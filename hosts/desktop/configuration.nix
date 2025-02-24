@@ -7,11 +7,10 @@
     ./hardware-configuration.nix
     inputs.disko.nixosModules.disko
     ./disk-config.nix
-    ./homes
+    ./users
 
     (map lib.custom.relativeToRoot [
       "modules/nixos/core"
-      "modules/nixos/optional/users/vipul"
       "modules/nixos/optional/tuigreet+niri.nix" # greeter + window manager
       "modules/nixos/optional/openssh.nix" # allow remote SSH access
       "modules/nixos/optional/audio.nix" # pipewire and cli controls
