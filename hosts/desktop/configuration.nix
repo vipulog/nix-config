@@ -2,7 +2,9 @@
   inputs,
   lib,
   ...
-}: {
+}: let
+  hostname = builtins.baseNameOf ./.;
+in {
   imports = lib.flatten [
     ./hardware-configuration.nix
     inputs.disko.nixosModules.disko
@@ -18,7 +20,7 @@
   ];
 
   networking = {
-    hostName = "desktop";
+    hostName = hostname;
     networkmanager.enable = true;
     enableIPv6 = false;
   };

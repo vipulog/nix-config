@@ -1,14 +1,24 @@
-{lib, ...}: {
-  home-manager.users.vipul = {
+{
+  lib,
+  username,
+  ...
+}: let
+  homePath = "modules/home/${username}/";
+
+  optionalModulePaths = map (x: "${homePath}/optional/${x}") [
+    "desktop/niri"
+    "browsers"
+    "ghostty.nix"
+    "btop.nix"
+    "direnv.nix"
+  ];
+in {
+  home-manager.users.${username} = {
     imports = lib.flatten [
-      (map lib.custom.relativeToRoot [
-        "modules/home/vipul/core"
-        "modules/home/vipul/optional/desktop/niri"
-        "modules/home/vipul/optional/browsers"
-        "modules/home/vipul/optional/ghostty.nix"
-        "modules/home/vipul/optional/btop.nix"
-        "modules/home/vipul/optional/direnv.nix"
-      ])
+      (map lib.custom.relativeToRoot (lib.flatten [
+        "${homePath}/core"
+        optionalModulePaths
+      ]))
     ];
 
     # The state version is required and should stay at the version you

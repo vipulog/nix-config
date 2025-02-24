@@ -1,8 +1,8 @@
 {lib, ...}: let
-  username = "vipul";
+  username = builtins.baseNameOf ./.;
 in {
   imports = [
     (lib.custom.relativeToRoot "modules/nixos/optional/users/${username}")
-    ./home-configuration.nix
+    (import ./home-configuration.nix {inherit lib username;})
   ];
 }
