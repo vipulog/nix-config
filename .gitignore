@@ -1,4 +1,4 @@
-.pre-commit-config.yaml
-.direnv
-tmp
+.direnv/
 result
+result-*
+.pre-commit-config.yaml
