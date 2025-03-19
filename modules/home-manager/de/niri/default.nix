@@ -171,6 +171,11 @@ in {
             "-listen"
           ];
         }
+        {
+          command = [
+            "${getExe inputs.vgs.packages.${pkgs.system}.default}"
+          ];
+        }
       ];
     };
   };
