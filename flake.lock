@@ -1015,17 +1015,18 @@
         ]
       },
       "locked": {
-        "lastModified": 1742383470,
-        "narHash": "sha256-/GRAfvhKPdHqyLG2+qDLWwSHoVojbCembOF9ppNHlU4=",
-        "ref": "refs/heads/main",
-        "rev": "aeecc7eab87bb1c22cef3e78469c134b7eb538a5",
-        "revCount": 2,
+        "lastModified": 1742475557,
+        "narHash": "sha256-6+AUjyQbIHPqImyAWZj1tL4LmKPBy8SJB3y0GDvRles=",
+        "ref": "develop",
+        "rev": "3dc240700db0908699b7b04ccf1c10d6a1808e69",
+        "revCount": 3,
         "type": "git",
-        "url": "ssh://git@github.com/vipulog/vgs.git"
+        "url": "ssh://git@github.com/vipulog/vgs"
       },
       "original": {
+        "ref": "develop",
         "type": "git",
-        "url": "ssh://git@github.com/vipulog/vgs.git"
+        "url": "ssh://git@github.com/vipulog/vgs"
       }
     },
     "xwayland-satellite-stable": {
