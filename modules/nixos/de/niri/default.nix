@@ -21,9 +21,6 @@ in {
       systemPackages = with pkgs; [
         xwayland-satellite
         wl-clipboard
-        alacritty
-        fuzzel
-        swaylock
       ];
     };
   };
