@@ -39,6 +39,7 @@ in {
         "Mod+R".action = switch-preset-column-width;
 
         "Mod+F".action = maximize-column;
+        "Mod+Ctrl+F".action = expand-column-to-available-width;
         "Mod+C".action = center-column;
 
         "Mod+L".action = focus-column-right;
@@ -48,6 +49,8 @@ in {
 
         "Mod+Minus".action = set-column-width "-10%";
         "Mod+Equal".action = set-column-width "+10%";
+
+        "Mod+W".action = toggle-column-tabbed-display;
       }
 
       # Window Management
@@ -79,7 +82,9 @@ in {
       {
         "Print".action = screenshot;
         "Mod+Print".action = screenshot-window;
-        "Mod+Shift+Print".action = screenshot-screen;
+        # "Mod+Shift+Print".action = screenshot-screen;
+        # https://github.com/sodiboo/niri-flake/issues/922
+        "Mod+Shift+Print".action.screenshot-screen = [];
       }
 
       # Application Launchers
