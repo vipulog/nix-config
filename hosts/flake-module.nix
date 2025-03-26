@@ -11,7 +11,7 @@ with lib; let
       inputs.nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit (ctx) inputs' self';
-          inherit inputs self;
+          inherit inputs system host self;
           packages = ctx.config.packages or {};
           pkgsStable = pkgsStable system;
           pkgsUnstable = pkgsUnstable system;
@@ -27,7 +27,7 @@ with lib; let
       inputs.nix-on-droid.lib.nixOnDroidConfiguration {
         specialArgs = {
           inherit (ctx) inputs' self';
-          inherit inputs self;
+          inherit inputs system host self;
           packages = ctx.config.packages or {};
           pkgsStable = pkgsStable system;
           pkgsUnstable = pkgsUnstable system;
