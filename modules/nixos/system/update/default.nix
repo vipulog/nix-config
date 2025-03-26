@@ -1,11 +1,11 @@
 {
   config,
   lib,
+  host,
   ...
 }:
 with lib; let
   cfg = config.internal.system.autoUpdate;
-  host = config.networking.hostName;
   input = "github:vipulog/nixos-config?ref=main";
 in {
   options.internal.system.autoUpdate = {
