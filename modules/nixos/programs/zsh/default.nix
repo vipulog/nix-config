@@ -7,7 +7,7 @@ with lib; let
   cfg = config.internal.programs.zsh;
 in {
   options.internal.programs.zsh = {
-    enable = mkEnableOption "audio";
+    enable = mkEnableOption "zsh";
 
     enableCompletion = mkOption {
       type = types.bool;
