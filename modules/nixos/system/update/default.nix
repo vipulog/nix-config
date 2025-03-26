@@ -20,7 +20,6 @@ in {
       randomizedDelaySec = "45min";
       operation = "boot";
       flags = [
-        "--refresh"
         "-L" # print build logs
       ];
     };
