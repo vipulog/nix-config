@@ -63,7 +63,7 @@
     };
 
     vgs = {
-      url = "git+ssh://git@github.com/vipulog/vgs?ref=develop";
+      url = "github:vipulog/vgs?ref=develop";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
