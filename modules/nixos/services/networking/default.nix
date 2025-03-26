@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  host,
   ...
 }:
 with lib; let
@@ -23,7 +24,10 @@ in {
   };
 
   config = mkIf cfg.enable {
-    networking.networkmanager.enable = true;
+    networking = {
+      networkmanager.enable = true;
+      hostName = host;
+    };
     users.users = userAttrs;
   };
 }
