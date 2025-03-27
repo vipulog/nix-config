@@ -14,5 +14,6 @@
     ./zen-browser
     ./brave-browser
     ./qutebrowser
+    ./android-studio
   ];
 }
