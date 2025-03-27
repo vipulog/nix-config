@@ -10,13 +10,12 @@ with lib; let
     withSystem system (ctx:
       inputs.nixpkgs.lib.nixosSystem {
         specialArgs = {
-          inherit (ctx) inputs' self';
+          inherit (ctx) inputs' self' pkgsStable pkgsUnstable;
           inherit inputs system host self;
           packages = ctx.config.packages or {};
-          pkgsStable = pkgsStable system;
-          pkgsUnstable = pkgsUnstable system;
         };
         modules = [
+          {nixpkgs.pkgs = ctx.pkgs;}
           self.nixosModules.default
           "${platformDirs.nixos}/${system}/${host}"
         ];
@@ -29,8 +28,6 @@ with lib; let
           inherit (ctx) inputs' self';
           inherit inputs system host self;
           packages = ctx.config.packages or {};
-          pkgsStable = pkgsStable system;
-          pkgsUnstable = pkgsUnstable system;
         };
         modules = [
           self.nixOnDroidModules.default
@@ -43,10 +40,6 @@ with lib; let
     nixos = ./nixos;
     nixOnDroid = ./nix-on-droid;
   };
-
-  # Import stable and unstable nixpkgs
-  pkgsStable = system: import inputs.nixpkgs-stable {inherit system;};
-  pkgsUnstable = system: import inputs.nixpkgs-unstable {inherit system;};
 
   # Configuration builders for each platform
   builders = {
