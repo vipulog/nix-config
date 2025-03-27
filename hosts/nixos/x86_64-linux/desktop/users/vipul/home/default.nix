@@ -11,6 +11,7 @@
         brave-browser.enable = true;
         zen-browser.enable = true;
         qutebrowser.enable = true;
+        android-studio.enable = true;
       };
 
       de.niri = {
