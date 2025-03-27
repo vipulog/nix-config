@@ -26,7 +26,7 @@ in {
         connect-timeout = 5;
         log-lines = 25;
 
-        min-free = 10 * 1024 * 1024 * 1024; # 10GB
+        min-free = 30 * 1024 * 1024 * 1024; # 30GB
         max-free = 50 * 1024 * 1024 * 1024; # 50GB
 
         auto-optimise-store = true;
