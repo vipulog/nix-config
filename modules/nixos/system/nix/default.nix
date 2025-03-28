@@ -44,6 +44,11 @@ in {
           "@wheel"
         ];
       };
+
+      optimise = {
+        automatic = true;
+        dates = ["7d"];
+      };
     };
   };
 }
