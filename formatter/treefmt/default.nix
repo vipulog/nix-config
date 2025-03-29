@@ -1,5 +1,4 @@
 {self, ...}: {
-  debug = true;
   perSystem = {...}: {
     treefmt = {
       projectRootFile = builtins.toString (self.lib.relativeToRoot "flake.nix");
