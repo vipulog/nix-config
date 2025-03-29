@@ -6,6 +6,10 @@
   ...
 }:
 with lib; let
+  # Creates a NixOS configuration for a specific host
+  # system: Architecture (e.g., "x86_64-linux")
+  # host: Hostname/configuration name
+  # Returns: A nixosSystem derivation
   mkNixosConfig = system: host:
     withSystem system (ctx:
       inputs.nixpkgs.lib.nixosSystem {
@@ -15,36 +19,36 @@ with lib; let
           packages = ctx.config.packages or {};
         };
         modules = [
-          {nixpkgs.pkgs = ctx.pkgs;}
           self.nixosModules.default
           "${platformDirs.nixos}/${system}/${host}"
+          {nixpkgs.pkgs = ctx.pkgs;}
         ];
       });
 
-  # Directory paths mapped to platform names
+  # Map of platform names to their base directories
+  # Used to locate platform-specific configurations in a consistent way
   platformDirs = {
     nixos = ./nixos;
   };
 
-  # Configuration builders for each platform
+  # Map of platform names to their configuration builder functions
+  # This allows us to use a generic approach for different platforms
   builders = {
     nixos = mkNixosConfig;
   };
 
-  # Helper functions for host discovery
-  getHostsForSystem = platformName: system:
-    pipe (builtins.readDir (platformDirs.${platformName} + "/${system}")) [
-      (filterAttrs (_: type: type == "directory"))
-      attrNames
-    ];
+  # Top-level function to create all configurations for a platform
+  # Returns: An attribute set mapping hostnames to their configurations
+  # Example: { "desktop" = <nixos-config>; "laptop" = <nixos-config>; }
+  makeConfigurations = platformName: let
+    systems = attrNames self.allSystems;
+    systemConfigurations = map (createSystemConfigurations platformName) systems;
+  in
+    listToAttrs (flatten systemConfigurations);
 
-  # Helper function to create a configuration for a single host
-  createHostConfiguration = platformName: system: host: {
-    name = host;
-    value = builders.${platformName} system host;
-  };
-
-  # Helper function to generate configurations for all hosts in a single system
+  # Generates configurations for all hosts of a specific system and platform
+  # Returns an empty list if the system directory doesn't exist
+  # This helps avoid errors when a platform doesn't support a particular system
   createSystemConfigurations = platformName: system: let
     systemPath = platformDirs.${platformName} + "/${system}";
   in
@@ -52,12 +56,23 @@ with lib; let
     then map (createHostConfiguration platformName system) (getHostsForSystem platformName system)
     else [];
 
-  # Generate configurations for all systems and hosts for a given platform
-  makeConfigurations = platformName: let
-    systems = attrNames self.allSystems;
-    systemConfigurations = map (createSystemConfigurations platformName) systems;
-  in
-    listToAttrs (flatten systemConfigurations);
+  # Creates a single name/value pair for a host configuration
+  # Returns: { name = "hostname"; value = <nixos-configuration>; }
+  createHostConfiguration = platformName: system: host: {
+    name = host;
+    value = builders.${platformName} system host;
+  };
+
+  # Discovers all host configurations for a given platform and system
+  # Example: getHostsForSystem "nixos" "x86_64-linux" might return ["desktop" "laptop"]
+  # if those host directories exist
+  getHostsForSystem = platformName: system:
+    pipe (builtins.readDir (platformDirs.${platformName} + "/${system}")) [
+      # Filter to only include directories (each directory = one host)
+      (filterAttrs (_: type: type == "directory"))
+      # Extract just the directory names (host names)
+      attrNames
+    ];
 in {
   flake = {
     nixosConfigurations = makeConfigurations "nixos";
