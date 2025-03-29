@@ -8,9 +8,5 @@
       all = ./home-manager;
       default = all;
     };
-    nixOnDroidModules = rec {
-      all = ./nix-on-droid;
-      default = all;
-    };
   };
 }

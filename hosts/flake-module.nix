@@ -21,30 +21,14 @@ with lib; let
         ];
       });
 
-  mkNixOnDroidConfig = system: host:
-    withSystem system (ctx:
-      inputs.nix-on-droid.lib.nixOnDroidConfiguration {
-        specialArgs = {
-          inherit (ctx) inputs' self';
-          inherit inputs system host self;
-          packages = ctx.config.packages or {};
-        };
-        modules = [
-          self.nixOnDroidModules.default
-          "${platformDirs.nixOnDroid}/${system}/${host}"
-        ];
-      });
-
   # Directory paths mapped to platform names
   platformDirs = {
     nixos = ./nixos;
-    nixOnDroid = ./nix-on-droid;
   };
 
   # Configuration builders for each platform
   builders = {
     nixos = mkNixosConfig;
-    nixOnDroid = mkNixOnDroidConfig;
   };
 
   # Helper functions for host discovery
@@ -77,6 +61,5 @@ with lib; let
 in {
   flake = {
     nixosConfigurations = makeConfigurations "nixos";
-    nixOnDroidConfigurations = makeConfigurations "nixOnDroid";
   };
 }
