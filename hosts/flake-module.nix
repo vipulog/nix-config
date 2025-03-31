@@ -40,7 +40,7 @@ with lib; let
   # Returns: An attribute set mapping hostnames to their configurations
   # Example: { "desktop" = <nixos-config>; "laptop" = <nixos-config>; }
   makeConfigurations = platformName: let
-    systems = attrNames self.allSystems;
+    systems = getSystemsForPlatform platformName;
     systemConfigurations = map (createSystemConfigurations platformName) systems;
   in
     listToAttrs (flatten systemConfigurations);
@@ -62,7 +62,18 @@ with lib; let
     value = builders.${platformName} system host;
   };
 
-  # Discovers all host configurations for a given platform and system
+  # Returns the system architectures available for a given platform.
+  # Example: getSystemsForPlatform "nixos" might return ["x86_64-linux" "aarch64-linux"]
+  # if those system directories exist
+  getSystemsForPlatform = platformName:
+    pipe (builtins.readDir (platformDirs.${platformName})) [
+      # Filter to only include directories (each directory = one host)
+      (filterAttrs (_: type: type == "directory"))
+      # Extract just the directory names (host names)
+      attrNames
+    ];
+
+  # Returns all host configurations for a given platform and system
   # Example: getHostsForSystem "nixos" "x86_64-linux" might return ["desktop" "laptop"]
   # if those host directories exist
   getHostsForSystem = platformName: system:
