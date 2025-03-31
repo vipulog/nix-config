@@ -16,7 +16,6 @@ with lib; let
         specialArgs = {
           inherit (ctx) inputs' self' pkgsStable pkgsUnstable;
           inherit inputs system host self;
-          packages = ctx.config.packages or {};
         };
         modules = [
           self.nixosModules.default
