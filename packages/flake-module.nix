@@ -1,5 +1,9 @@
 {
-  perSystem = {pkgs, ...}: {
-    packages.SF-Pro = pkgs.callPackage ./SF-Pro {inherit (pkgs) stdenv;};
+  perSystem = {pkgs, ...}: let
+    SF-Pro = pkgs.callPackage ./SF-Pro {};
+  in {
+    packages = {
+      inherit SF-Pro;
+    };
   };
 }

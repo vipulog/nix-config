@@ -3,7 +3,11 @@
     pkgs,
     config,
     ...
-  }: {
-    devShells.default = import ./default {inherit pkgs config;};
+  }: let
+    default = import ./default {inherit pkgs config;};
+  in {
+    devShells = {
+      inherit default;
+    };
   };
 }
