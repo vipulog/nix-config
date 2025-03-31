@@ -67,6 +67,23 @@
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["x86_64-linux" "aarch64-linux"];
 
+      perSystem = {system, ...}: {
+        _module.args.pkgs = import inputs.nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+        };
+
+        _module.args.pkgsStable = import inputs.nixpkgs-stable {
+          inherit system;
+          config.allowUnfree = true;
+        };
+
+        _module.args.pkgsUnstable = import inputs.nixpkgs-unstable {
+          inherit system;
+          config.allowunfree = true;
+        };
+      };
+
       imports = [
         inputs.git-hooks-nix.flakeModule
         inputs.treefmt-nix.flakeModule
@@ -79,7 +96,6 @@
         ./packages/flake-module.nix
         ./modules/flake-module.nix
         ./hosts/flake-module.nix
-        ./nixpkgs/flake-module.nix
       ];
     };
 }
