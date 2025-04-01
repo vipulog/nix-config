@@ -3,6 +3,8 @@
   config,
   lib,
   self,
+  self',
+  inputs',
   ...
 }:
 with lib; let
@@ -21,7 +23,7 @@ in {
       useGlobalPkgs = true;
       useUserPackages = true;
       backupFileExtension = "backup";
-      extraSpecialArgs = {inherit self inputs;};
+      extraSpecialArgs = {inherit self self' inputs inputs';};
     };
   };
 }
