@@ -1,8 +1,7 @@
 {
-  inputs,
+  inputs',
   config,
   lib,
-  pkgs,
   ...
 }:
 with lib; let
@@ -14,7 +13,7 @@ in {
 
   config = mkIf cfg.enable {
     home.packages = [
-      inputs.zen-browser.packages.${pkgs.system}.default
+      inputs'.zen-browser.packages.default
     ];
   };
 }
