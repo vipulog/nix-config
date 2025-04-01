@@ -46,6 +46,7 @@ in {
       programs = {
         zsh.enable = true;
         flatpak.enable = true;
+        comma.enable = true;
       };
     };
   };
