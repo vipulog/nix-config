@@ -33,8 +33,8 @@
       };
 
       sansSerif = {
-        name = "Poppins";
-        package = pkgs.poppins;
+        name = "Inter";
+        package = pkgs.inter;
       };
 
       serif = {
@@ -43,9 +43,9 @@
       };
 
       sizes = {
-        applications = 13;
-        desktop = 13;
-        popups = 13;
+        applications = 12;
+        desktop = 12;
+        popups = 12;
         terminal = 14;
       };
     };
