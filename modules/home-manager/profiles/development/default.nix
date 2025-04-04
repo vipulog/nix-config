@@ -20,7 +20,6 @@ in {
         starship.enable = true;
         zoxide.enable = true;
         direnv.enable = true;
-        ghostty.enable = true;
       };
     };
   };
