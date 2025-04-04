@@ -39,7 +39,6 @@ in {
       };
 
       misc = {
-        home-manager.enable = true;
         disko.enable = true;
       };
 
