@@ -4,18 +4,19 @@
   config = {
     internal = {
       home.vipul.enable = true;
-      profiles.common.enable = true;
-      profiles.development.enable = true;
+
+      profiles = {
+        common.enable = true;
+        development.enable = true;
+        graphical.enable = true;
+      };
 
       programs = {
-        brave-browser.enable = true;
         zen-browser.enable = true;
-        qutebrowser.enable = true;
         android-studio.enable = true;
       };
 
       de.niri = {
-        enable = true;
         outputs."HDMI-A-1" = {
           scale = 1.0;
           mode = {
