@@ -4,5 +4,6 @@
     ./programs
     ./profiles
     ./de
+    ./misc
   ];
 }
