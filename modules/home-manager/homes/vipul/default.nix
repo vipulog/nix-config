@@ -15,6 +15,7 @@ in {
     home = {
       username = "vipul";
       homeDirectory = "/home/vipul";
+
       packages = with pkgs; [
         coreutils # basic gnu utils
       ];

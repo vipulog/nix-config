@@ -7,4 +7,5 @@
   };
 
   home-manager.users.vipul = import ./home;
+  internal.user.vipul.enable = true;
 }

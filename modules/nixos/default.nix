@@ -6,5 +6,6 @@
     ./de
     ./roles
     ./misc
+    ./users
   ];
 }
