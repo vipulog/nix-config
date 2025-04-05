@@ -15,5 +15,6 @@
     ./brave-browser
     ./qutebrowser
     ./android-studio
+    ./zellij
   ];
 }
