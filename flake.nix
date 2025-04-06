@@ -44,7 +44,6 @@
     niri = {
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.rust-overlay.follows = "";
     };
 
     nix-index-database = {
