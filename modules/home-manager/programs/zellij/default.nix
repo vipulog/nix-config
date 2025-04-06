@@ -8,6 +8,7 @@ with lib; let
 in {
   imports = [
     ./config.nix
+    ./layout.nix
     ./sesh.nix
   ];
 
