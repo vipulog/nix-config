@@ -16,5 +16,6 @@
     ./qutebrowser
     ./android-studio
     ./zellij
+    ./neovim
   ];
 }

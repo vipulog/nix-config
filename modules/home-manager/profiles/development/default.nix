@@ -15,7 +15,7 @@ in {
       programs = {
         git.enable = true;
         lazygit.enable = true;
-        helix.enable = true;
+        neovim.enable = true;
         atuin.enable = true;
         starship.enable = true;
         zoxide.enable = true;
