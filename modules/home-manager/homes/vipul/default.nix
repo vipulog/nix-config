@@ -16,6 +16,11 @@ in {
       username = "vipul";
       homeDirectory = "/home/vipul";
 
+      sessionVariables = {
+        VISUAL = "nvim";
+        EDITOR = "nvim";
+      };
+
       packages = with pkgs; [
         coreutils # basic gnu utils
       ];
