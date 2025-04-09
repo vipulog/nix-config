@@ -16,6 +16,10 @@
         android-studio.enable = true;
       };
 
+      services = {
+        redirector.enable = true;
+      };
+
       de.niri = {
         outputs."HDMI-A-1" = {
           scale = 1.0;
