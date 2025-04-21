@@ -16,7 +16,7 @@ in {
     system.autoUpgrade = {
       enable = true;
       flake = "${input}#${host}";
-      dates = "daily";
+      dates = "weekly";
       randomizedDelaySec = "45min";
       operation = "boot";
       flags = [
