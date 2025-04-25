@@ -1,7 +1,6 @@
-{self, ...}: {
+{...}: {
   perSystem = {inputs', ...}: {
     pre-commit.settings = {
-      src = builtins.toString (self.lib.relativeToRoot ./.);
       default_stages = ["pre-commit"];
 
       hooks = {

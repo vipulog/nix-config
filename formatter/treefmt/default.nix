@@ -1,7 +1,6 @@
-{self, ...}: {
+{...}: {
   perSystem = {...}: {
     treefmt = {
-      projectRootFile = builtins.toString (self.lib.relativeToRoot "flake.nix");
       programs.alejandra.enable = true;
       programs.deadnix.enable = true;
       programs.shellcheck.enable = true;
