@@ -100,6 +100,14 @@ in {
         "Mod+Shift+Slash".action = show-hotkey-overlay;
         "Mod+Space".action = spawn "${getExe pkgs.fuzzel}";
       }
+
+      {
+        # Volume Control
+        "Mod+F9".action = spawn "${getExe' pkgs.pulseaudio "pactl"}" "set-source-mute" "@DEFAULT_SOURCE@" "toggle";
+        "Mod+F10".action = spawn "${getExe' pkgs.pulseaudio "pactl"}" "set-sink-mute" "@DEFAULT_SINK@" "toggle";
+        "Mod+F11".action = spawn "${getExe' pkgs.pulseaudio "pactl"}" "set-sink-volume" "@DEFAULT_SINK@" "-5%";
+        "Mod+F12".action = spawn "${getExe' pkgs.pulseaudio "pactl"}" "set-sink-volume" "@DEFAULT_SINK@" "+5%";
+      }
     ];
   };
 }
