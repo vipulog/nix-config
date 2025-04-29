@@ -6,7 +6,7 @@
 }:
 with lib; let
   cfg = config.internal.system.autoUpdate;
-  input = "github:vipulog/nixos-config?ref=main";
+  input = "github:vipulog/nix-config?ref=main";
 in {
   options.internal.system.autoUpdate = {
     enable = mkEnableOption "auto updates";
