@@ -1,0 +1,12 @@
+window#osd {
+  padding: 6px;
+  border-radius: 12px;
+}
+
+#container > image {
+  -gtk-icon-transform: scale(0.8);
+}
+
+progressbar {
+  min-height: 12px;
+}

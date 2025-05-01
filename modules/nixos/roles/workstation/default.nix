@@ -27,6 +27,7 @@ in {
         audio.enable = true;
         networking.enable = true;
         openssh.enable = true;
+        swayosd.enable = true;
 
         tailscale = {
           enable = true;
