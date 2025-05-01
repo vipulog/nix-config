@@ -78,21 +78,6 @@ in {
         "Mod+Shift+V".action = switch-focus-between-floating-and-tiling;
       }
 
-      # Screenshots
-      {
-        "Print".action = screenshot;
-        "Mod+Print".action = screenshot-window;
-        # "Mod+Shift+Print".action = screenshot-screen;
-        # https://github.com/sodiboo/niri-flake/issues/922
-        "Mod+Shift+Print".action.screenshot-screen = [];
-      }
-
-      # Application Launchers
-      {
-        "Mod+T".action = spawn "${getExe pkgs.ghostty}";
-        "Mod+Ctrl+V".action = sh "${getExe pkgs.ghostty} -e '${getExe pkgs.clipse}'";
-      }
-
       # System Actions
       {
         "Mod+Shift+E".action = quit;
@@ -112,6 +97,21 @@ in {
         "Mod+F10".action = spawn "${getExe' pkgs.swayosd "swayosd-client"}" "--output-volume" "mute-toggle";
         "Mod+F11".action = spawn "${getExe' pkgs.swayosd "swayosd-client"}" "--output-volume" "raise";
         "Mod+F12".action = spawn "${getExe' pkgs.swayosd "swayosd-client"}" "--output-volume" "lower";
+      }
+
+      # Screenshots
+      {
+        "Print".action = screenshot;
+        "Mod+Print".action = screenshot-window;
+        # "Mod+Shift+Print".action = screenshot-screen;
+        # https://github.com/sodiboo/niri-flake/issues/922
+        "Mod+Shift+Print".action.screenshot-screen = [];
+      }
+
+      # Applications
+      {
+        "Mod+T".action = spawn "${getExe pkgs.ghostty}";
+        "Mod+Ctrl+V".action = sh "${getExe pkgs.ghostty} -e '${getExe pkgs.clipse}'";
       }
     ];
   };
