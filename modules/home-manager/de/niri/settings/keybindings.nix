@@ -103,6 +103,11 @@ in {
 
       # Volume Control
       {
+        "XF86AudioMicMute".action = spawn "${getExe' pkgs.swayosd "swayosd-client"}" "--input-volume" "mute-toggle";
+        "XF86AudioMute".action = spawn "${getExe' pkgs.swayosd "swayosd-client"}" "--output-volume" "mute-toggle";
+        "XF86AudioRaiseVolume".action = spawn "${getExe' pkgs.swayosd "swayosd-client"}" "--output-volume" "raise";
+        "XF86AudioLowerVolume".action = spawn "${getExe' pkgs.swayosd "swayosd-client"}" "--output-volume" "lower";
+
         "Mod+F9".action = spawn "${getExe' pkgs.swayosd "swayosd-client"}" "--input-volume" "mute-toggle";
         "Mod+F10".action = spawn "${getExe' pkgs.swayosd "swayosd-client"}" "--output-volume" "mute-toggle";
         "Mod+F11".action = spawn "${getExe' pkgs.swayosd "swayosd-client"}" "--output-volume" "raise";
