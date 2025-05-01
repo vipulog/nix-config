@@ -101,12 +101,12 @@ in {
         "Mod+Space".action = spawn "${getExe pkgs.fuzzel}";
       }
 
+      # Volume Control
       {
-        # Volume Control
-        "Mod+F9".action = spawn "${getExe' pkgs.pulseaudio "pactl"}" "set-source-mute" "@DEFAULT_SOURCE@" "toggle";
-        "Mod+F10".action = spawn "${getExe' pkgs.pulseaudio "pactl"}" "set-sink-mute" "@DEFAULT_SINK@" "toggle";
-        "Mod+F11".action = spawn "${getExe' pkgs.pulseaudio "pactl"}" "set-sink-volume" "@DEFAULT_SINK@" "-5%";
-        "Mod+F12".action = spawn "${getExe' pkgs.pulseaudio "pactl"}" "set-sink-volume" "@DEFAULT_SINK@" "+5%";
+        "Mod+F9".action = spawn "${getExe' pkgs.swayosd "swayosd-client"}" "--input-volume" "mute-toggle";
+        "Mod+F10".action = spawn "${getExe' pkgs.swayosd "swayosd-client"}" "--output-volume" "mute-toggle";
+        "Mod+F11".action = spawn "${getExe' pkgs.swayosd "swayosd-client"}" "--output-volume" "raise";
+        "Mod+F12".action = spawn "${getExe' pkgs.swayosd "swayosd-client"}" "--output-volume" "lower";
       }
     ];
   };
