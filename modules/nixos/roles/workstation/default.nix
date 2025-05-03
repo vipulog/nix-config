@@ -18,7 +18,6 @@ in {
         security.sudo.enable = true;
         time.enable = true;
         locale.enable = true;
-        fonts.enable = true;
         autoUpdate.enable = true;
       };
 
@@ -27,7 +26,6 @@ in {
         audio.enable = true;
         networking.enable = true;
         openssh.enable = true;
-        swayosd.enable = true;
 
         tailscale = {
           enable = true;

@@ -4,7 +4,6 @@
     ./security
     ./locale
     ./time
-    ./fonts
     ./nix
     ./update
   ];

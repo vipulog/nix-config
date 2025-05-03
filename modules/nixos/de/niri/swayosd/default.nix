@@ -5,13 +5,9 @@
   ...
 }:
 with lib; let
-  cfg = config.internal.services.swayosd;
+  niriCfg = config.internal.de.niri;
 in {
-  options.internal.services.swayosd = {
-    enable = mkEnableOption "swayosd";
-  };
-
-  config = mkIf cfg.enable {
+  config = mkIf niriCfg.enable {
     environment.systemPackages = [pkgs.swayosd];
     services.udev.packages = [pkgs.swayosd];
 

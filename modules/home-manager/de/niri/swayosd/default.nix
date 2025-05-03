@@ -4,13 +4,9 @@
   ...
 }:
 with lib; let
-  cfg = config.internal.services.swayosd;
+  niriCfg = config.internal.de.niri;
 in {
-  options.internal.services.swayosd = {
-    enable = mkEnableOption "swayosd";
-  };
-
-  config = mkIf cfg.enable {
+  config = mkIf niriCfg.enable {
     services.swayosd.enable = true;
     home.file.".config/swayosd/style.css".text = builtins.readFile ./style.css;
   };

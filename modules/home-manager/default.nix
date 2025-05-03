@@ -5,6 +5,5 @@
     ./services
     ./profiles
     ./de
-    ./misc
   ];
 }

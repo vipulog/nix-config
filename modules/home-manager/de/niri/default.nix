@@ -1,21 +1,8 @@
 {
-  lib,
-  config,
-  ...
-}:
-with lib; let
-  cfg = config.internal.de.niri;
-in {
   imports = [
-    ./options.nix
-    ./settings
+    ./niri
+    ./stylix
+    ./swayosd
+    ./mako
   ];
-
-  config = mkIf cfg.enable {
-    internal = {
-      misc.stylix.enable = true;
-      services.swayosd.enable = true;
-      services.mako.enable = true;
-    };
-  };
 }

@@ -4,13 +4,9 @@
   ...
 }:
 with lib; let
-  cfg = config.internal.system.fonts;
+  niriCfg = config.internal.de.niri;
 in {
-  options.internal.system.fonts = {
-    enable = mkEnableOption "fonts";
-  };
-
-  config = mkIf cfg.enable {
+  config = mkIf niriCfg.enable {
     fonts = {
       fontconfig = {
         enable = true;

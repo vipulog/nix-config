@@ -5,6 +5,5 @@
     ./openssh
     ./tailscale
     ./dm
-    ./swayosd
   ];
 }

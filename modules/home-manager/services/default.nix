@@ -1,7 +1,5 @@
 {
   imports = [
     ./redirector
-    ./swayosd
-    ./mako
   ];
 }

@@ -7,18 +7,14 @@
   ...
 }:
 with lib; let
-  cfg = config.internal.misc.stylix;
+  niriCfg = config.internal.de.niri;
 in {
   imports = [
     inputs.stylix.homeManagerModules.stylix
     inputs.niri.homeModules.stylix
   ];
 
-  options.internal.misc.stylix = {
-    enable = mkEnableOption "stylix";
-  };
-
-  config = mkIf cfg.enable {
+  config = mkIf niriCfg.enable {
     stylix = {
       enable = true;
       base16Scheme = "${pkgs.base16-schemes}/share/themes/chalk.yaml";
