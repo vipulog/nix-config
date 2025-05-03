@@ -34,7 +34,7 @@ in {
       };
 
       de = {
-        niri.enable = true;
+        senkai.enable = true;
       };
 
       misc = {

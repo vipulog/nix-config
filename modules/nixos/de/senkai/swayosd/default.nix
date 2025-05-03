@@ -5,9 +5,9 @@
   ...
 }:
 with lib; let
-  niriCfg = config.internal.de.niri;
+  senkaiCfg = config.internal.de.senkai;
 in {
-  config = mkIf niriCfg.enable {
+  config = mkIf senkaiCfg.enable {
     environment.systemPackages = [pkgs.swayosd];
     services.udev.packages = [pkgs.swayosd];
 

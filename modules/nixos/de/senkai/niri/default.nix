@@ -6,17 +6,17 @@
   ...
 }:
 with lib; let
-  cfg = config.internal.de.niri;
+  senkaiCfg = config.internal.de.senkai;
 in {
   imports = [
     inputs.niri.nixosModules.niri
   ];
 
-  options.internal.de.niri = {
-    enable = mkEnableOption "niri";
+  options.internal.de.senkai = {
+    enable = mkEnableOption "senkai";
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf senkaiCfg.enable {
     nixpkgs.overlays = [inputs.niri.overlays.niri];
     niri-flake.cache.enable = true;
 

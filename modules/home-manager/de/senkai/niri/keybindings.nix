@@ -6,10 +6,10 @@
 }:
 with config.lib.niri.actions;
 with lib; let
-  cfg = config.internal.de.niri;
+  senkaiCfg = config.internal.de.senkai;
   sh = spawn "sh" "-c";
 in {
-  config = mkIf cfg.enable {
+  config = mkIf senkaiCfg.enable {
     programs.niri.settings.binds = mergeAttrsList [
       # Workspace Navigation
       {

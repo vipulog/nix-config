@@ -4,9 +4,9 @@
   ...
 }:
 with lib; let
-  cfg = config.internal.de.niri;
+  senkaiCfg = config.internal.de.senkai;
 in {
-  config = mkIf cfg.enable {
+  config = mkIf senkaiCfg.enable {
     programs.niri.settings.layout = {
       gaps = 4;
 

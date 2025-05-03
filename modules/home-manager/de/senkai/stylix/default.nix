@@ -7,14 +7,14 @@
   ...
 }:
 with lib; let
-  niriCfg = config.internal.de.niri;
+  senkaiCfg = config.internal.de.senkai;
 in {
   imports = [
     inputs.stylix.homeManagerModules.stylix
     inputs.niri.homeModules.stylix
   ];
 
-  config = mkIf niriCfg.enable {
+  config = mkIf senkaiCfg.enable {
     stylix = {
       enable = true;
       base16Scheme = "${pkgs.base16-schemes}/share/themes/chalk.yaml";

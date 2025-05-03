@@ -14,7 +14,7 @@
         android-studio.enable = true;
       };
 
-      de.niri = {
+      de.senkai = {
         enable = true;
         outputs."HDMI-A-1" = {
           scale = 1.0;

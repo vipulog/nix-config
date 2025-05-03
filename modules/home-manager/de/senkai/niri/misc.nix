@@ -4,9 +4,9 @@
   ...
 }:
 with lib; let
-  cfg = config.internal.de.niri;
+  senkaiCfg = config.internal.de.senkai;
 in {
-  options.internal.de.niri = {
+  options.internal.de.senkai = {
     outputs = mkOption {
       type = types.attrsOf types.anything;
       default = {};
@@ -14,9 +14,9 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf senkaiCfg.enable {
     programs.niri.settings = {
-      outputs = cfg.outputs;
+      outputs = senkaiCfg.outputs;
       prefer-no-csd = true;
       hotkey-overlay.skip-at-startup = true;
       environment = {

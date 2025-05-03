@@ -6,9 +6,9 @@
   ...
 }:
 with lib; let
-  cfg = config.internal.de.niri;
+  senkaiCfg = config.internal.de.senkai;
 in {
-  config = mkIf cfg.enable {
+  config = mkIf senkaiCfg.enable {
     programs.niri.settings.spawn-at-startup = [
       {command = ["${getExe pkgs.xwayland-satellite}"];}
       {command = ["${getExe' pkgs.swayosd "swayosd-server"}"];}

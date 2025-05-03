@@ -7,8 +7,4 @@ with lib; {
     ./startup.nix
     ./misc.nix
   ];
-
-  options.internal.de.niri = {
-    enable = mkEnableOption "niri";
-  };
 }
