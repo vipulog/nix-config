@@ -37,10 +37,6 @@ in {
         senkai.enable = true;
       };
 
-      misc = {
-        disko.enable = true;
-      };
-
       programs = {
         zsh.enable = true;
         flatpak.enable = true;
