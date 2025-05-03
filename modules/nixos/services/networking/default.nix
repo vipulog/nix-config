@@ -6,20 +6,20 @@
 }:
 with lib; let
   cfg = config.internal.services.networking;
-  userAttrs = listToAttrs (map addGroup cfg.users);
-
-  addGroup = user: {
-    name = user;
-    value = {extraGroups = ["networkmanager"];};
-  };
 in {
   options.internal.services.networking = {
-    enable = mkEnableOption "networking";
+    enable = mkEnableOption "Enable networking configuration";
 
     users = mkOption {
       type = types.listOf types.str;
       default = [];
-      description = "List of users to add to the networkmanager group.";
+      description = "List of users to add to the networking group";
+    };
+
+    group = mkOption {
+      type = types.str;
+      default = "networkmanager";
+      description = "Group to add users to for networking access";
     };
   };
 
@@ -28,6 +28,9 @@ in {
       networkmanager.enable = true;
       hostName = host;
     };
-    users.users = userAttrs;
+
+    users.users = mkIf cfg.enable (genAttrs cfg.users (_name: {
+      extraGroups = mkBefore [cfg.group];
+    }));
   };
 }
