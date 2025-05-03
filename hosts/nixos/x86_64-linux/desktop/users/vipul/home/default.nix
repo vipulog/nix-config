@@ -5,7 +5,17 @@
     internal = {
       home.vipul.enable = true;
 
+      profiles = {
+        development.enable = true;
+        graphical.enable = true;
+      };
+
+      programs = {
+        android-studio.enable = true;
+      };
+
       de.niri = {
+        enable = true;
         outputs."HDMI-A-1" = {
           scale = 1.0;
           mode = {

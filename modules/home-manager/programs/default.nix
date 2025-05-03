@@ -17,5 +17,6 @@
     ./android-studio
     ./zellij
     ./neovim
+    ./coreutils
   ];
 }

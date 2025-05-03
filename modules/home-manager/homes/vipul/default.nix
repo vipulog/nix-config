@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 with lib; let
@@ -15,31 +14,11 @@ in {
     home = {
       username = "vipul";
       homeDirectory = "/home/vipul";
-
-      sessionVariables = {
-        VISUAL = "nvim";
-        EDITOR = "nvim";
-      };
-
-      packages = with pkgs; [
-        coreutils # basic gnu utils
-      ];
     };
 
     internal = {
       profiles = {
         common.enable = true;
-        development.enable = true;
-        graphical.enable = true;
-      };
-
-      programs = {
-        zen-browser.enable = true;
-        android-studio.enable = true;
-      };
-
-      services = {
-        redirector.enable = true;
       };
     };
   };

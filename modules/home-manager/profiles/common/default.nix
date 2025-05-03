@@ -17,6 +17,7 @@ in {
         git.enable = true;
         btop.enable = true;
         nnn.enable = true;
+        coreutils.enable = true;
       };
     };
   };

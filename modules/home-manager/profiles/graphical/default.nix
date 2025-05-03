@@ -16,6 +16,10 @@ in {
         ghostty.enable = true;
         zen-browser.enable = true;
       };
+
+      services = {
+        redirector.enable = true;
+      };
     };
   };
 }
