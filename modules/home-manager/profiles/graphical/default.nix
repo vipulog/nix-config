@@ -15,6 +15,7 @@ in {
       misc.stylix.enable = true;
       de.niri.enable = true;
       services.swayosd.enable = true;
+      services.mako.enable = true;
       programs = {
         ghostty.enable = true;
         zen-browser.enable = true;
