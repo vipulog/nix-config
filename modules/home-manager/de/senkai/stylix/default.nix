@@ -1,24 +1,39 @@
 {
   pkgs,
   inputs,
-  self,
   lib,
+  self,
   config,
   ...
 }:
 with lib; let
   senkaiCfg = config.internal.de.senkai;
+  cfg = senkaiCfg.theme;
 in {
   imports = [
     inputs.stylix.homeManagerModules.stylix
     inputs.niri.homeModules.stylix
   ];
 
+  options.internal.de.senkai.theme = {
+    wallpaper = mkOption {
+      type = types.path;
+      default = self.lib.relativeToRoot "assets/wallpapers/wallpaper.jpg";
+      description = "Path to the wallpaper image";
+    };
+
+    scheme = mkOption {
+      type = types.path;
+      default = "${pkgs.base16-schemes}/share/themes/chalk.yaml";
+      description = "Path to the base16 color scheme";
+    };
+  };
+
   config = mkIf senkaiCfg.enable {
     stylix = {
       enable = true;
-      base16Scheme = "${pkgs.base16-schemes}/share/themes/chalk.yaml";
-      image = self.lib.relativeToRoot "assets/wallpapers/wallpaper.jpg";
+      base16Scheme = cfg.scheme;
+      image = cfg.wallpaper;
       polarity = "dark";
 
       cursor = {
