@@ -8,7 +8,7 @@ with lib; let
 in {
   config = mkIf senkaiCfg.enable {
     programs.niri.settings.layout = {
-      gaps = 4;
+      gaps = 6;
 
       shadow = {
         enable = true;
