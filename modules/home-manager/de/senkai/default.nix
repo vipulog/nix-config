@@ -5,6 +5,7 @@ with lib; {
     ./stylix
     ./swayosd
     ./mako
+    ./waybar
   ];
 
   options.internal.de.senkai = {
