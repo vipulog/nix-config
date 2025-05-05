@@ -6,6 +6,7 @@ with lib; {
     ./swayosd
     ./mako
     ./waybar
+    ./wofi
   ];
 
   options.internal.de.senkai = {
