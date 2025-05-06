@@ -9,6 +9,10 @@ in {
   config = mkIf senkaiCfg.enable {
     programs.waybar.style = with config.lib.stylix.colors.withHashtag;
       mkAfter ''
+        window#waybar {
+            border-left: 1px solid ${base03};
+        }
+
         .modules-left {
             margin-top: 16px;
         }
