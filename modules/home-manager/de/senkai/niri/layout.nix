@@ -8,7 +8,7 @@ with lib; let
 in {
   config = mkIf senkaiCfg.enable {
     programs.niri.settings.layout = {
-      gaps = 6;
+      gaps = 10;
 
       shadow = {
         enable = true;
@@ -27,8 +27,8 @@ in {
         gaps-between-tabs = 4;
         corner-radius = 0;
         position = "bottom";
-        place-within-column = true;
-        hide-when-single-tab = true;
+        place-within-column = false;
+        hide-when-single-tab = false;
       };
     };
   };
