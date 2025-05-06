@@ -12,9 +12,9 @@ in {
       settings = {
         font = mkForce "monospace 12";
         margin = "8";
-        outer-margin = "6";
+        outer-margin = "4";
         padding = "8";
-        width = "360";
+        width = "320";
       };
     };
   };
