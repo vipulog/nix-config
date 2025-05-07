@@ -8,9 +8,9 @@ in
 
     if [ "$active" = "yes" ]; then
             if [ "$mute" = "yes" ]; then
-                icon=""
+                icon=""
             else
-                icon=""
+                icon=" "
             fi
     else
             icon=""

@@ -5,7 +5,7 @@ in
     interface=$(${nmcliExe} -t -f DEVICE,TYPE,STATE d | awk -F: '$2 == "wifi" && $3 == "connected" {print $1}')
 
     if [ -z "$interface" ]; then
-      echo '{"text": "󰖪", "tooltip": "Wi-Fi: Disconnected"}'
+      echo '{"text": " 󰖪", "tooltip": "Wi-Fi: Disconnected"}'
       exit 0
     fi
 
@@ -13,15 +13,15 @@ in
     signal=$(${nmcliExe} -t -f IN-USE,SIGNAL dev wifi | grep '*' | cut -d':' -f2)
 
     if [ "$signal" -ge 80 ]; then
-      icon="󰤨"
+      icon=" 󰤨"
     elif [ "$signal" -ge 60 ]; then
-      icon="󰤥"
+      icon=" 󰤥"
     elif [ "$signal" -ge 40 ]; then
-      icon="󰤢"
+      icon=" 󰤢"
     elif [ "$signal" -ge 20 ]; then
-      icon="󰤟"
+      icon=" 󰤟"
     else
-      icon="󰤯"
+      icon=" 󰤯"
     fi
 
     echo "{\"text\": \"$icon\", \"tooltip\": \"Wi-Fi: $ssid ($signal%)\"}"
