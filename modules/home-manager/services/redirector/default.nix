@@ -18,14 +18,16 @@ in {
     services.redirector = {
       enable = true;
       package = inputs'.redirector.packages.redirector;
-      defaultSearch = "https://duckduckgo.com/?q={}";
-
-      customBangs = [
-        {
-          trigger = "hmopt";
-          url_template = "https://home-manager-options.extranix.com/?query={{{s}}}";
-        }
-      ];
+      settings = {
+        default_search = "https://duckduckgo.com/?q={}";
+        search_suggestions = "https://search.brave.com/api/suggest?q={}";
+        bangs = [
+          {
+            trigger = "hmopt";
+            url_template = "https://home-manager-options.extranix.com/?query={{{s}}}";
+          }
+        ];
+      };
     };
   };
 }
