@@ -7,6 +7,7 @@ with lib; {
     ./mako
     ./wofi
     ./swayidle
+    ./swaylock
     ./extras
   ];
 
