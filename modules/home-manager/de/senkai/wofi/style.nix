@@ -11,6 +11,7 @@ in {
       mkAfter ''
         #outer-box {
         	padding: 20px;
+          border: 3px solid ${base0D};
         }
 
         #input {

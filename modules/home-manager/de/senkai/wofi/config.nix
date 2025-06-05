@@ -12,16 +12,13 @@ in {
       ## General
       show=drun
       prompt=Apps
-      normal_window=true
-      layer=top
       term=${pkgs.ghostty}
 
       ## Geometry
-      width=500px
-      height=305px
+      width=540px
+      height=360px
       location=0
       orientation=vertical
-      halign=fill
       line_wrap=off
       dynamic_lines=false
 
@@ -34,7 +31,7 @@ in {
       exec_search=false
       hide_search=false
       parse_search=false
-      insensitive=false
+      insensitive=true
 
       ## Other
       hide_scroll=true
@@ -44,7 +41,6 @@ in {
       filter_rate=100
 
       ## Keys
-      key_expand=Tab
       key_exit=Escape
     '';
   };

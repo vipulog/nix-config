@@ -83,7 +83,7 @@ in {
         "Mod+Shift+E".action = quit;
         "Ctrl+Alt+Delete".action = quit;
         "Mod+Shift+Slash".action = show-hotkey-overlay;
-        "Mod+Space".action = spawn "${getExe pkgs.wofi}";
+        "Mod+Space".action = sh "flock -n /tmp/wofi.lock wofi --show drun";
       }
 
       # Volume Control
