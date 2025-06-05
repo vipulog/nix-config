@@ -8,6 +8,7 @@ with lib; {
     ./waybar
     ./wofi
     ./swayidle
+    ./extras
   ];
 
   options.internal.de.senkai = {
