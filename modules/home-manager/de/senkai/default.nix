@@ -5,7 +5,6 @@ with lib; {
     ./stylix
     ./swayosd
     ./mako
-    ./waybar
     ./wofi
     ./swayidle
     ./extras
