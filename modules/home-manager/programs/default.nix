@@ -15,6 +15,7 @@
     ./brave-browser
     ./qutebrowser
     ./android-studio
+    ./whatsapp-web
     ./zellij
     ./neovim
     ./coreutils

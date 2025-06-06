@@ -12,6 +12,7 @@
 
       programs = {
         android-studio.enable = true;
+        whatsapp-web.enable = true;
       };
 
       de.senkai = {
