@@ -10,6 +10,7 @@ in {
     programs.niri.settings.window-rules = [
       {
         open-maximized = true;
+        open-on-workspace = "scratch";
         clip-to-geometry = true;
         geometry-corner-radius = {
           top-left = 0.0;
