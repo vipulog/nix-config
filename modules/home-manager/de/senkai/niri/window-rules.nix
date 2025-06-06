@@ -18,6 +18,26 @@ in {
           bottom-right = 0.0;
         };
       }
+
+      {
+        matches = [{app-id = "com.mitchellh.ghostty";}];
+        open-on-workspace = "code";
+      }
+
+      {
+        matches = [{app-id = "^zen";}];
+        open-on-workspace = "web";
+      }
+
+      {
+        matches = [{app-id = "^chrome-web.whatsapp.com";}];
+        open-on-workspace = "chat";
+      }
+
+      {
+        matches = [{title = "btop";}];
+        open-on-workspace = "system-monitor";
+      }
     ];
   };
 }
