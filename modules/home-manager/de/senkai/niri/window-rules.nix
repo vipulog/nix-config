@@ -9,6 +9,7 @@ in {
   config = mkIf senkaiCfg.enable {
     programs.niri.settings.window-rules = [
       {
+        open-maximized = true;
         clip-to-geometry = true;
         geometry-corner-radius = {
           top-left = 0.0;
