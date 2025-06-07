@@ -13,11 +13,11 @@ in {
     programs.niri.settings.spawn-at-startup =
       [
         {command = ["${getExe pkgs.xwayland-satellite}"];}
-        {command = ["${getExe' pkgs.swayosd "swayosd-server"}"];}
         {command = ["${getExe pkgs.swaybg}" "-i" "${self.lib.relativeToRoot "assets/wallpapers/wallpaper.jpg"}"];}
 
         # https://github.com/sodiboo/niri-flake/issues/509
         {command = ["systemctl" "--user" "restart" "xdg-desktop-portal-gnome"];}
+        {command = ["systemctl" "--user" "restart" "swayosd"];}
         {command = ["systemctl" "--user" "restart" "clipse"];}
       ]
       ++ lib.optionals config.internal.programs.ghostty.enable [

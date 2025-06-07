@@ -8,6 +8,6 @@ with lib; let
 in {
   config = mkIf senkaiCfg.enable {
     services.swayosd.enable = true;
-    home.file.".config/swayosd/style.css".text = builtins.readFile ./style.css;
+    home.file.".config/swayosd/style.css".text = readFile ./style.css;
   };
 }
