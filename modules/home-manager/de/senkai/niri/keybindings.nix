@@ -19,6 +19,18 @@ in {
         "Mod+Ctrl+I".action = move-column-to-workspace-up;
         "Mod+Shift+U".action = move-workspace-down;
         "Mod+Shift+I".action = move-workspace-up;
+
+        "Mod+1".action = focus-workspace 1;
+        "Mod+2".action = focus-workspace 2;
+        "Mod+3".action = focus-workspace 3;
+        "Mod+4".action = focus-workspace 4;
+        "Mod+5".action = focus-workspace 5;
+
+        "Mod+Ctrl+1".action = move-column-to-index 1;
+        "Mod+Ctrl+2".action = move-column-to-index 2;
+        "Mod+Ctrl+3".action = move-column-to-index 3;
+        "Mod+Ctrl+4".action = move-column-to-index 4;
+        "Mod+Ctrl+5".action = move-column-to-index 5;
       }
 
       # Monitor Navigation
@@ -63,8 +75,8 @@ in {
 
         "Mod+J".action = focus-window-down;
         "Mod+K".action = focus-window-up;
-        "Mod+Ctrl+J".action = move-window-down;
-        "Mod+Ctrl+K".action = move-window-up;
+        "Mod+Ctrl+J".action = move-window-down-or-to-workspace-down;
+        "Mod+Ctrl+K".action = move-window-up-or-to-workspace-up;
 
         "Mod+Shift+Minus".action = set-window-height "-10%";
         "Mod+Shift+Equal".action = set-window-height "+10%";
