@@ -10,7 +10,6 @@ in {
     programs.niri.settings.window-rules = [
       {
         open-maximized = true;
-        open-on-workspace = "scratch";
         clip-to-geometry = true;
         geometry-corner-radius = {
           top-left = 0.0;
@@ -21,7 +20,13 @@ in {
       }
 
       {
+        excludes = [{title = "clipse";}];
+        open-on-workspace = "scratch";
+      }
+
+      {
         matches = [{app-id = "com.mitchellh.ghostty";}];
+        excludes = [{title = "clipse";}];
         open-on-workspace = "code";
       }
 
@@ -38,6 +43,11 @@ in {
       {
         matches = [{title = "btop";}];
         open-on-workspace = "system-monitor";
+      }
+
+      {
+        matches = [{title = "clipse";}];
+        open-floating = true;
       }
     ];
   };

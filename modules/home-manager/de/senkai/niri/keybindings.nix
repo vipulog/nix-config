@@ -123,7 +123,7 @@ in {
       # Applications
       {
         "Mod+T".action = spawn "${getExe pkgs.ghostty}";
-        "Mod+Ctrl+V".action = sh "${getExe pkgs.ghostty} -e '${getExe pkgs.clipse}'";
+        "Mod+Ctrl+V".action = sh "${getExe pkgs.ghostty} --title=clipse --command=${getExe pkgs.clipse}";
       }
     ];
   };

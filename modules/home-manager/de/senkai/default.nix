@@ -8,6 +8,7 @@ with lib; {
     ./wofi
     ./swayidle
     ./swaylock
+    ./clipse
     ./extras
   ];
 
