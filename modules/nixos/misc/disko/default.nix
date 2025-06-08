@@ -8,43 +8,31 @@ with lib; let
   cfg = config.internal.misc.disko;
   layoutsDir = ./layouts;
 
-  builtinLayouts =
-    mapAttrs
-    (name: _: import (layoutsDir + "/${name}"))
-    (builtins.readDir layoutsDir);
+  layouts = (
+    builtins.mapAttrs (
+      name: _: import "${layoutsDir}/${name}"
+    ) (builtins.readDir layoutsDir)
+  );
 
-  applyLayout = layout: params:
-    if builtins.isFunction layout
+  resolveLayout = layout: params: (
+    if isFunction layout
     then layout params
-    else layout;
-
-  resolveLayout = layout: params: let
-    resolvedLayout =
-      if builtins.isString layout
-      then builtinLayouts.${layout} # Lookup built-in layout by name
-      else if builtins.isPath layout
-      then import layout # Import layout from path
-      else layout; # Use direct layout (function or attrs)
-  in
-    applyLayout resolvedLayout params;
+    else layout
+  );
 in {
-  imports = [
-    inputs.disko.nixosModules.disko
-  ];
+  imports = [inputs.disko.nixosModules.disko];
 
   options.internal.misc.disko = {
     enable = mkEnableOption "disk setup with Disko";
 
     layout = mkOption {
-      description = "Disk layout configuration (function or attribute set)";
+      description = "Disk layout configuration";
       type = with types;
         oneOf [
-          str # Layout name from built-in layouts
-          path # Path to a layout file
-          (functionTo (attrsOf anything)) # Layout function
-          (attrsOf anything) # Direct layout configuration
+          (functionTo (attrsOf anything))
+          (attrsOf anything)
         ];
-      default = "single-disk-ext4"; # Default to a built-in layout name
+      default = config.internal.misc.disko.layouts.single-disk-ext4;
     };
 
     params = mkOption {
@@ -53,11 +41,11 @@ in {
       default = {};
     };
 
-    builtinLayouts = mkOption {
-      description = "Read-only access to all available built-in disk layouts";
+    layouts = mkOption {
+      description = "Set of pre-configured disk layouts";
       type = types.attrs;
       readOnly = true;
-      default = builtinLayouts;
+      default = layouts;
     };
   };
 
