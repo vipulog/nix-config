@@ -6,7 +6,7 @@
 }:
 with lib; let
   cfg = config.internal.services.tailscale;
-  exitNode = cfg.exitNode.wanInterface != "";
+  exitNodeEnabled = cfg.exitNode.wanInterface != "";
 in {
   options.internal.services.tailscale = {
     enable = mkEnableOption "Tailscale";
@@ -29,14 +29,14 @@ in {
       enable = true;
       openFirewall = true;
       useRoutingFeatures =
-        if exitNode
+        if exitNodeEnabled
         then "both"
         else "client";
       extraUpFlags = lists.optionals cfg.enableSSH ["--ssh"];
-      extraSetFlags = lists.optionals exitNode ["--advertise-exit-node"];
+      extraSetFlags = lists.optionals exitNodeEnabled ["--advertise-exit-node"];
     };
 
-    systemd.services.tailscale-transport-layer-offloads = mkIf exitNode {
+    systemd.services.tailscale-transport-layer-offloads = mkIf exitNodeEnabled {
       # See https://tailscale.com/kb/1320/performance-best-practices#ethtool-configuration.
       description = "Tailscale: better performance for exit nodes";
 
@@ -54,6 +54,6 @@ in {
       };
     };
 
-    environment.systemPackages = lists.optionals exitNode [pkgs.ethtool];
+    environment.systemPackages = lists.optionals exitNodeEnabled [pkgs.ethtool];
   };
 }
