@@ -1,4 +1,5 @@
 {
+  pkgs,
   config,
   lib,
   ...
@@ -18,13 +19,17 @@ in {
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
 
-      initExtra =
-        #shell
-        ''
-          # Add a newline between commands
-          precmd() { precmd() { echo "" } }
-          alias clear="precmd() { precmd() { echo } } && clear"
-        '';
+      plugins = [
+        {
+          name = "vi-mode";
+          src = pkgs.zsh-vi-mode;
+          file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
+        }
+      ];
+
+      initContent = concatStringsSep "\n" [
+        (readFile ./init-scripts/prompt.zsh)
+      ];
     };
   };
 }
