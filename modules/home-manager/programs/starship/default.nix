@@ -13,9 +13,7 @@ in {
   config = mkIf cfg.enable {
     programs.starship = {
       enable = true;
-      enableBashIntegration = true;
-      enableZshIntegration = true;
-      settings = builtins.fromTOML (builtins.readFile ./config.toml);
+      settings = importTOML ./config.toml;
     };
   };
 }
