@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+infile="$1"
+
+# Make sure the file exists
+if [[ ! -f $infile ]]; then
+  echo "Error: File does not exist: $infile" >&2
+  exit 1
+fi
+
+# Create a temporary file with .kdl extension
+tmpfile="$(mktemp --suffix=.kdl)"
+
+# Copy original to temporary .kdl
+cp "$infile" "$tmpfile"
+
+# Format the temporary file
+@KDLFMT_EXE@ format "$tmpfile"
+
+# If content differs, copy back
+if ! cmp -s "$infile" "$tmpfile"; then
+  cp "$tmpfile" "$infile"
+fi
+
+# Clean up
+rm "$tmpfile"
