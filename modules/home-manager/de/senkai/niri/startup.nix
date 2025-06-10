@@ -17,6 +17,7 @@ in {
 
         # https://github.com/sodiboo/niri-flake/issues/509
         {command = ["systemctl" "--user" "restart" "xdg-desktop-portal-gnome"];}
+        {command = ["systemctl" "--user" "restart" "swayidle"];}
         {command = ["systemctl" "--user" "restart" "swayosd"];}
         {command = ["systemctl" "--user" "restart" "clipse"];}
       ]
