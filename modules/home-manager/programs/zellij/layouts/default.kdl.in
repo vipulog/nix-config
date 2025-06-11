@@ -1,0 +1,40 @@
+layout {
+    pane size=1 borderless=true {
+        plugin location="@ZJSTATUS_PLUGIN_LOCATION@" {
+            hide_frame_for_single_pane "true"
+            format_left "{mode}#[fg=@COLOR_BASE05@,bg=@COLOR_BASE01@] {session}#[bg=@COLOR_BASE01@] "
+            format_right "{datetime}"
+            format_center "{tabs}"
+            format_space "#[bg=@COLOR_BASE01@]"
+            mode_normal "#[fg=@COLOR_BASE01@,bg=@COLOR_BASE0D@,bold] "
+            mode_default_to_mode_tmux "#[fg=@COLOR_BASE01@,bg=@COLOR_BASE09@,bold] "
+            mode_locked "#[fg=@COLOR_BASE01@,bg=@COLOR_BASE08@,bold] "
+            mode_resize "#[fg=@COLOR_BASE01@,bg=@COLOR_BASE0A@,bold] "
+            mode_pane "#[fg=@COLOR_BASE01@,bg=@COLOR_BASE0B@,bold] "
+            mode_tab "#[fg=@COLOR_BASE01@,bg=@COLOR_BASE0C@,bold] "
+            mode_scroll "#[fg=@COLOR_BASE01@,bg=@COLOR_BASE0E@,bold] "
+            mode_enter_search "#[fg=@COLOR_BASE01@,bg=@COLOR_BASE0F@,bold] "
+            mode_search "#[fg=@COLOR_BASE01@,bg=@COLOR_BASE0F@,bold] "
+            mode_rename_tab "#[fg=@COLOR_BASE01@,bg=@COLOR_BASE0C@,bold] "
+            mode_rename_pane "#[fg=@COLOR_BASE01@,bg=@COLOR_BASE0B@,bold] "
+            mode_session "#[fg=@COLOR_BASE01@,bg=@COLOR_BASE06@,bold] "
+            mode_move "#[fg=@COLOR_BASE01@,bg=@COLOR_BASE05@,bold] "
+            mode "tmux"
+            tab_normal "#[fg=@COLOR_BASE03@,bg=@COLOR_BASE01@] {name} {fullscreen_indicator}{sync_indicator}{floating_indicator}"
+            tab_active "#[fg=@COLOR_BASE05@,bg=@COLOR_BASE01@,bold] {name} {fullscreen_indicator}{sync_indicator}{floating_indicator}"
+            tab_fullscreen_indicator "□ "
+            tab_sync_indicator "  "
+            tab_floating_indicator "󰉈 "
+            datetime "#[fg=@COLOR_BASE04@,bg=@COLOR_BASE01@] {format} "
+            datetime_format "%A, %d %b %Y %H:%M"
+            datetime_timezone "@TIMEZONE@"
+            border_enabled "false"
+            border_char "‾"
+            border_format "#[fg=@COLOR_BASE02@]"
+            border_position "bottom"
+        }
+    }
+    pane split_direction="vertical" {
+        pane
+    }
+}
