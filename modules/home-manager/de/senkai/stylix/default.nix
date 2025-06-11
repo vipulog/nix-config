@@ -11,7 +11,7 @@ with lib; let
   cfg = senkaiCfg.theme;
 in {
   imports = [
-    inputs.stylix.homeManagerModules.stylix
+    inputs.stylix.homeModules.stylix
     inputs.niri.homeModules.stylix
   ];
 
