@@ -19,7 +19,7 @@ in {
         theme_backgroud = false;
         rounded_corners = false;
         shown_boxes = "proc cpu gpu0 mem net";
-        proc_tree = true;
+        proc_tree = false;
         clock_format = "/user@/host %X - %A, %d %B %Y";
       };
     };
