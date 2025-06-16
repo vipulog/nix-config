@@ -14,17 +14,8 @@
         android-studio.enable = true;
         whatsapp-web.enable = true;
       };
-
       de.senkai = {
         enable = true;
-        outputs."HDMI-A-1" = {
-          scale = 1.0;
-          mode = {
-            width = 1920;
-            height = 1080;
-            refresh = 60.000;
-          };
-        };
       };
     };
 
