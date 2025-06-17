@@ -3,6 +3,7 @@
   pkgs,
   self,
   config,
+  inputs,
   inputs',
   ...
 }:
@@ -40,7 +41,13 @@ with lib; let
     ]
   );
 in {
+  imports = [
+    inputs.niri.homeModules.niri
+  ];
+
   config = mkIf senkaiCfg.enable {
+    nixpkgs.overlays = [inputs.niri.overlays.niri];
+
     programs.niri.config = pipe ./config.kdl.in [
       (path: pkgs.replaceVars path vars)
       readFile

@@ -2,7 +2,6 @@
   pkgs,
   lib,
   config,
-  osConfig,
   inputs',
   ...
 }:
@@ -23,7 +22,7 @@ in {
     xdg.configFile."zellij/layouts/default.kdl".text = readFile (
       pkgs.replaceVars ./layouts/default.kdl.in (with config.lib.stylix.colors.withHashtag; {
         ZJSTATUS_PLUGIN_LOCATION = "file://${inputs'.zjstatus.packages.default}/bin/zjstatus.wasm";
-        TIMEZONE = osConfig.time.timeZone;
+        TIMEZONE = "Asia/Kolkata";
         COLOR_BASE01 = base01;
         COLOR_BASE02 = base02;
         COLOR_BASE03 = base03;

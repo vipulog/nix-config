@@ -1,11 +1,11 @@
 {...}: {
   imports = [
     ./hardware-configuration.nix
-    ./users
   ];
 
   config = {
     internal = {
+      users.vipul.enable = true;
       roles.workstation.enable = true;
       services.networking.users = ["vipul"];
       misc.disko.enable = true;

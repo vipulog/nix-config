@@ -1,6 +1,5 @@
 {
   imports = [
-    ./homes
     ./programs
     ./services
     ./profiles

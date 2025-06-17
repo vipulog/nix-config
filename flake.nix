@@ -105,6 +105,7 @@
         ./packages/flake-module.nix
         ./modules/flake-module.nix
         ./hosts/flake-module.nix
+        ./homes/flake-module.nix
       ];
     };
 }
