@@ -33,7 +33,7 @@ with lib; let
       "spawn-at-startup \"${getExe inputs'.zen-browser.packages.default}\""
     ]
     ++ lib.optionals config.internal.programs.whatsapp-web.enable [
-      "spawn-at-startup \"${config.xdg.desktopEntries.whatsapp-web.exec}\""
+      "spawn-at-startup \"${config.internal.programs.whatsapp-web.exe}\""
     ]
     ++ lib.optionals config.internal.programs.btop.enable [
       "spawn-at-startup \"${vars.GHOSTTY_EXE}\" \"--command=${getExe pkgs.btop}\" \"--title=btop\""
