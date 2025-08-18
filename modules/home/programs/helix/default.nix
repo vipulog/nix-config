@@ -123,6 +123,24 @@ in {
             auto-format = true;
           }
           {
+            name = "jsx";
+            language-servers = ["ts-ls" "eslint-ls"];
+            formatter = {
+              command = "${pkgs.nodePackages.prettier}/bin/prettier";
+              args = ["--stdin-filepath" "file.jsx"];
+            };
+            auto-format = true;
+          }
+          {
+            name = "tsx";
+            language-servers = ["ts-ls" "eslint-ls"];
+            formatter = {
+              command = "${pkgs.nodePackages.prettier}/bin/prettier";
+              args = ["--stdin-filepath" "file.tsx"];
+            };
+            auto-format = true;
+          }
+          {
             name = "html";
             language-servers = ["html-ls"];
             formatter = {
