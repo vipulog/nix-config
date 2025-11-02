@@ -1,0 +1,26 @@
+{
+  imports = [
+    ./coreutils
+    ./home-manager
+    ./zsh
+    ./ssh
+    ./git
+    ./delta
+    ./helix
+    ./btop
+    ./atuin
+    ./zoxide
+    ./eza
+    ./bat
+    ./direnv
+    ./lazygit
+    ./starship
+    ./ghostty
+    ./chromium
+    ./zen-browser
+    ./steam
+    ./lutris
+    ./gemini-cli
+    ./android-studio
+  ];
+}

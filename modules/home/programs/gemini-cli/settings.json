@@ -1,0 +1,10 @@
+{
+	"theme": "Default",
+	"vimMode": true,
+	"telemetry": {
+		"enabled": false
+	},
+	"usageStatisticsEnabled": false,
+	"hideTips": true,
+	"hideBanner": true
+}

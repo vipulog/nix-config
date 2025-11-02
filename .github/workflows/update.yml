@@ -1,0 +1,27 @@
+name: Update
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 2 * * 1'
+jobs:
+  update:
+    permissions:
+      contents: write
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+      - name: Configure Nix for Private Dependencies
+        run: |
+          mkdir -p ~/.config/nix
+          echo "access-tokens = github.com=${{ secrets.NIX_CONFIG_GITHUB_PAT }}" >> ~/.config/nix/nix.conf
+      - uses: DeterminateSystems/update-flake-lock@v27
+        with:
+          commit-msg: "flake.lock: update"
+          pr-title: "chore: update flake inputs"
+          pr-labels: |
+            dependencies
+            automated
