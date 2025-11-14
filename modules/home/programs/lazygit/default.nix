@@ -16,7 +16,9 @@ in {
       enable = true;
 
       settings = {
-        git.paging.pager = "${pkgs.delta}/bin/delta --dark --paging=never";
+        git.pagers = [
+          {pager = "${pkgs.delta}/bin/delta --dark --paging=never";}
+        ];
 
         gui = {
           expandFocusedSidePanel = true;
