@@ -22,5 +22,6 @@
     ./lutris
     ./gemini-cli
     ./android-studio
+    ./discord
   ];
 }

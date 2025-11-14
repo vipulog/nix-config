@@ -35,6 +35,7 @@ in {
         zen-browser.enable = true;
         gemini-cli.enable = true;
         android-studio.enable = true;
+        discord.enable = true;
 
         helix = {
           enable = true;
