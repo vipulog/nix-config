@@ -98,6 +98,9 @@ in {
             command = "${pkgs.vscode-langservers-extracted}/bin/vscode-eslint-language-server";
             args = ["--stdio"];
           };
+          go-ls = {
+            command = "${pkgs.gopls}/bin/gopls";
+          };
         };
 
         language = [
@@ -176,6 +179,14 @@ in {
             formatter = {
               command = "${pkgs.nodePackages.prettier}/bin/prettier";
               args = ["--stdin-filepath" "file.json"];
+            };
+            auto-format = true;
+          }
+          {
+            name = "go";
+            language-servers = ["go-ls"];
+            formatter = {
+              command = "${pkgs.go}/bin/gofmt";
             };
             auto-format = true;
           }
