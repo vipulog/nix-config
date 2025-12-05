@@ -36,6 +36,7 @@ in {
         gemini-cli.enable = true;
         android-studio.enable = true;
         discord.enable = true;
+        wl-clipboard.enable = true;
 
         helix = {
           enable = true;

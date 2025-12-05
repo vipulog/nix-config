@@ -23,5 +23,6 @@
     ./gemini-cli
     ./android-studio
     ./discord
+    ./wl-clipboard
   ];
 }
