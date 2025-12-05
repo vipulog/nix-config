@@ -34,6 +34,7 @@ in {
         chromium.enable = true;
         zen-browser.enable = true;
         gemini-cli.enable = true;
+        opencode.enable = true;
         android-studio.enable = true;
         discord.enable = true;
         wl-clipboard.enable = true;

@@ -24,5 +24,6 @@
     ./android-studio
     ./discord
     ./wl-clipboard
+    ./opencode
   ];
 }
