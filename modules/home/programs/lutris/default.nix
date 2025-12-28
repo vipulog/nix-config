@@ -20,10 +20,6 @@ in {
         wineWowPackages.stableFull
       ];
 
-      protonPackages = with pkgs; [
-        proton-ge-bin
-      ];
-
       extraPackages = with pkgs; [
         mangohud
         winetricks
