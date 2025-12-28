@@ -27,5 +27,18 @@
     services.udev.extraRules = ''
       ATTRS{name}=="ELAN900C:00 04F3:25A2", ENV{ID_INPUT_TOUCHSCREEN}="0", ENV{ID_INPUT}="0"
     '';
+
+    zramSwap = {
+      enable = true;
+      memoryPercent = 30;
+    };
+
+    swapDevices = [
+      {
+        device = "/var/lib/swapfile";
+        size = 8 * 1024;
+        priority = 0;
+      }
+    ];
   };
 }
