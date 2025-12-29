@@ -47,6 +47,7 @@ in {
 
       services = {
         redirector.enable = true;
+        trayscale.enable = true;
       };
 
       misc = {
