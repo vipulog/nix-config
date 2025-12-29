@@ -30,7 +30,7 @@ in {
             "org.gnome.Nautilus.desktop"
             "org.gnome.Software.desktop"
             "zen-beta.desktop"
-            "net.lutris.Lutris.desktop"
+            "page.kramo.Cartridges.desktop"
             "org.gnome.Geary.desktop"
             "org.gnome.Settings.desktop"
           ];

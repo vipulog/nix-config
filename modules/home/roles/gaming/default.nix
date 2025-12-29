@@ -15,6 +15,7 @@ in {
     ${namespace}.programs = {
       steam.enable = true;
       lutris.enable = true;
+      cartridges.enable = true;
     };
 
     home = {

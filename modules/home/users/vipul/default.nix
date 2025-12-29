@@ -23,6 +23,7 @@ in {
     (importUserModule ./ssh.nix)
     (importUserModule ./atuin.nix)
     (importUserModule ./zen-browser.nix)
+    (importUserModule ./cartridges.nix)
   ];
 
   options.${namespace}.users.${username} = {

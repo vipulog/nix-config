@@ -20,6 +20,7 @@
     ./zen-browser
     ./steam
     ./lutris
+    ./cartridges
     ./gemini-cli
     ./android-studio
     ./discord
