@@ -22,7 +22,7 @@ args @ {
       };
       pkgsUnstable = import inputs.nixpkgs-unstable {
         inherit system;
-        config.allowunfree = true;
+        config.allowUnfree = true;
       };
     };
   };
