@@ -17,7 +17,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     home-manager = {
-      useGlobalPkgs = true;
+      useGlobalPkgs = false;
       useUserPackages = true;
       backupFileExtension = "backup";
       extraSpecialArgs = specialArgs;

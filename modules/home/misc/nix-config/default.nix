@@ -51,6 +51,10 @@ in {
             my-templates.flake = inputs.my-templates;
           };
         };
+
+        nixpkgs.config = {
+          allowUnfree = true;
+        };
       }
 
       (lib.mkIf sopsEnabled (let
