@@ -20,9 +20,9 @@
     }
   );
 in {
-  imports = [
-    (importUserModule ./home-manager.nix)
-    (importUserModule ./podman.nix)
+  imports = map importUserModule [
+    ./home-manager.nix
+    ./podman.nix
   ];
 
   options.${namespace}.users.${username} = {

@@ -18,12 +18,12 @@
     }
   );
 in {
-  imports = [
-    (importUserModule ./git.nix)
-    (importUserModule ./ssh.nix)
-    (importUserModule ./atuin.nix)
-    (importUserModule ./zen-browser.nix)
-    (importUserModule ./cartridges.nix)
+  imports = map importUserModule [
+    ./git.nix
+    ./ssh.nix
+    ./atuin.nix
+    ./zen-browser.nix
+    ./cartridges.nix
   ];
 
   options.${namespace}.users.${username} = {
