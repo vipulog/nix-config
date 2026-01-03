@@ -1,3 +1,6 @@
 {
-  imports = [./podman];
+  imports = [
+    ./podman
+    ./waydroid
+  ];
 }

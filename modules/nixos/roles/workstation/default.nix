@@ -35,7 +35,10 @@ in {
 
       de.gnome.enable = true;
 
-      virtualisation.podman.enable = true;
+      virtualisation = {
+        podman.enable = true;
+        waydroid.enable = true;
+      };
 
       misc = {
         nix.enable = true;
