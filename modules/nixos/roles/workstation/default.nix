@@ -38,6 +38,7 @@ in {
       virtualisation = {
         podman.enable = true;
         waydroid.enable = true;
+        libvirtd.enable = true;
       };
 
       misc = {
