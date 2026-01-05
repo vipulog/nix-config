@@ -7,7 +7,7 @@
   cfg = config.${namespace}.virtualisation.podman;
 in {
   options.${namespace}.virtualisation.podman = {
-    enable = lib.mkEnableOption "virtualisation with podman";
+    enable = lib.mkEnableOption "podman";
   };
 
   config = lib.mkIf cfg.enable {
