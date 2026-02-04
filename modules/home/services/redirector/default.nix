@@ -18,6 +18,7 @@ in {
       enable = true;
 
       settings = {
+        port = 3030;
         default_search = "https://duckduckgo.com/?q={}";
         search_suggestions = "https://search.brave.com/api/suggest?q={}";
 
