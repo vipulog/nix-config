@@ -36,7 +36,7 @@ in {
           editor = {
             cursorline = true;
             line-number = "relative";
-            rulers = [120];
+            rulers = [100];
             true-color = true;
 
             cursor-shape = {
@@ -51,16 +51,9 @@ in {
             };
 
             lsp = {
-              auto-signature-help = false;
+              auto-signature-help = true;
               display-messages = true;
             };
-
-            statusline.left = [
-              "mode"
-              "spinner"
-              "version-control"
-              "file-name"
-            ];
           };
         }
 
@@ -74,30 +67,42 @@ in {
           nix-ls = {
             command = "${pkgs.nil}/bin/nil";
           };
+
           python-ls = {
             command = "${pkgs.ruff}/bin/ruff";
             args = ["server"];
           };
+
           ts-ls = {
             command = "${pkgs.typescript-language-server}/bin/typescript-language-server";
             args = ["--stdio"];
           };
+
           html-ls = {
             command = "${pkgs.vscode-langservers-extracted}/bin/vscode-html-language-server";
             args = ["--stdio"];
           };
+
           css-ls = {
             command = "${pkgs.vscode-langservers-extracted}/bin/vscode-css-language-server";
             args = ["--stdio"];
           };
+
           json-ls = {
             command = "${pkgs.vscode-langservers-extracted}/bin/vscode-json-language-server";
             args = ["--stdio"];
           };
+
           eslint-ls = {
             command = "${pkgs.vscode-langservers-extracted}/bin/vscode-eslint-language-server";
             args = ["--stdio"];
           };
+
+          svelte-ls = {
+            command = "${pkgs.svelte-language-server}/bin/svelteserver";
+            args = ["--stdio"];
+          };
+
           go-ls = {
             command = "${pkgs.gopls}/bin/gopls";
           };
@@ -110,6 +115,7 @@ in {
             formatter.command = "${pkgs.alejandra}/bin/alejandra";
             auto-format = true;
           }
+
           {
             name = "python";
             language-servers = ["python-ls"];
@@ -119,6 +125,7 @@ in {
             };
             auto-format = true;
           }
+
           {
             name = "javascript";
             language-servers = ["ts-ls" "eslint-ls"];
@@ -128,6 +135,7 @@ in {
             };
             auto-format = true;
           }
+
           {
             name = "typescript";
             language-servers = ["ts-ls" "eslint-ls"];
@@ -137,6 +145,7 @@ in {
             };
             auto-format = true;
           }
+
           {
             name = "jsx";
             language-servers = ["ts-ls" "eslint-ls"];
@@ -146,6 +155,7 @@ in {
             };
             auto-format = true;
           }
+
           {
             name = "tsx";
             language-servers = ["ts-ls" "eslint-ls"];
@@ -155,6 +165,7 @@ in {
             };
             auto-format = true;
           }
+
           {
             name = "html";
             language-servers = ["html-ls"];
@@ -164,6 +175,7 @@ in {
             };
             auto-format = true;
           }
+
           {
             name = "css";
             language-servers = ["css-ls"];
@@ -173,6 +185,7 @@ in {
             };
             auto-format = true;
           }
+
           {
             name = "json";
             language-servers = ["json-ls"];
@@ -182,6 +195,17 @@ in {
             };
             auto-format = true;
           }
+
+          {
+            name = "svelte";
+            language-servers = ["svelte-ls"];
+            formatter = {
+              command = "${pkgs.nodePackages.prettier}/bin/prettier";
+              args = ["--stdin-filepath" "file.svelte"];
+            };
+            auto-format = true;
+          }
+
           {
             name = "go";
             language-servers = ["go-ls"];
