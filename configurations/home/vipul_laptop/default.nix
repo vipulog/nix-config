@@ -5,7 +5,7 @@
     ${namespace} = {
       roles = {
         workstation.enable = true;
-        gaming.enable = true;
+        gaming.enable = false;
       };
     };
   };

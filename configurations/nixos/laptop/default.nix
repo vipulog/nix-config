@@ -15,8 +15,9 @@
     ${namespace} = {
       roles = {
         workstation.enable = true;
-        gaming.enable = true;
+        gaming.enable = false;
       };
+
       misc.disko.presets.single-disk-ext4.device = "/dev/nvme0n1";
     };
 
