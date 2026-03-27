@@ -23,7 +23,7 @@ in {
         mangohud
         gamescope
         gamemode
-        wineWowPackages.full
+        wineWow64Packages.full
       ];
     };
   };

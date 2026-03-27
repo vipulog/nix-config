@@ -23,8 +23,8 @@ in {
       enable = true;
 
       winePackages = with pkgs; [
-        wineWowPackages.unstableFull
-        wineWowPackages.stableFull
+        wineWow64Packages.unstableFull
+        wineWow64Packages.stableFull
       ];
 
       extraPackages = with pkgs; [
