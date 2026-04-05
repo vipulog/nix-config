@@ -130,7 +130,7 @@ in {
             name = "javascript";
             language-servers = ["ts-ls" "eslint-ls"];
             formatter = {
-              command = "${pkgs.nodePackages.prettier}/bin/prettier";
+              command = "${pkgs.prettier}/bin/prettier";
               args = ["--stdin-filepath" "file.js"];
             };
             auto-format = true;
@@ -140,7 +140,7 @@ in {
             name = "typescript";
             language-servers = ["ts-ls" "eslint-ls"];
             formatter = {
-              command = "${pkgs.nodePackages.prettier}/bin/prettier";
+              command = "${pkgs.prettier}/bin/prettier";
               args = ["--stdin-filepath" "file.ts"];
             };
             auto-format = true;
@@ -150,7 +150,7 @@ in {
             name = "jsx";
             language-servers = ["ts-ls" "eslint-ls"];
             formatter = {
-              command = "${pkgs.nodePackages.prettier}/bin/prettier";
+              command = "${pkgs.prettier}/bin/prettier";
               args = ["--stdin-filepath" "file.jsx"];
             };
             auto-format = true;
@@ -160,7 +160,7 @@ in {
             name = "tsx";
             language-servers = ["ts-ls" "eslint-ls"];
             formatter = {
-              command = "${pkgs.nodePackages.prettier}/bin/prettier";
+              command = "${pkgs.prettier}/bin/prettier";
               args = ["--stdin-filepath" "file.tsx"];
             };
             auto-format = true;
@@ -170,7 +170,7 @@ in {
             name = "html";
             language-servers = ["html-ls"];
             formatter = {
-              command = "${pkgs.nodePackages.prettier}/bin/prettier";
+              command = "${pkgs.prettier}/bin/prettier";
               args = ["--stdin-filepath" "file.html"];
             };
             auto-format = true;
@@ -180,7 +180,7 @@ in {
             name = "css";
             language-servers = ["css-ls"];
             formatter = {
-              command = "${pkgs.nodePackages.prettier}/bin/prettier";
+              command = "${pkgs.prettier}/bin/prettier";
               args = ["--stdin-filepath" "file.css"];
             };
             auto-format = true;
@@ -190,7 +190,7 @@ in {
             name = "json";
             language-servers = ["json-ls"];
             formatter = {
-              command = "${pkgs.nodePackages.prettier}/bin/prettier";
+              command = "${pkgs.prettier}/bin/prettier";
               args = ["--stdin-filepath" "file.json"];
             };
             auto-format = true;
@@ -200,7 +200,7 @@ in {
             name = "svelte";
             language-servers = ["svelte-ls"];
             formatter = {
-              command = "${pkgs.nodePackages.prettier}/bin/prettier";
+              command = "${pkgs.prettier}/bin/prettier";
               args = ["--stdin-filepath" "file.svelte"];
             };
             auto-format = true;
