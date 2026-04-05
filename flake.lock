@@ -450,11 +450,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1775379381,
-        "narHash": "sha256-yxYOAV00Z60jtJyefF0uUhyyhadHSp+sIVRLgfP8kkY=",
+        "lastModified": 1775389235,
+        "narHash": "sha256-iKhfWXAOUPpRdVuc26w57CjpmiaEu6vRFqDgHmSgHow=",
         "owner": "vipulog",
         "repo": "redirector-flake",
-        "rev": "25bcdb3c2b6ce9ee76a81d00f6ae4e9f4022e36e",
+        "rev": "f84f57cee8fc1d6f84f518cca33cf202be90120f",
         "type": "github"
       },
       "original": {
