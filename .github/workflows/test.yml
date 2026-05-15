@@ -18,10 +18,5 @@ jobs:
       - uses: DeterminateSystems/magic-nix-cache-action@main
       - uses: actions/checkout@v5
       - run: nix flake metadata
-      - run: |
-          cat <<-EOF > modules/ci-runtime.nix
-          {
-            _module.args.CI = true;
-          }
-          EOF
+      - run: echo "{_module.args.CI = true;}" > modules/ci-runtime.nix
       - run: nix flake check
