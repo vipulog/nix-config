@@ -4,7 +4,10 @@
   ...
 }: {
   den.default = {
-    includes = [den.batteries.define-user];
+    includes = [
+      den.batteries.define-user
+      den.batteries.hostname
+    ];
 
     nixos.system.stateVersion = "25.11";
     homeManager.home.stateVersion = "25.11";
