@@ -1,5 +1,7 @@
-{
+{den, ...}: {
   den.aspects.niri = {
+    includes = [den.aspects.alacritty];
+
     nixos = {
       services.displayManager.gdm = {
         enable = true;
@@ -32,20 +34,17 @@
     }: {
       home.packages = [pkgs.xwayland-satellite];
 
-      programs.alacritty = {
+      wrappers.alacritty = {
         enable = true;
 
         settings = {
-          general."import" = ["./dank-theme.toml"];
+          general."import" = [
+            "~/.config/alacritty/dank-theme.toml"
+          ];
 
           window = {
             decorations = "None";
             opacity = 0.9;
-
-            padding = {
-              x = 12;
-              y = 12;
-            };
           };
         };
       };
