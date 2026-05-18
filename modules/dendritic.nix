@@ -2,6 +2,7 @@
   imports = [
     (inputs.flake-file.flakeModules.dendritic or {})
     (inputs.den.flakeModules.dendritic or {})
+    (inputs.wrapper-modules.flakeModules.wrappers or {})
   ];
 
   # other inputs may be defined at a module using them.
@@ -19,6 +20,11 @@
 
     home-manager = {
       url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    wrapper-modules = {
+      url = "github:BirdeeHub/nix-wrapper-modules";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
