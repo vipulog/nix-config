@@ -8,11 +8,10 @@
 
     nixos = {
       virtualisation = {
-        vmVariant = {
+        vmVariantWithDisko = {
           virtualisation = {
             memorySize = 2048;
             cores = 2;
-            diskSize = 20480;
             graphics = true;
 
             qemu.options = [
@@ -27,12 +26,11 @@
 
   perSystem = {pkgs, ...}: let
     host = self.nixosConfigurations.igloo.config;
-    hostname = host.networking.hostName;
-    vm = host.system.build.vm;
+    vm = host.system.build.vmWithDisko;
   in {
     packages.igloo-vm = pkgs.writeShellApplication {
       name = "igloo-vm";
-      text = "${vm}/bin/run-${hostname}-vm \"$@\"";
+      text = "${vm}/bin/disko-vm \"$@\"";
     };
   };
 }

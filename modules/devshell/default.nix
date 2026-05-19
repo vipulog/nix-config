@@ -103,16 +103,6 @@
               help = "builds, activates, and sets the configuration as the boot default";
               command = withHost "switch --ask";
             }
-            {
-              name = "host-build-vm";
-              help = "builds the vm configuration";
-              command = withHost "build-vm";
-            }
-            {
-              name = "host-run-vm";
-              help = "builds and runs the vm configuration";
-              command = withHost "build-vm --run";
-            }
           ] [(addCategory "[host commands]")]
         )
       ];

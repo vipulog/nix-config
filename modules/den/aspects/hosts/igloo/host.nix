@@ -1,13 +1,21 @@
-{den, ...}: {
+{
+  inputs,
+  self,
+  den,
+  ...
+}: {
   den.aspects.igloo = {
     includes = [den.aspects.niri];
 
     nixos = {
-      boot.loader.grub.enable = false;
+      imports = [
+        inputs.disko.nixosModules.disko
+        self.diskoConfigurations.igloo
+      ];
 
-      fileSystems."/" = {
-        device = "/dev/fake";
-        fsType = "auto";
+      boot.loader = {
+        systemd-boot.enable = true;
+        efi.canTouchEfiVariables = true;
       };
     };
 
