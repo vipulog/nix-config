@@ -10,6 +10,8 @@
       den.batteries.inputs'
       den.batteries.self'
       (den.batteries.unfree ["replace"])
+
+      den.aspects.localization
     ];
 
     nixos.system.stateVersion = "25.11";
