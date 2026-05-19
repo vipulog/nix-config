@@ -9,6 +9,7 @@
       den.batteries.hostname
       den.batteries.inputs'
       den.batteries.self'
+      (den.batteries.unfree ["replace"])
     ];
 
     nixos.system.stateVersion = "25.11";
