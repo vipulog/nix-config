@@ -6,21 +6,22 @@
   den.aspects.igloo = {
     includes = [(den.batteries.vm-autologin "tux")];
 
-    nixos = {pkgs, ...}: {
-      hardware.graphics.enable = true;
+    nixos = {
+      virtualisation = {
+        vmVariant = {
+          virtualisation = {
+            memorySize = 2048;
+            cores = 2;
+            diskSize = 20480;
+            graphics = true;
 
-      virtualisation.vmVariant.virtualisation = {
-        graphics = true;
-
-        qemu.options = [
-          "-device virtio-vga-gl"
-          "-display gtk,gl=on"
-        ];
+            qemu.options = [
+              "-device virtio-vga-gl"
+              "-display gtk,gl=on"
+            ];
+          };
+        };
       };
-
-      environment.systemPackages = with pkgs; [
-        mesa-demos
-      ];
     };
   };
 
