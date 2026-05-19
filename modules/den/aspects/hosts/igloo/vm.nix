@@ -1,5 +1,5 @@
 {
-  inputs,
+  self,
   den,
   ...
 }: {
@@ -25,7 +25,7 @@
   };
 
   perSystem = {pkgs, ...}: let
-    host = inputs.self.nixosConfigurations.igloo.config;
+    host = self.nixosConfigurations.igloo.config;
     hostname = host.networking.hostName;
     vm = host.system.build.vm;
   in {
