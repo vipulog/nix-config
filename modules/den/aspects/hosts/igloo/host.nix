@@ -5,7 +5,10 @@
   ...
 }: {
   den.aspects.igloo = {
-    includes = [den.aspects.niri];
+    includes = [
+      (den.aspects.preservation {})
+      den.aspects.niri
+    ];
 
     nixos = {
       lib,
@@ -45,6 +48,31 @@
       networking.networkmanager.enable = true;
       hardware.bluetooth.enable = true;
       services.blueman.enable = true;
+    };
+
+    preservation = {
+      directories = [
+        {
+          directory = "/var/lib/nixos";
+          inInitrd = true;
+        }
+
+        "/var/lib/systemd"
+        "/var/lib/bluetooth"
+        "/var/lib/NetworkManager"
+
+        "/var/log"
+      ];
+
+      files = [
+        {
+          file = "/etc/machine-id";
+          inInitrd = true;
+        }
+
+        "/etc/ssh/ssh_host_ed25519_key"
+        "/etc/ssh/ssh_host_ed25519_key.pub"
+      ];
     };
 
     provides.to-users = {
