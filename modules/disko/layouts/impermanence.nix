@@ -49,7 +49,7 @@
               };
 
               swap = lib.mkIf finalSwap.enable {
-                size = finalSwap.size;
+                inherit (finalSwap) size;
 
                 content = {
                   type = "swap";

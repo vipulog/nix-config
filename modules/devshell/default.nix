@@ -25,7 +25,7 @@
       availableHosts = builtins.attrNames denNhPackages;
       hostsStr = lib.concatStringsSep " " availableHosts;
       hostsPrettyStr = lib.concatStringsSep "\n" (map (h: "  - ${h}") availableHosts);
-    in (
+    in
       # sh
       ''
         HOST="''${HOST_NAME:?HOST_NAME is not set}"
@@ -49,8 +49,7 @@
         esac
 
         "$HOST" ${cmd} --hostname "$HOST" "$@"
-      ''
-    );
+      '';
 
     addCategory = category: map (cmd: cmd // {inherit category;});
   in {

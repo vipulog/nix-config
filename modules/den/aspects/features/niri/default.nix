@@ -54,7 +54,7 @@
         clSettingsJson = ./config/DankMaterialShell/clsettings.json;
         alacrittyTheme = ./config/alacritty/dank-theme.toml;
         niriDirNix = ./config/niri;
-      in (
+      in
         lib.hm.dag.entryAfter ["writeBoundary"]
         # sh
         ''
@@ -95,8 +95,7 @@
             rel="''${file#${niriDirNix}/}"
             copy_if_missing "$file" "$niriDir/$rel"
           done < <(find ${niriDirNix} -type f -print0)
-        ''
-      );
+        '';
     };
   };
 }

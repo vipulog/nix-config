@@ -26,6 +26,7 @@
         forbid-new-submodules.enable = true;
         check-symlinks.enable = true;
         treefmt.enable = true;
+        statix.enable = true;
       };
     };
   };
