@@ -1,62 +1,55 @@
-{
-  lib,
-  den,
-  inputs,
-  ...
-}: {
+{inputs, ...}: {
   flake-file.inputs = {
     preservation.url = "github:nix-community/preservation";
   };
 
-  den.aspects.preservation = {defaultPreserveAt ? "/persistent"}: let
-    preservationFwd = {
-      host,
-      aspect-chain,
-      ...
-    }: (
-      den.provides.forward {
-        each = lib.singleton true;
-        fromClass = _: "preservation";
-        intoClass = _: host.class;
-        intoPath = _: ["$denPreservationAspect"];
-        fromAspect = _: lib.head aspect-chain;
-        guard = {options, ...}: options ? preservation.preserveAt;
-      }
-    );
-  in {
-    includes = [preservationFwd];
-
+  den.aspects.preservation = {
     nixos = {
+      lib,
       config,
       options,
       ...
     }: let
-      preserveAtOpt = options.preservation.preserveAt;
-      preserveAtOpts = preserveAtOpt.type.getSubOptions [];
+      cfg = config.preservation;
+      inherit (cfg) defaultPreserveAt;
+
+      defaultPreserve = {
+        persistentStoragePath = defaultPreserveAt;
+
+        directories = [
+          {
+            directory = "/var/lib/nixos";
+            inInitrd = true;
+          }
+
+          "/etc/nixos"
+        ];
+
+        files = [
+          {
+            file = "/etc/machine-id";
+            inInitrd = true;
+          }
+        ];
+      };
     in {
       imports = [inputs.preservation.nixosModules.default];
 
-      options."$denPreservationAspect" = {
-        preserveAt = preserveAtOpt;
-        inherit (preserveAtOpts) directories files users;
+      options.preservation = {
+        preserve = lib.mkOption {
+          type = options.preservation.preserveAt.type.nestedTypes.elemType;
+          default = {};
+        };
+
+        defaultPreserveAt = lib.mkOption {
+          type = lib.types.str;
+          default = "/persistent";
+        };
       };
 
-      config = {
-        preservation = {
-          enable = true;
-
-          preserveAt = lib.mkMerge [
-            config."$denPreservationAspect".preserveAt
-
-            {
-              ${defaultPreserveAt} = {
-                directories = config."$denPreservationAspect".directories;
-                files = config."$denPreservationAspect".files;
-                users = config."$denPreservationAspect".users;
-              };
-            }
-          ];
-        };
+      config.preservation = {
+        preserveAt.${defaultPreserveAt} = cfg.preserve;
+        preserve = defaultPreserve;
       };
     };
   };

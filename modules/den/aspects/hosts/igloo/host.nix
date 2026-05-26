@@ -6,7 +6,7 @@
 }: {
   den.aspects.igloo = {
     includes = [
-      (den.aspects.preservation {})
+      den.aspects.preservation
       den.aspects.niri
     ];
 
@@ -25,6 +25,15 @@
         .content
         .subvolumes
         .nix
+        .mountpoint;
+
+      preservationMountpoint = diskoMainCfg
+        .content
+        .partitions
+        .root
+        .content
+        .subvolumes
+        .persistent
         .mountpoint;
     in {
       imports = [
@@ -61,31 +70,26 @@
       networking.networkmanager.enable = true;
       hardware.bluetooth.enable = true;
       services.blueman.enable = true;
-    };
 
-    preservation = {
-      directories = [
-        {
-          directory = "/var/lib/nixos";
-          inInitrd = true;
-        }
+      preservation = {
+        enable = true;
+        defaultPreserveAt = preservationMountpoint;
 
-        "/var/lib/systemd"
-        "/var/lib/bluetooth"
-        "/var/lib/NetworkManager"
+        preserve = {
+          directories = [
+            "/var/lib/systemd"
+            "/var/lib/bluetooth"
+            "/var/lib/NetworkManager"
 
-        "/var/log"
-      ];
+            "/var/log"
+          ];
 
-      files = [
-        {
-          file = "/etc/machine-id";
-          inInitrd = true;
-        }
-
-        "/etc/ssh/ssh_host_ed25519_key"
-        "/etc/ssh/ssh_host_ed25519_key.pub"
-      ];
+          files = [
+            "/etc/ssh/ssh_host_ed25519_key"
+            "/etc/ssh/ssh_host_ed25519_key.pub"
+          ];
+        };
+      };
     };
 
     provides.to-users = {
