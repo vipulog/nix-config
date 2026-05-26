@@ -6,6 +6,7 @@
 }: {
   den.aspects.igloo = {
     includes = [
+      den.aspects.home-manager
       den.aspects.preservation
       den.aspects.niri
     ];
@@ -90,10 +91,20 @@
           ];
         };
       };
+
+      system.stateVersion = "25.11";
     };
 
-    provides.to-users = {
-      includes = [den.aspects.niri];
+    provides = {
+      to-users = {
+        includes = [den.aspects.niri];
+      };
+
+      tux = {
+        homeManager = {
+          home.stateVersion = "25.11";
+        };
+      };
     };
   };
 }
