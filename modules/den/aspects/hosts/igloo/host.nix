@@ -101,6 +101,8 @@
       };
 
       tux = {
+        includes = [den.batteries.primary-user];
+
         homeManager = {
           home.stateVersion = "25.11";
         };
