@@ -9,7 +9,7 @@
     _module.args = {
       pkgs = import inputs.nixpkgs {
         inherit system;
-        config.allowUnfreePredicate = mkAllowPredicate ["replace"];
+        config.allowUnfreePredicate = mkAllowPredicate [];
       };
     };
   };

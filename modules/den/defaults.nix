@@ -9,7 +9,6 @@
       den.batteries.hostname
       den.batteries.inputs'
       den.batteries.self'
-      (den.batteries.unfree ["replace"])
 
       den.aspects.home-manager
       den.aspects.localization
