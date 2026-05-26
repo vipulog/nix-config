@@ -1,25 +1,32 @@
 {lib, ...}: {
-  flake.diskoLayouts.impermanence = {
+  flake.diskoLayouts.btrfsImpermanence = {
     device,
+    tmpfsSize ? "25%",
+    tmpfsMode ? "755",
     imageSize ? "30G",
-    swap ? {},
-  }: let
-    defaultSwap = {
+    espSize ? "1G",
+    swap ? {
       enable = true;
       size = "4G";
-    };
-
-    finalSwap = defaultSwap // swap;
-  in {
-    fileSystems."/nix".neededForBoot = true;
-
+    },
+    subvolumes ? {
+      persistent = {
+        mountpoint = "/persistent";
+        mountOptions = ["compress=zstd" "noatime"];
+      };
+      nix = {
+        mountpoint = "/nix";
+        mountOptions = ["compress=zstd" "noatime"];
+      };
+    },
+  }: {
     disko = {
       imageBuilder.extraRootModules = ["btrfs"];
 
       devices = {
         nodev."/" = {
           fsType = "tmpfs";
-          mountOptions = ["size=25%" "mode=755"];
+          mountOptions = ["size=${tmpfsSize}" "mode=${tmpfsMode}"];
         };
 
         disk.main = {
@@ -34,22 +41,25 @@
                 name = "boot";
                 size = "1M";
                 type = "EF02";
+                priority = 1;
               };
 
               esp = {
                 name = "ESP";
-                size = "1G";
+                size = espSize;
                 type = "EF00";
+                priority = 2;
 
                 content = {
                   type = "filesystem";
                   format = "vfat";
                   mountpoint = "/boot";
+                  mountOptions = ["umask=0077"];
                 };
               };
 
-              swap = lib.mkIf finalSwap.enable {
-                inherit (finalSwap) size;
+              swap = lib.mkIf swap.enable {
+                inherit (swap) size;
 
                 content = {
                   type = "swap";
@@ -64,18 +74,7 @@
                 content = {
                   type = "btrfs";
                   extraArgs = ["-f"];
-
-                  subvolumes = {
-                    "/persistent" = {
-                      mountOptions = ["subvol=persistent" "noatime"];
-                      mountpoint = "/persistent";
-                    };
-
-                    "/nix" = {
-                      mountOptions = ["subvol=nix" "noatime"];
-                      mountpoint = "/nix";
-                    };
-                  };
+                  inherit subvolumes;
                 };
               };
             };

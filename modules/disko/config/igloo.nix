@@ -1,6 +1,6 @@
 {self, ...}: {
   flake.diskoConfigurations = {
-    igloo = self.diskoLayouts.impermanence {
+    igloo = self.diskoLayouts.btrfsImpermanence {
       device = "/dev/nvme0n1";
 
       swap = {

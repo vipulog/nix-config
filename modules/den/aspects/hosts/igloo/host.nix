@@ -15,7 +15,18 @@
       config,
       modulesPath,
       ...
-    }: {
+    }: let
+      diskoMainCfg = config.disko.devices.disk.main;
+
+      nixMountpoint = diskoMainCfg
+        .content
+        .partitions
+        .root
+        .content
+        .subvolumes
+        .nix
+        .mountpoint;
+    in {
       imports = [
         (modulesPath + "/installer/scan/not-detected.nix")
         inputs.nixos-hardware.nixosModules.dell-latitude-7490
@@ -39,6 +50,8 @@
           efi.canTouchEfiVariables = true;
         };
       };
+
+      fileSystems."${nixMountpoint}".neededForBoot = true;
 
       nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
