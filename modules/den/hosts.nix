@@ -1,11 +1,13 @@
 {
-  den.hosts.x86_64-linux.igloo.users = {
-    tux = {
-      classes = ["homeManager"];
+  den.hosts.x86_64-linux = {
+    igloo.users = {
+      tux.classes = ["homeManager"];
+      vm-user.classes = ["homeManager"];
     };
 
-    vm-user = {
-      classes = ["homeManager"];
+    iceberg.users = {
+      tux.classes = ["homeManager"];
+      vm-user.classes = ["homeManager"];
     };
   };
 }
