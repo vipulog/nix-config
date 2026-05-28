@@ -4,9 +4,5 @@
       den.batteries.define-user
       (den.batteries.user-shell "zsh")
     ];
-
-    user = {
-      initialPassword = "1234";
-    };
   };
 }

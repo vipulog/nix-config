@@ -8,6 +8,7 @@
     includes = [
       den.aspects.home-manager
       den.aspects.preservation
+      den.aspects.sops-nix
       den.aspects.niri
     ];
 
@@ -15,6 +16,7 @@
       lib,
       config,
       modulesPath,
+      host,
       ...
     }: let
       diskoMainCfg = config.disko.devices.disk.main;
@@ -36,6 +38,8 @@
         .subvolumes
         .persistent
         .mountpoint;
+
+      sshHostKeyPath = "${preservationMountpoint}/etc/ssh/ssh_host_ed25519_key";
     in {
       imports = [
         (modulesPath + "/installer/scan/not-detected.nix")
@@ -61,7 +65,10 @@
         };
       };
 
-      fileSystems."${nixMountpoint}".neededForBoot = true;
+      fileSystems = {
+        "${nixMountpoint}".neededForBoot = true;
+        "${preservationMountpoint}".neededForBoot = true;
+      };
 
       nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
@@ -86,10 +93,34 @@
           ];
 
           files = [
-            "/etc/ssh/ssh_host_ed25519_key"
-            "/etc/ssh/ssh_host_ed25519_key.pub"
+            {
+              file = "/etc/ssh/ssh_host_ed25519_key";
+              how = "symlink";
+              configureParent = true;
+            }
+            {
+              file = "/etc/ssh/ssh_host_ed25519_key.pub";
+              how = "symlink";
+              configureParent = true;
+            }
           ];
         };
+      };
+
+      sops = {
+        defaultSopsFile = "${inputs.my-secrets}/secrets/sops/${host.name}.yaml";
+        age.sshKeyPaths = [sshHostKeyPath];
+      };
+
+      services.openssh = {
+        enable = true;
+
+        hostKeys = [
+          {
+            path = sshHostKeyPath;
+            type = "ed25519";
+          }
+        ];
       };
 
       users.users.vm-user.enable = false;
@@ -104,6 +135,16 @@
 
       tux = {
         includes = [den.batteries.primary-user];
+
+        nixos = {
+          sops.secrets.tux-password = {
+            neededForUsers = true;
+          };
+        };
+
+        user = {config, ...}: {
+          hashedPasswordFile = config.sops.secrets.tux-password.path;
+        };
 
         homeManager = {
           home.stateVersion = "25.11";
