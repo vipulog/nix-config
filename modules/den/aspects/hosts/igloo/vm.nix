@@ -1,14 +1,17 @@
 {
+  lib,
   self,
   den,
   ...
 }: {
   den.aspects.igloo = {
-    includes = [(den.batteries.vm-autologin "tux")];
+    includes = [(den.batteries.vm-autologin "vm-user")];
 
     nixos = {
       virtualisation = {
         vmVariantWithDisko = {
+          users.users.vm-user.enable = lib.mkForce true;
+
           virtualisation = {
             memorySize = 2048;
             cores = 2;
@@ -19,6 +22,16 @@
               "-display gtk,gl=on"
             ];
           };
+        };
+      };
+    };
+
+    provides = {
+      vm-user = {
+        includes = [den.batteries.primary-user];
+
+        homeManager = {
+          home.stateVersion = "25.11";
         };
       };
     };
