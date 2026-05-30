@@ -140,7 +140,10 @@
 
     provides = {
       to-users = {
-        includes = [den.aspects.niri];
+        includes = [
+          den.aspects.niri
+          den.aspects.neovim
+        ];
       };
 
       tux = {
