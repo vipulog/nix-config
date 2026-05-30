@@ -1,6 +1,18 @@
 {
-  flake.wrappers.alacritty = {wlib, ...}: {
+  flake.wrappers.alacritty = {
+    wlib,
+    pkgs,
+    ...
+  }: {
     imports = [wlib.wrapperModules.alacritty];
+
+    env = {
+      FONTCONFIG_FILE = pkgs.makeFontsConf {
+        fontDirectories = [
+          pkgs.nerd-fonts.jetbrains-mono
+        ];
+      };
+    };
 
     settings = {
       window.padding = {
@@ -22,6 +34,28 @@
       mouse.hide_when_typing = true;
       selection.save_to_clipboard = false;
       bell.duration = 0;
+
+      font = {
+        normal = {
+          family = "JetBrainsMono Nerd Font";
+          style = "Regular";
+        };
+
+        bold = {
+          family = "JetBrainsMono Nerd Font";
+          style = "Bold";
+        };
+
+        italic = {
+          family = "JetBrainsMono Nerd Font";
+          style = "Italic";
+        };
+
+        bold_italic = {
+          family = "JetBrainsMono Nerd Font";
+          style = "Bold Italic";
+        };
+      };
 
       keyboard.bindings = [
         {
