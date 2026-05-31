@@ -17,12 +17,11 @@
         shfmt.enable = true;
       };
 
-      settings.formatter = {
-        alejandra.excludes = ["flake.nix"];
+      settings = {
+        excludes = ["flake.nix"];
 
-        deadnix = {
-          no_lambda_arg = true;
-          excludes = ["flake.nix"];
+        formatter = {
+          deadnix.no_lambda_arg = true;
         };
       };
     };
