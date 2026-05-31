@@ -86,9 +86,6 @@
         networkmanager.enable = true;
       };
 
-      hardware.bluetooth.enable = true;
-      services.blueman.enable = true;
-
       preservation = {
         enable = true;
         defaultPreserveAt = preservationMountpoint;
@@ -96,7 +93,6 @@
         preserve = {
           directories = [
             "/var/lib/systemd"
-            "/var/lib/bluetooth"
             "/var/lib/NetworkManager"
 
             "/var/log"
