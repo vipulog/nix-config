@@ -34,9 +34,7 @@
     }: {
       home.packages = [pkgs.xwayland-satellite];
 
-      wrappers.alacritty = {
-        enable = true;
-
+      programs.alacritty = {
         settings = {
           general."import" = [
             "~/.config/alacritty/dank-theme.toml"

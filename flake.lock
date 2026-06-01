@@ -376,8 +376,7 @@
         "nvf": "nvf",
         "preservation": "preservation",
         "sops-nix": "sops-nix",
-        "treefmt-nix": "treefmt-nix",
-        "wrapper-modules": "wrapper-modules"
+        "treefmt-nix": "treefmt-nix"
       }
     },
     "sops-nix": {
@@ -432,26 +431,6 @@
       "original": {
         "owner": "numtide",
         "repo": "treefmt-nix",
-        "type": "github"
-      }
-    },
-    "wrapper-modules": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1779698383,
-        "narHash": "sha256-8B0VM13icJClvwK6ILfXHm9c5DuVUb2OZjC2UouFAYA=",
-        "owner": "BirdeeHub",
-        "repo": "nix-wrapper-modules",
-        "rev": "0a1c7485f39141e461380239f804de2bd9f43322",
-        "type": "github"
-      },
-      "original": {
-        "owner": "BirdeeHub",
-        "repo": "nix-wrapper-modules",
         "type": "github"
       }
     }
