@@ -48,6 +48,7 @@
       };
 
       config.preservation = {
+        enable = true;
         preserveAt.${defaultPreserveAt} = cfg.preserve;
         preserve = defaultPreserve;
       };

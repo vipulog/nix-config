@@ -87,7 +87,6 @@
       };
 
       preservation = {
-        enable = true;
         defaultPreserveAt = preservationMountpoint;
 
         preserve = {

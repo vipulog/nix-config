@@ -80,7 +80,6 @@
       services.blueman.enable = true;
 
       preservation = {
-        enable = true;
         defaultPreserveAt = preservationMountpoint;
 
         preserve = {
