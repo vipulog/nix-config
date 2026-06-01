@@ -12,26 +12,6 @@
     }: let
       cfg = config.preservation;
       inherit (cfg) defaultPreserveAt;
-
-      defaultPreserve = {
-        persistentStoragePath = defaultPreserveAt;
-
-        directories = [
-          {
-            directory = "/var/lib/nixos";
-            inInitrd = true;
-          }
-
-          "/etc/nixos"
-        ];
-
-        files = [
-          {
-            file = "/etc/machine-id";
-            inInitrd = true;
-          }
-        ];
-      };
     in {
       imports = [inputs.preservation.nixosModules.default];
 
@@ -50,7 +30,26 @@
       config.preservation = {
         enable = true;
         preserveAt.${defaultPreserveAt} = cfg.preserve;
-        preserve = defaultPreserve;
+
+        preserve = {
+          persistentStoragePath = defaultPreserveAt;
+
+          directories = [
+            {
+              directory = "/var/lib/nixos";
+              inInitrd = true;
+            }
+
+            "/etc/nixos"
+          ];
+
+          files = [
+            {
+              file = "/etc/machine-id";
+              inInitrd = true;
+            }
+          ];
+        };
       };
     };
   };
