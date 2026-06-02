@@ -4,13 +4,16 @@
   ...
 }: {
   den.aspects.neovim = {
-    homeManager = {pkgs, ...}: let
-      neovimCfg = inputs.nvf.lib.neovimConfiguration {
-        inherit pkgs;
-        modules = [self.neovimModules.default];
+    homeManager = {
+      imports = [inputs.nvf.homeManagerModules.default];
+
+      programs.nvf = {
+        enable = true;
+
+        settings = {
+          imports = [self.neovimModules.default];
+        };
       };
-    in {
-      home.packages = [neovimCfg.neovim];
     };
   };
 }
