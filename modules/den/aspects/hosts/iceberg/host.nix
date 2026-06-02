@@ -6,7 +6,6 @@
 }: {
   den.aspects.iceberg = {
     includes = [
-      den.aspects.home-manager
       den.aspects.preservation
       den.aspects.sops-nix
       den.aspects.niri
