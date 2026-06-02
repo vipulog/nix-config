@@ -2,6 +2,7 @@
   lib,
   den,
   inputs,
+  self,
   ...
 }: {
   imports = [inputs.devshell.flakeModule];
@@ -19,38 +20,7 @@
     ...
   }: let
     denShell = den.lib.nh.denShell {fromFlake = true;} pkgs;
-    denNhPackages = den.lib.nh.denPackages {fromFlake = true;} pkgs;
-
-    withHost = cmd: let
-      availableHosts = builtins.attrNames denNhPackages;
-      hostsStr = lib.concatStringsSep " " availableHosts;
-      hostsPrettyStr = lib.concatStringsSep "\n" (map (h: "  - ${h}") availableHosts);
-    in
-      # sh
-      ''
-        HOST="''${HOST_NAME:?HOST_NAME is not set}"
-
-        if [[ $# -gt 0 && "$1" != -* ]]; then
-          HOST="$1"
-          shift
-        fi
-
-        case " ${hostsStr} " in
-          *" $HOST "*) ;;
-          *)
-            echo "error: invalid host '$HOST'" >&2
-            echo >&2
-            echo "available hosts:" >&2
-            cat >&2 <<EOF
-        ${hostsPrettyStr}
-        EOF
-            exit 1
-            ;;
-        esac
-
-        "$HOST" ${cmd} --hostname "$HOST" "$@"
-      '';
-
+    withDenHostNh = self.lib.devshell.withDenHostNh pkgs;
     addCategory = category: map (cmd: cmd // {inherit category;});
   in {
     devshells.default = {
@@ -85,22 +55,22 @@
             {
               name = "host-build";
               help = "builds the configuration";
-              command = withHost "build";
+              command = withDenHostNh "build";
             }
             {
               name = "host-test";
               help = "builds and activates the configuration";
-              command = withHost "test --ask";
+              command = withDenHostNh "test --ask";
             }
             {
               name = "host-boot";
               help = "builds the configuration and sets it as the boot default";
-              command = withHost "boot --ask";
+              command = withDenHostNh "boot --ask";
             }
             {
               name = "host-switch";
               help = "builds, activates, and sets the configuration as the boot default";
-              command = withHost "switch --ask";
+              command = withDenHostNh "switch --ask";
             }
           ] [(addCategory "[host commands]")]
         )
