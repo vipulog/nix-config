@@ -8,7 +8,7 @@
     includes = [
       den.aspects.preservation
       den.aspects.sops-nix
-      den.aspects.niri
+      den.aspects.niri-de
     ];
 
     nixos = {
@@ -135,7 +135,7 @@
     provides = {
       to-users = {
         includes = [
-          den.aspects.niri
+          den.aspects.niri-de
           den.aspects.neovim
         ];
       };

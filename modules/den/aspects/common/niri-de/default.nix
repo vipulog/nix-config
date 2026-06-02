@@ -1,5 +1,5 @@
 {den, ...}: {
-  den.aspects.niri = {
+  den.aspects.niri-de = {
     includes = [den.aspects.alacritty];
 
     nixos = {
