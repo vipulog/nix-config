@@ -121,8 +121,6 @@
         ];
       };
 
-      users.users.vm-user.enable = false;
-
       system.stateVersion = "25.11";
     };
 
