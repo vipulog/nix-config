@@ -1,25 +1,15 @@
-{den, ...}: {
-  den.aspects.niri-de = {
-    includes = [den.aspects.alacritty];
+{inputs, ...}: {
+  flake-file.inputs = {
+    niri = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
 
+  den.aspects.niri-de = {
     nixos = {
       services.displayManager.gdm = {
         enable = true;
-      };
-
-      programs.dms-shell = {
-        enable = true;
-        enableVPN = true;
-        enableCalendarEvents = true;
-        enableClipboardPaste = true;
-        enableDynamicTheming = true;
-        enableAudioWavelength = true;
-        enableSystemMonitoring = true;
-
-        systemd = {
-          enable = true;
-          restartIfChanged = true;
-        };
       };
 
       programs.niri = {
@@ -27,73 +17,101 @@
       };
     };
 
-    homeManager = {
-      lib,
-      pkgs,
-      ...
-    }: {
-      home.packages = [pkgs.xwayland-satellite];
+    homeManager = {pkgs, ...}: {
+      imports = [
+        inputs.niri.homeModules.niri
+      ];
 
-      programs.alacritty = {
+      home.packages = [
+        pkgs.xwayland-satellite
+      ];
+
+      programs.niri = {
+        enable = true;
+        package = pkgs.niri;
+
         settings = {
-          general."import" = [
-            "~/.config/alacritty/dank-theme.toml"
+          prefer-no-csd = true;
+
+          hotkey-overlay = {
+            skip-at-startup = true;
+          };
+
+          environment = {
+            XDG_CURRENT_DESKTOP = "niri";
+          };
+
+          outputs = {
+            "eDP-1" = {
+              mode = {
+                width = 1920;
+                height = 1080;
+                refresh = 60.0;
+              };
+
+              scale = 1.5;
+            };
+          };
+
+          layer-rules = [
+            {
+              matches = [{namespace = "^quickshell$";}];
+              place-within-backdrop = true;
+            }
           ];
 
-          window = {
-            decorations = "None";
-            opacity = 0.9;
-          };
+          window-rules = [
+            {
+              geometry-corner-radius = {
+                top-left = 6.0;
+                top-right = 6.0;
+                bottom-left = 6.0;
+                bottom-right = 6.0;
+              };
+
+              clip-to-geometry = true;
+              tiled-state = true;
+              draw-border-with-background = false;
+            }
+
+            {
+              matches = [
+                {app-id = "^gnome-calculator$";}
+                {app-id = "^galculator$";}
+                {app-id = "^blueman-manager$";}
+                {app-id = "^org\\.gnome\\.Nautilus$";}
+                {app-id = "^xdg-desktop-portal$";}
+                {
+                  app-id = "firefox$";
+                  title = "^Picture-in-Picture$";
+                }
+                {app-id = "zoom";}
+                {app-id = "org.quickshell$";}
+                {app-id = "com.danklinux.dms$";}
+              ];
+
+              open-floating = true;
+            }
+
+            {
+              matches = [
+                {
+                  app-id = "^steam$";
+                  title = "^notificationtoasts_\\d+_desktop$";
+                }
+              ];
+
+              default-floating-position = {
+                x = 10;
+                y = 10;
+                relative-to = "bottom-right";
+              };
+
+              open-focused = false;
+            }
+          ];
         };
       };
-
-      home.activation.setupDms = let
-        settingsJson = ./config/DankMaterialShell/settings.json;
-        clSettingsJson = ./config/DankMaterialShell/clsettings.json;
-        alacrittyTheme = ./config/alacritty/dank-theme.toml;
-        niriDirNix = ./config/niri;
-      in
-        lib.hm.dag.entryAfter ["writeBoundary"]
-        # sh
-        ''
-          configHome="''${XDG_CONFIG_HOME:-$HOME/.config}"
-
-          configDir="$configHome/DankMaterialShell"
-          alacrittyDir="$configHome/alacritty"
-          niriDir="$configHome/niri"
-
-          mkdir -p \
-            "$configDir" \
-            "$alacrittyDir" \
-            "$niriDir"
-
-          copy_if_missing() {
-            src="$1"
-            dest="$2"
-
-            if [ ! -e "$dest" ]; then
-              install -Dm644 "$src" "$dest"
-            fi
-          }
-
-          copy_if_missing \
-            ${settingsJson} \
-            "$configDir/settings.json"
-
-          copy_if_missing \
-            ${clSettingsJson} \
-            "$configDir/clsettings.json"
-
-          copy_if_missing \
-            ${alacrittyTheme} \
-            "$alacrittyDir/dank-theme.toml"
-
-          # Copy all files from ./config/niri recursively if missing
-          while IFS= read -r -d ''' file; do
-            rel="''${file#${niriDirNix}/}"
-            copy_if_missing "$file" "$niriDir/$rel"
-          done < <(find ${niriDirNix} -type f -print0)
-        '';
     };
   };
 }
