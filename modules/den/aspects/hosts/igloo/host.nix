@@ -6,32 +6,7 @@
       den.aspects.niri-de
     ];
 
-    nixos = {config, ...}: let
-      diskoMainCfg = config.disko.devices.disk.main;
-
-      nixMountpoint = diskoMainCfg
-        .content
-        .partitions
-        .root
-        .content
-        .subvolumes
-        .nix
-        .mountpoint;
-
-      persistentMountpoint = diskoMainCfg
-        .content
-        .partitions
-        .root
-        .content
-        .subvolumes
-        .persistent
-        .mountpoint;
-    in {
-      ephemeral-host = {
-        enable = true;
-        inherit nixMountpoint persistentMountpoint;
-      };
-
+    nixos = {config, ...}: {
       boot.loader = {
         systemd-boot.enable = true;
         efi.canTouchEfiVariables = true;
@@ -40,6 +15,15 @@
       hardware.bluetooth.enable = true;
       networking.networkmanager.enable = true;
       services.blueman.enable = true;
+
+      ephemeral-host = let
+        mainDiskCfg = config.disko.devices.disk.main;
+        subVols = mainDiskCfg.content.partitions.root.content.subvolumes;
+      in {
+        enable = true;
+        nixMountpoint = subVols.nix.mountpoint;
+        persistentMountpoint = subVols.persistent.mountpoint;
+      };
 
       preservation.preserve.directories = [
         "/var/lib/systemd"
