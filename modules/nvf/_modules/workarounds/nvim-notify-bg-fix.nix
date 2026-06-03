@@ -1,4 +1,4 @@
-# REASON FOR PATCH:
+# WORKAROUND:
 # nvim-notify warns "Highlight group 'NotifyBackground' has no background highlight"
 # when using transparent themes. NVF hardcodes background_colour = "NotifyBackground".
 #
@@ -11,7 +11,7 @@
 # Remove this file when NVF either exposes an option to disable the hardcoded
 # `background_colour` parameter, or nvim-notify gracefully handles transparent backgrounds.
 {
-  vim.luaConfigRC."00-nvim-notify-patch" =
+  vim.luaConfigRC."00-nvim-notify-bg-fix" =
     # lua
     ''
       vim.api.nvim_create_autocmd({"VimEnter", "ColorScheme"}, {

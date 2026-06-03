@@ -1,7 +1,7 @@
 {
   imports = [
     ./min.nix
-    ./patches/nvim-notify-patch.nix
+    ./workarounds/nvim-notify-bg-fix.nix
   ];
 
   vim = {
