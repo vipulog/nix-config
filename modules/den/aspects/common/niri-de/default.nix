@@ -20,6 +20,7 @@
     homeManager = {pkgs, ...}: {
       imports = [
         inputs.niri.homeModules.niri
+        (import ./_workarounds/niri-raw-config.nix inputs.niri.lib)
       ];
 
       home.packages = [
