@@ -11,14 +11,11 @@
       (den.batteries.vm-autologin "vm-user")
     ];
 
-    nixos = {options, ...}: {
-      virtualisation = lib.mkMerge [
-        {vmVariant.users.users.vm-user.enable = lib.mkForce true;}
-
-        (lib.mkIf ((options.disko or null) != null) {
-          vmVariantWithDisko.users.users.vm-user.enable = lib.mkForce true;
-        })
-      ];
+    nixos = {
+      virtualisation = {
+        vmVariant.users.users.vm-user.enable = lib.mkForce true;
+        vmVariantWithDisko.users.users.vm-user.enable = lib.mkForce true;
+      };
     };
 
     user = {
