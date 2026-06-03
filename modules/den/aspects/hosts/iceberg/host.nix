@@ -1,8 +1,4 @@
-{
-  inputs,
-  den,
-  ...
-}: {
+{den, ...}: {
   den.aspects.iceberg = {
     includes = [
       den.aspects.ephemeral-host
@@ -14,7 +10,6 @@
       lib,
       config,
       modulesPath,
-      host,
       ...
     }: let
       diskoMainCfg = config.disko.devices.disk.main;
@@ -36,8 +31,6 @@
         .subvolumes
         .persistent
         .mountpoint;
-
-      sshHostKeyPath = "${persistentMountpoint}/etc/ssh/ssh_host_ed25519_key";
     in {
       imports = [
         (modulesPath + "/installer/scan/not-detected.nix")
@@ -81,43 +74,12 @@
         networkmanager.enable = true;
       };
 
-      preservation.preserve = {
-        directories = [
-          "/var/lib/systemd"
-          "/var/lib/NetworkManager"
+      preservation.preserve.directories = [
+        "/var/lib/systemd"
+        "/var/lib/NetworkManager"
 
-          "/var/log"
-        ];
-
-        files = [
-          {
-            file = "/etc/ssh/ssh_host_ed25519_key";
-            how = "symlink";
-            configureParent = true;
-          }
-          {
-            file = "/etc/ssh/ssh_host_ed25519_key.pub";
-            how = "symlink";
-            configureParent = true;
-          }
-        ];
-      };
-
-      sops = {
-        defaultSopsFile = "${inputs.my-secrets}/secrets/sops/${host.name}.yaml";
-        age.sshKeyPaths = [sshHostKeyPath];
-      };
-
-      services.openssh = {
-        enable = true;
-
-        hostKeys = [
-          {
-            path = sshHostKeyPath;
-            type = "ed25519";
-          }
-        ];
-      };
+        "/var/log"
+      ];
 
       system.stateVersion = "25.11";
     };
