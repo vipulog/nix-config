@@ -16,7 +16,7 @@
     in
       # sh
       ''
-        HOST="''${HOST_NAME:?HOST_NAME is not set}"
+        HOST="''${HOST_NAME:-$(hostname -s)}"
 
         if [[ $# -gt 0 && "$1" != -* ]]; then
           HOST="$1"
