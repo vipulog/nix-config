@@ -5,7 +5,7 @@
 }: {
   den.aspects.igloo = {
     includes = [
-      den.aspects.preservation
+      den.aspects.ephemeral-host
       den.aspects.sops-nix
       den.aspects.niri-de
     ];
@@ -28,7 +28,7 @@
         .nix
         .mountpoint;
 
-      preservationMountpoint = diskoMainCfg
+      persistentMountpoint = diskoMainCfg
         .content
         .partitions
         .root
@@ -37,12 +37,17 @@
         .persistent
         .mountpoint;
 
-      sshHostKeyPath = "${preservationMountpoint}/etc/ssh/ssh_host_ed25519_key";
+      sshHostKeyPath = "${persistentMountpoint}/etc/ssh/ssh_host_ed25519_key";
     in {
       imports = [
         (modulesPath + "/installer/scan/not-detected.nix")
         inputs.nixos-hardware.nixosModules.dell-latitude-7490
       ];
+
+      ephemeral-host = {
+        enable = true;
+        inherit nixMountpoint persistentMountpoint;
+      };
 
       boot = {
         kernelModules = ["kvm-intel"];
@@ -60,11 +65,6 @@
         };
       };
 
-      fileSystems = {
-        "${nixMountpoint}".neededForBoot = true;
-        "${preservationMountpoint}".neededForBoot = true;
-      };
-
       nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
       hardware.cpu.intel.updateMicrocode =
@@ -74,31 +74,27 @@
       hardware.bluetooth.enable = true;
       services.blueman.enable = true;
 
-      preservation = {
-        defaultPreserveAt = preservationMountpoint;
+      preservation.preserve = {
+        directories = [
+          "/var/lib/systemd"
+          "/var/lib/bluetooth"
+          "/var/lib/NetworkManager"
 
-        preserve = {
-          directories = [
-            "/var/lib/systemd"
-            "/var/lib/bluetooth"
-            "/var/lib/NetworkManager"
+          "/var/log"
+        ];
 
-            "/var/log"
-          ];
-
-          files = [
-            {
-              file = "/etc/ssh/ssh_host_ed25519_key";
-              how = "symlink";
-              configureParent = true;
-            }
-            {
-              file = "/etc/ssh/ssh_host_ed25519_key.pub";
-              how = "symlink";
-              configureParent = true;
-            }
-          ];
-        };
+        files = [
+          {
+            file = "/etc/ssh/ssh_host_ed25519_key";
+            how = "symlink";
+            configureParent = true;
+          }
+          {
+            file = "/etc/ssh/ssh_host_ed25519_key.pub";
+            how = "symlink";
+            configureParent = true;
+          }
+        ];
       };
 
       sops = {
