@@ -694,6 +694,8 @@
           configDir="''${XDG_CONFIG_HOME:-$HOME/.config}/niri/dms"
           mkdir -p "$configDir"
 
+          touch "''${XDG_CONFIG_HOME:-$HOME/.config}/alacritty/dank-theme.toml"
+
           while IFS= read -r -d $'\0' file; do
             rel="''${file#$src/}"
             if [ ! -e "$configDir/$rel" ]; then
