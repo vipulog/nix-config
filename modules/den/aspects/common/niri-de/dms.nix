@@ -50,7 +50,26 @@
           notificationPopupPosition = 1;
           osdPowerProfileEnabled = true;
           updaterHideWidget = true;
-          cursorSettings.niri.hideWhenTyping = true;
+
+          cursorSettings = {
+            theme = "System Default";
+            size = 18;
+
+            hyprland = {
+              hideOnKeyPress = false;
+              hideOnTouch = false;
+              inactiveTimeout = 0;
+            };
+
+            dwl = {
+              cursorHideTimeout = 0;
+            };
+
+            niri = {
+              hideWhenTyping = true;
+              hideAfterInactiveMs = 0;
+            };
+          };
 
           barConfigs = [
             {
@@ -385,25 +404,6 @@
           qt5ctAvailable = false;
           qt6ctAvailable = false;
           gtkAvailable = false;
-
-          cursorSettings = {
-            theme = "System Default";
-            size = 24;
-
-            niri = {
-              hideAfterInactiveMs = 0;
-            };
-
-            hyprland = {
-              hideOnKeyPress = false;
-              hideOnTouch = false;
-              inactiveTimeout = 0;
-            };
-
-            dwl = {
-              cursorHideTimeout = 0;
-            };
-          };
 
           availableCursorThemes = ["System Default"];
           systemDefaultCursorTheme = "";
