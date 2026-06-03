@@ -1,6 +1,5 @@
 {
   inputs,
-  self,
   den,
   ...
 }: {
@@ -43,9 +42,6 @@
       imports = [
         (modulesPath + "/installer/scan/not-detected.nix")
         inputs.nixos-hardware.nixosModules.dell-latitude-7490
-
-        inputs.disko.nixosModules.disko
-        self.diskoConfigurations.igloo
       ];
 
       boot = {

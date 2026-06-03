@@ -1,6 +1,5 @@
 {
   inputs,
-  self,
   den,
   ...
 }: {
@@ -42,9 +41,6 @@
     in {
       imports = [
         (modulesPath + "/installer/scan/not-detected.nix")
-
-        inputs.disko.nixosModules.disko
-        self.diskoConfigurations.iceberg
       ];
 
       boot = {
