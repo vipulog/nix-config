@@ -9,7 +9,6 @@
     nixos = {
       lib,
       config,
-      modulesPath,
       ...
     }: let
       diskoMainCfg = config.disko.devices.disk.main;
@@ -32,42 +31,15 @@
         .persistent
         .mountpoint;
     in {
-      imports = [
-        (modulesPath + "/installer/scan/not-detected.nix")
-      ];
-
       ephemeral-host = {
         enable = true;
         inherit nixMountpoint persistentMountpoint;
       };
 
-      boot = {
-        kernelModules = ["kvm-intel"];
-        extraModulePackages = [];
-
-        initrd = {
-          systemd.enable = true;
-          kernelModules = ["dm-snapshot"];
-
-          availableKernelModules = [
-            "ehci_pci"
-            "ata_piix"
-            "usb_storage"
-            "usbhid"
-            "sd_mod"
-          ];
-        };
-
-        loader = {
-          systemd-boot.enable = true;
-          efi.canTouchEfiVariables = true;
-        };
+      boot.loader = {
+        systemd-boot.enable = true;
+        efi.canTouchEfiVariables = true;
       };
-
-      nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-
-      hardware.cpu.intel.updateMicrocode =
-        lib.mkDefault config.hardware.enableRedistributableFirmware;
 
       networking = {
         useDHCP = lib.mkDefault true;
