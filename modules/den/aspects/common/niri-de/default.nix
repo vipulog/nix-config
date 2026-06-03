@@ -81,13 +81,14 @@
                 {app-id = "^blueman-manager$";}
                 {app-id = "^org\\.gnome\\.Nautilus$";}
                 {app-id = "^xdg-desktop-portal$";}
+                {app-id = "zoom";}
+                {app-id = "org.quickshell$";}
+                {app-id = "com.danklinux.dms$";}
+
                 {
                   app-id = "firefox$";
                   title = "^Picture-in-Picture$";
                 }
-                {app-id = "zoom";}
-                {app-id = "org.quickshell$";}
-                {app-id = "com.danklinux.dms$";}
               ];
 
               open-floating = true;
