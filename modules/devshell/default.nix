@@ -20,7 +20,7 @@
     ...
   }: let
     denShell = den.lib.nh.denShell {fromFlake = true;} pkgs;
-    withDenHostNh = self.lib.devshell.withDenHostNh pkgs;
+    withHostNh = self.lib.den.withHostNh pkgs;
     addCategory = category: map (cmd: cmd // {inherit category;});
   in {
     devshells.default = {
@@ -55,22 +55,22 @@
             {
               name = "host-build";
               help = "builds the configuration";
-              command = withDenHostNh "build";
+              command = withHostNh "build";
             }
             {
               name = "host-test";
               help = "builds and activates the configuration";
-              command = withDenHostNh "test --ask";
+              command = withHostNh "test --ask";
             }
             {
               name = "host-boot";
               help = "builds the configuration and sets it as the boot default";
-              command = withDenHostNh "boot --ask";
+              command = withHostNh "boot --ask";
             }
             {
               name = "host-switch";
               help = "builds, activates, and sets the configuration as the boot default";
-              command = withDenHostNh "switch --ask";
+              command = withHostNh "switch --ask";
             }
           ] [(addCategory "[host commands]")]
         )
