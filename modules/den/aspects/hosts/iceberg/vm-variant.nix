@@ -1,6 +1,6 @@
 {self, ...}: {
   den.aspects.iceberg = {
-    nixos = {
+    nixos = {lib, ...}: {
       virtualisation.vmVariantWithDisko = {
         virtualisation = {
           memorySize = 2048;
@@ -12,13 +12,10 @@
             "-display gtk,gl=on"
           ];
         };
-      };
-    };
 
-    provides = {
-      vm-user = {
-        homeManager = {
-          home.stateVersion = "25.11";
+        users.users.tux = {
+          initialPassword = "tux";
+          hashedPasswordFile = lib.mkForce null;
         };
       };
     };

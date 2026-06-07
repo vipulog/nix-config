@@ -41,15 +41,11 @@
     };
 
     provides = {
-      to-users = {
+      tux = {
         includes = [
           den.aspects.niri-de
           den.aspects.neovim
         ];
-      };
-
-      tux = {
-        includes = [den.batteries.primary-user];
 
         nixos = {
           sops.secrets.tux-password = {
