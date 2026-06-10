@@ -22,61 +22,69 @@
     };
   };
 
-  den.aspects.sops-nix = let
-    inherit (den) aspects;
-    inherit (den.lib) policy;
+  den.aspects.sops-nix = {host, ...}: {
+    nixos = {
+      lib,
+      config,
+      ...
+    }: let
+      sshHostKeyType = "ed25519";
+      sshHostKeyRelPath = "/etc/ssh/ssh_host_${sshHostKeyType}_key";
 
-    sshHostKeyType = "ed25519";
-    sshHostKeyRelPath = "/etc/ssh/ssh_host_${sshHostKeyType}_key";
-  in {
-    includes = [
-      (policy.when ({host, ...}: !(host.hasAspect aspects.ephemeral-host)) {
-        nixos = {
-          sops.age.sshKeyPaths = [sshHostKeyRelPath];
+      isEphemeralHost = host.hasAspect den.aspects.ephemeral-host;
 
-          services.openssh.hostKeys = [
-            {
-              path = sshHostKeyRelPath;
-              type = sshHostKeyType;
-            }
-          ];
-        };
-      })
+      persistentMountpoint =
+        if isEphemeralHost
+        then config.ephemeral-host.persistentMountpoint
+        else null;
 
-      (policy.when ({host, ...}: host.hasAspect aspects.ephemeral-host) {
-        nixos = {config, ...}: let
-          persistentMountpoint = config.ephemeral-host.persistentMountpoint;
-          sshHostKeyPath = "${persistentMountpoint}${sshHostKeyRelPath}";
-        in {
-          sops.age.sshKeyPaths = [sshHostKeyPath];
+      sshHostKeyPersistPath =
+        if isEphemeralHost
+        then "${persistentMountpoint}${sshHostKeyRelPath}"
+        else null;
 
-          services.openssh.hostKeys = [
-            {
-              path = sshHostKeyPath;
-              type = sshHostKeyType;
-            }
-          ];
+      sshHostKeyPath =
+        if isEphemeralHost
+        then sshHostKeyPersistPath
+        else sshHostKeyRelPath;
+    in {
+      imports = [inputs.sops-nix.nixosModules.sops];
 
+      config = lib.mkMerge [
+        {
+          sops = {
+            defaultSopsFile = "${inputs.my-secrets}/secrets/sops/${host.name}.yaml";
+            age.sshKeyPaths = [sshHostKeyPath];
+          };
+
+          services.openssh = {
+            enable = true;
+
+            hostKeys = [
+              {
+                path = sshHostKeyPath;
+                type = sshHostKeyType;
+              }
+            ];
+          };
+        }
+
+        (lib.mkIf isEphemeralHost {
           preservation.preserve.files = [
             {
               file = sshHostKeyRelPath;
               how = "symlink";
               configureParent = true;
             }
+
             {
               file = "${sshHostKeyRelPath}.pub";
               how = "symlink";
               configureParent = true;
             }
           ];
-        };
-      })
-    ];
-
-    nixos = {host, ...}: {
-      imports = [inputs.sops-nix.nixosModules.sops];
-      sops.defaultSopsFile = "${inputs.my-secrets}/secrets/sops/${host.name}.yaml";
-      services.openssh.enable = true;
+        })
+      ];
     };
 
     darwin = {
