@@ -46,6 +46,7 @@
           den.aspects.sops-nix
           den.aspects.niri-de
           den.aspects.neovim
+          den.aspects.atuin
         ];
 
         nixos = {
