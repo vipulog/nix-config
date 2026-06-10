@@ -39,6 +39,7 @@
     provides = {
       tux = {
         includes = [
+          den.aspects.sops-nix
           den.aspects.niri-de
           den.aspects.neovim
         ];

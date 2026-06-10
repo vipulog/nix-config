@@ -22,7 +22,11 @@
     };
   };
 
-  den.aspects.sops-nix = {host, ...}: {
+  den.aspects.sops-nix = {
+    host,
+    user ? null,
+    ...
+  }: {
     nixos = {
       lib,
       config,
@@ -70,19 +74,30 @@
         }
 
         (lib.mkIf isEphemeralHost {
-          preservation.preserve.files = [
-            {
-              file = sshHostKeyRelPath;
-              how = "symlink";
-              configureParent = true;
-            }
+          preservation.preserve = {
+            files = [
+              {
+                file = sshHostKeyRelPath;
+                how = "symlink";
+                configureParent = true;
+              }
 
-            {
-              file = "${sshHostKeyRelPath}.pub";
-              how = "symlink";
-              configureParent = true;
-            }
-          ];
+              {
+                file = "${sshHostKeyRelPath}.pub";
+                how = "symlink";
+                configureParent = true;
+              }
+            ];
+
+            users = lib.mkIf (user != null) {
+              ${user.name}.directories = [
+                {
+                  directory = ".ssh";
+                  mode = "0700";
+                }
+              ];
+            };
+          };
         })
       ];
     };
@@ -91,8 +106,19 @@
       imports = [inputs.sops-nix.darwinModules.sops];
     };
 
-    homeManager = {
+    homeManager = {config, ...}: let
+      sshUserKeyType = "ed25519";
+      sshUserKeyRelPath = ".ssh/id_${sshUserKeyType}";
+    in {
       imports = [inputs.sops-nix.homeManagerModules.sops];
+
+      sops = {
+        defaultSopsFile = "${inputs.my-secrets}/secrets/sops/${user.name}_${host.name}.yaml";
+
+        age.sshKeyPaths = [
+          "${config.home.homeDirectory}/${sshUserKeyRelPath}"
+        ];
+      };
     };
   };
 }
