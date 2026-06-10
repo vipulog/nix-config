@@ -30,7 +30,9 @@
 
       config.preservation = lib.mkIf hostCfg.enable {
         enable = true;
-        preserveAt.${defaultPreserveAt} = cfg.preserve;
+
+        preserveAt.${defaultPreserveAt} =
+          lib.mkAliasDefinitions options.preservation.preserve;
 
         preserve = {
           persistentStoragePath = defaultPreserveAt;
