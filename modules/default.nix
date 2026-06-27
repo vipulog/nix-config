@@ -1,9 +1,8 @@
-{inputs, ...}: {
-  imports = [
-    inputs.flake-file.flakeModules.dendritic
-    inputs.den.flakeModules.dendritic
-  ];
-
+{
+  inputs,
+  lib,
+  ...
+}: {
   # other inputs may be defined at a module using them.
   flake-file.inputs = {
     nixpkgs.url = "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.xz";
@@ -21,6 +20,22 @@
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
+
+  imports = [
+    inputs.flake-file.flakeModules.dendritic
+    inputs.den.flakeModules.dendritic
+  ];
+
+  perSystem = {system, ...}: let
+    mkAllowPredicate = names: pkg: builtins.elem (lib.getName pkg) names;
+  in {
+    _module.args = {
+      pkgs = import inputs.nixpkgs {
+        inherit system;
+        config.allowUnfreePredicate = mkAllowPredicate [];
+      };
     };
   };
 }
