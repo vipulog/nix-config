@@ -28,29 +28,44 @@
         };
       };
 
-      config.preservation = lib.mkIf hostCfg.enable {
-        enable = true;
+      config = lib.mkIf hostCfg.enable {
+        preservation = {
+          enable = true;
 
-        preserveAt.${defaultPreserveAt} =
-          lib.mkAliasDefinitions options.preservation.preserve;
+          preserveAt.${defaultPreserveAt} =
+            lib.mkAliasDefinitions options.preservation.preserve;
 
-        preserve = {
-          persistentStoragePath = defaultPreserveAt;
+          preserve = {
+            persistentStoragePath = defaultPreserveAt;
 
-          directories = [
-            {
-              directory = "/var/lib/nixos";
-              inInitrd = true;
-            }
+            directories = [
+              {
+                directory = "/var/lib/nixos";
+                inInitrd = true;
+              }
 
-            "/etc/nixos"
+              "/etc/nixos"
+            ];
+
+            files = [
+              {
+                file = "/etc/machine-id";
+                inInitrd = true;
+                how = "symlink";
+              }
+            ];
+          };
+        };
+
+        systemd.services.systemd-machine-id-commit = {
+          unitConfig.ConditionPathIsMountPoint = [
+            ""
+            "${defaultPreserveAt}/etc/machine-id"
           ];
 
-          files = [
-            {
-              file = "/etc/machine-id";
-              inInitrd = true;
-            }
+          serviceConfig.ExecStart = [
+            ""
+            "systemd-machine-id-setup --commit --root ${defaultPreserveAt}"
           ];
         };
       };
