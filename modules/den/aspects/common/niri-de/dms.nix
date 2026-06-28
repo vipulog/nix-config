@@ -7,7 +7,11 @@
   };
 
   den.aspects.niri-de = {
-    homeManager = {lib, ...}: {
+    homeManager = {
+      pkgs,
+      lib,
+      ...
+    }: {
       imports = [
         inputs.dms.homeModules.dank-material-shell
         inputs.dms.homeModules.niri
@@ -26,6 +30,8 @@
           enable = true;
           restartIfChanged = true;
         };
+
+        quickshell.package = pkgs.quickshell;
 
         settings = {
           matugenScheme = "scheme-content";
