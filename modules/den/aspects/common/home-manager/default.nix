@@ -7,5 +7,10 @@
         backupCommand = "${pkgs.trash-cli}/bin/trash-put";
       };
     };
+
+    homeManager = {
+      news.display = "silent";
+      programs.home-manager.enable = true;
+    };
   };
 }
