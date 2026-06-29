@@ -19,6 +19,7 @@
       den.aspects.direnv
       den.aspects.starship
       den.aspects.btop
+      den.aspects.nix-index
 
       den.aspects.qutebrowser
     ];
