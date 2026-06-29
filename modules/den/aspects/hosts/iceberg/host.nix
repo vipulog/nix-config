@@ -58,6 +58,7 @@
         includes = [
           den.aspects.sops-nix
           den.aspects.niri-de
+          den.aspects.git
           den.aspects.neovim
           den.aspects.atuin
         ];
