@@ -58,17 +58,6 @@
         includes = [
           den.aspects.sops-nix
           den.aspects.niri-de
-          den.aspects.git
-          den.aspects.neovim
-          den.aspects.atuin
-          den.aspects.jujutsu
-          den.aspects.delta
-          den.aspects.lazygit
-          den.aspects.zoxide
-          den.aspects.eza
-          den.aspects.bat
-          den.aspects.direnv
-          den.aspects.ssh
         ];
 
         nixos = {
