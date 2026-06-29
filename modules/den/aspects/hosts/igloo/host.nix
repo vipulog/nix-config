@@ -62,6 +62,7 @@
           den.aspects.lazygit
           den.aspects.zoxide
           den.aspects.eza
+          den.aspects.bat
         ];
 
         nixos = {
