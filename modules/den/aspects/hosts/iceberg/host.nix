@@ -65,6 +65,7 @@
           den.aspects.delta
           den.aspects.lazygit
           den.aspects.zoxide
+          den.aspects.eza
         ];
 
         nixos = {
