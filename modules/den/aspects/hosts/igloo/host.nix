@@ -57,6 +57,7 @@
           den.aspects.git
           den.aspects.neovim
           den.aspects.atuin
+          den.aspects.jujutsu
         ];
 
         nixos = {
