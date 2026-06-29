@@ -64,6 +64,7 @@
           den.aspects.eza
           den.aspects.bat
           den.aspects.direnv
+          den.aspects.ssh
         ];
 
         nixos = {
