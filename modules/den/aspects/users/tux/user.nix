@@ -18,6 +18,7 @@
       den.aspects.bat
       den.aspects.direnv
       den.aspects.starship
+      den.aspects.btop
     ];
   };
 }
