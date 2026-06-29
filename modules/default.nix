@@ -6,7 +6,11 @@
   # other inputs may be defined at a module using them.
   flake-file.inputs = {
     nixpkgs.url = "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.xz";
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
+    nixos-hardware = {
+      url = "github:NixOS/nixos-hardware/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
