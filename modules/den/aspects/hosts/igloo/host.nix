@@ -60,6 +60,7 @@
           den.aspects.jujutsu
           den.aspects.delta
           den.aspects.lazygit
+          den.aspects.zoxide
         ];
 
         nixos = {
