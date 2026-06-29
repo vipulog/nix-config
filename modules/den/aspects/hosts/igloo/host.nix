@@ -63,6 +63,7 @@
           den.aspects.zoxide
           den.aspects.eza
           den.aspects.bat
+          den.aspects.direnv
         ];
 
         nixos = {
