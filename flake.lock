@@ -291,6 +291,21 @@
         "type": "github"
       }
     },
+    "my-templates": {
+      "locked": {
+        "lastModified": 1762074497,
+        "narHash": "sha256-H7HEkG7mOYlhCo4q/HQV5hytVfnxaW5S2XTcDuRWI4k=",
+        "owner": "vipulog",
+        "repo": "nix-templates",
+        "rev": "eeb323bb3566e3d172745ef020c04448ac906c3f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "vipulog",
+        "repo": "nix-templates",
+        "type": "github"
+      }
+    },
     "niri": {
       "inputs": {
         "niri-stable": "niri-stable",
@@ -503,6 +518,7 @@
         "home-manager": "home-manager",
         "import-tree": "import-tree",
         "my-secrets": "my-secrets",
+        "my-templates": "my-templates",
         "niri": "niri",
         "nix-index": "nix-index",
         "nixos-hardware": "nixos-hardware",

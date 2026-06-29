@@ -41,6 +41,7 @@
         treefmt-nix.follows = "treefmt-nix";
       };
     };
+    my-templates.url = "github:vipulog/nix-templates";
     niri = {
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
