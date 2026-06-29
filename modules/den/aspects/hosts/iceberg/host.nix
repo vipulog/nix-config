@@ -62,6 +62,7 @@
           den.aspects.neovim
           den.aspects.atuin
           den.aspects.jujutsu
+          den.aspects.delta
         ];
 
         nixos = {
