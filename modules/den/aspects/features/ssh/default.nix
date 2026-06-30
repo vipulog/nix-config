@@ -3,12 +3,11 @@
     homeManager = {
       programs.ssh = {
         enable = true;
+        enableDefaultConfig = false;
 
-        matchBlocks = {
-          "*" = {
-            addKeysToAgent = "yes";
-            forwardAgent = true;
-          };
+        settings."*" = {
+          addKeysToAgent = "yes";
+          forwardAgent = true;
         };
       };
     };
