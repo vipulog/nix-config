@@ -8,7 +8,7 @@
 
   den.aspects.niri-de = {
     nixos = {
-      services.displayManager.gdm = {
+      services.displayManager.ly = {
         enable = true;
       };
 
