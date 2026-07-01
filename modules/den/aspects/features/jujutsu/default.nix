@@ -1,6 +1,10 @@
-{lib, ...}: {
-  den.aspects.jujutsu = {user ? null, ...}: {
+{
+  den.aspects.jujutsu = {
     homeManager = {
+      lib,
+      user,
+      ...
+    }: {
       programs.jujutsu = {
         enable = true;
 

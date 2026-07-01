@@ -1,8 +1,4 @@
-{
-  lib,
-  inputs,
-  ...
-}: {
+{inputs, ...}: {
   flake-file.inputs = {
     my-templates = {
       url = "github:vipulog/nix-templates";
@@ -10,7 +6,11 @@
   };
 
   den.aspects.nix = {
-    homeManager = {pkgs, ...}: {
+    homeManager = {
+      lib,
+      pkgs,
+      ...
+    }: {
       nix = {
         package = lib.mkForce pkgs.nix;
 

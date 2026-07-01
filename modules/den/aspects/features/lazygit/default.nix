@@ -1,16 +1,11 @@
-{
-  den,
-  lib,
-  ...
-}: {
+{den, ...}: {
   den.aspects.lazygit = {
     host,
-    user ? null,
-    ...
+    user,
   }: let
     isEphemeralHost = host.hasAspect den.aspects.ephemeral-host;
   in {
-    nixos = {
+    nixos = {lib, ...}: {
       config = lib.mkMerge [
         (lib.mkIf isEphemeralHost {
           preservation.preserve = {

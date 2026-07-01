@@ -24,18 +24,18 @@
 
   den.aspects.sops-nix = {
     host,
-    user ? null,
-    ...
-  }: {
+    user,
+  }: let
+    isEphemeralHost = host.hasAspect den.aspects.ephemeral-host;
+  in {
     nixos = {
       lib,
       config,
+      host,
       ...
     }: let
       sshHostKeyType = "ed25519";
       sshHostKeyRelPath = "/etc/ssh/ssh_host_${sshHostKeyType}_key";
-
-      isEphemeralHost = host.hasAspect den.aspects.ephemeral-host;
 
       persistentMountpoint =
         if isEphemeralHost
@@ -106,7 +106,12 @@
       imports = [inputs.sops-nix.darwinModules.sops];
     };
 
-    homeManager = {config, ...}: let
+    homeManager = {
+      config,
+      host,
+      user,
+      ...
+    }: let
       sshUserKeyType = "ed25519";
       sshUserKeyRelPath = ".ssh/id_${sshUserKeyType}";
     in {

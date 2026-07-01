@@ -1,6 +1,6 @@
 {den, ...}: {
-  den.aspects.delta = {user ? null, ...}: {
-    homeManager = {
+  den.aspects.delta = {
+    homeManager = {user, ...}: {
       programs.delta = {
         enable = true;
         enableGitIntegration = user.hasAspect den.aspects.git;

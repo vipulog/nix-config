@@ -1,6 +1,10 @@
-{lib, ...}: {
-  den.aspects.git = {user ? null, ...}: {
+{
+  den.aspects.git = {
     homeManager = {
+      lib,
+      user,
+      ...
+    }: {
       programs.git = {
         enable = true;
 
