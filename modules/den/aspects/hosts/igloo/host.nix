@@ -6,10 +6,12 @@
   den = {
     aspects.igloo = {
       includes = [
+        den.policies.igloo-to-users
+        den.policies.igloo-to-tux
+
         den.aspects.ephemeral-host
         den.aspects.sops-nix
         den.aspects.niri-de
-        den.policies.igloo-to-tux
       ];
 
       nixos = {config, ...}: {
@@ -42,6 +44,17 @@
         system.stateVersion = "26.05";
       };
     };
+
+    policies.igloo-to-users = {
+      host,
+      user,
+      ...
+    }: let
+      guard = host.name == "igloo";
+    in
+      lib.optional guard (den.lib.policy.include {
+        includes = [den.aspects.ephemeral-host];
+      });
 
     policies.igloo-to-tux = {
       host,

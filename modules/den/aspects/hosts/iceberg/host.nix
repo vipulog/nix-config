@@ -6,10 +6,12 @@
   den = {
     aspects.iceberg = {
       includes = [
+        den.policies.iceberg-to-users
+        den.policies.iceberg-to-tux
+
         den.aspects.ephemeral-host
         den.aspects.sops-nix
         den.aspects.niri-de
-        den.policies.iceberg-to-tux
       ];
 
       nixos = {
@@ -46,6 +48,17 @@
         system.stateVersion = "26.05";
       };
     };
+
+    policies.iceberg-to-users = {
+      host,
+      user,
+      ...
+    }: let
+      guard = host.name == "iceberg";
+    in
+      lib.optional guard (den.lib.policy.include {
+        includes = [den.aspects.ephemeral-host];
+      });
 
     policies.iceberg-to-tux = {
       host,
