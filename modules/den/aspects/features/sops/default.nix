@@ -27,6 +27,10 @@
     user,
   }: let
     isEphemeralHost = host.hasAspect den.aspects.ephemeral-host;
+
+    sshKeyType = "ed25519";
+    sshHostKeyPath = "/etc/ssh/ssh_host_${sshKeyType}_key";
+    sshUserKeyPath = ".ssh/id_${sshKeyType}";
   in {
     nixos = {
       lib,
@@ -34,23 +38,10 @@
       host,
       ...
     }: let
-      sshHostKeyType = "ed25519";
-      sshHostKeyRelPath = "/etc/ssh/ssh_host_${sshHostKeyType}_key";
-
-      persistentMountpoint =
+      sshHostKeyPath' =
         if isEphemeralHost
-        then config.ephemeral-host.persistentMountpoint
-        else null;
-
-      sshHostKeyPersistPath =
-        if isEphemeralHost
-        then "${persistentMountpoint}${sshHostKeyRelPath}"
-        else null;
-
-      sshHostKeyPath =
-        if isEphemeralHost
-        then sshHostKeyPersistPath
-        else sshHostKeyRelPath;
+        then "${config.ephemeral-host.persistentMountpoint}${sshHostKeyPath}"
+        else sshHostKeyPath;
     in {
       imports = [inputs.sops-nix.nixosModules.sops];
 
@@ -58,7 +49,7 @@
         {
           sops = {
             defaultSopsFile = "${inputs.my-secrets}/secrets/sops/${host.name}.yaml";
-            age.sshKeyPaths = [sshHostKeyPath];
+            age.sshKeyPaths = [sshHostKeyPath'];
           };
 
           services.openssh = {
@@ -66,8 +57,8 @@
 
             hostKeys = [
               {
-                path = sshHostKeyPath;
-                type = sshHostKeyType;
+                path = sshHostKeyPath';
+                type = sshKeyType;
               }
             ];
           };
@@ -77,13 +68,13 @@
           preservation.preserve = {
             files = [
               {
-                file = sshHostKeyRelPath;
+                file = sshHostKeyPath;
                 how = "symlink";
                 configureParent = true;
               }
 
               {
-                file = "${sshHostKeyRelPath}.pub";
+                file = "${sshHostKeyPath}.pub";
                 how = "symlink";
                 configureParent = true;
               }
@@ -111,17 +102,14 @@
       host,
       user,
       ...
-    }: let
-      sshUserKeyType = "ed25519";
-      sshUserKeyRelPath = ".ssh/id_${sshUserKeyType}";
-    in {
+    }: {
       imports = [inputs.sops-nix.homeManagerModules.sops];
 
       sops = {
         defaultSopsFile = "${inputs.my-secrets}/secrets/sops/${user.name}_${host.name}.yaml";
 
         age.sshKeyPaths = [
-          "${config.home.homeDirectory}/${sshUserKeyRelPath}"
+          "${config.home.homeDirectory}/${sshUserKeyPath}"
         ];
       };
     };
