@@ -37,6 +37,7 @@
           "/var/lib/systemd"
           "/var/lib/bluetooth"
           "/var/lib/NetworkManager"
+          "/etc/NetworkManager/system-connections"
 
           "/var/log"
         ];

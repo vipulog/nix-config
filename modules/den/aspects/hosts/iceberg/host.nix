@@ -41,6 +41,7 @@
         preservation.preserve.directories = [
           "/var/lib/systemd"
           "/var/lib/NetworkManager"
+          "/etc/NetworkManager/system-connections"
 
           "/var/log"
         ];
