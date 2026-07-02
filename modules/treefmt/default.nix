@@ -12,17 +12,18 @@
     treefmt = {
       programs = {
         alejandra.enable = true;
-        deadnix.enable = true;
+
+        deadnix = {
+          enable = true;
+          no-lambda-pattern-names = true;
+        };
+
         shellcheck.enable = true;
         shfmt.enable = true;
       };
 
       settings = {
         excludes = ["flake.nix"];
-
-        formatter = {
-          deadnix.no_lambda_arg = true;
-        };
       };
     };
   };
