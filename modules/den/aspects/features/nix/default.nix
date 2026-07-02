@@ -6,21 +6,16 @@
   };
 
   den.aspects.nix = {
-    homeManager = {
-      lib,
-      pkgs,
-      ...
-    }: {
+    nixos = {
       nix = {
-        package = lib.mkForce pkgs.nix;
-
         settings = {
           connect-timeout = 5;
           fallback = true;
+          experimental-features = ["nix-command" "flakes"];
+
           auto-optimise-store = true;
           min-free = 128000000;
           max-free = 1000000000;
-          experimental-features = ["nix-command" "flakes"];
 
           substituters = [
             "https://cache.nixos.org/"
@@ -33,7 +28,7 @@
           ];
         };
 
-        gc = {
+        optimise = {
           automatic = true;
           dates = ["weekly"];
           persistent = true;
