@@ -21,6 +21,7 @@
       den.aspects.btop
       den.aspects.nix-index
       den.aspects.antigravity-cli
+      den.aspects.codex
       den.aspects.zed-editor
 
       # den.aspects.qutebrowser
