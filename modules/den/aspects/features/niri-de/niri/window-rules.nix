@@ -30,7 +30,7 @@
         match app-id="Alacritty" at-startup=true
         open-on-workspace "1-dev"
         open-focused false
-        open-maximized-to-edges true
+        open-maximized true
     }
 
     /*
@@ -53,7 +53,7 @@
         match app-id="firefox$" at-startup=true
         open-on-workspace "2-web"
         open-focused false
-        open-maximized-to-edges true
+        open-maximized true
     }
 
     /*
