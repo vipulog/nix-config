@@ -19,6 +19,7 @@
       den.aspects.direnv
       den.aspects.starship
       den.aspects.btop
+      den.aspects.zellij
       den.aspects.nix-index
       den.aspects.antigravity-cli
       den.aspects.codex
