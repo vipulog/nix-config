@@ -18,7 +18,7 @@
       den.aspects.zellij
 
       # Version control
-      den.aspects.git
+      den.aspects.tux.git
       den.aspects.delta
       den.aspects.jujutsu
       den.aspects.lazygit
