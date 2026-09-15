@@ -20,7 +20,7 @@
       # Version control
       den.aspects.tux.git
       den.aspects.delta
-      den.aspects.jujutsu
+      den.aspects.tux.jujutsu
       den.aspects.lazygit
 
       # Dev tooling
