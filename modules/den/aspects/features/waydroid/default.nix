@@ -1,5 +1,7 @@
-{
+{den, ...}: {
   den.aspects.waydroid = {user}: {
+    includes = [den.aspects.polkit];
+
     nixos = {pkgs, ...}: {
       environment.systemPackages = [
         pkgs.waydroid-helper

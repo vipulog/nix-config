@@ -43,7 +43,6 @@
 
       # System / security
       den.aspects.sudo
-      den.aspects.polkit
 
       # Desktop environment
       den.aspects.niri-de
