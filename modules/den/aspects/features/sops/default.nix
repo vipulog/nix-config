@@ -60,6 +60,8 @@
         else joinPath [homePath sshUserHostKeyPath];
     };
   in {
+    includes = [den.aspects.ssh];
+
     nixos = {config, ...}: let
       resolved = resolveKeyPaths {
         persistPoint = config.ephemeral-host.persistentMountpoint;
