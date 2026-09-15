@@ -1,7 +1,6 @@
 {den, ...}: {
   den.aspects.igloo = {
     includes = [
-      (den.batteries.unfree ["antigravity-cli"])
       den.aspects.igloo.hardware
       den.aspects.igloo.disko
       den.aspects.ephemeral-host

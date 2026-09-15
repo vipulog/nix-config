@@ -1,6 +1,9 @@
 {den, ...}: {
   den.aspects.antigravity-cli = {user}: {
-    includes = [den.aspects.mcp];
+    includes = [
+      (den.batteries.unfree ["antigravity-cli"])
+      den.aspects.mcp
+    ];
 
     homeManager = {
       config,
