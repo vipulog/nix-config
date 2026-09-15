@@ -12,6 +12,7 @@
               ublock-origin
               multi-account-containers
               bitwarden
+              vimium
             ];
           };
 
