@@ -6,10 +6,6 @@
     ];
 
     homeManager = {
-      config,
-      pkgs,
-      ...
-    }: {
       programs.antigravity-cli = {
         enable = true;
         enableMcpIntegration = true;
