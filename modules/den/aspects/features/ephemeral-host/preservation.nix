@@ -64,8 +64,6 @@
             directory = "/var/lib/nixos";
             inInitrd = true;
           }
-
-          "/etc/nixos"
         ];
 
         files = [
@@ -87,8 +85,6 @@
             "Pictures"
             "Videos"
             "Dev"
-
-            ".cache/mesa_shader_cache"
 
             {
               directory = ".local/share/keyrings";
