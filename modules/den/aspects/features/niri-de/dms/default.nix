@@ -44,6 +44,10 @@
     homeManager = {pkgs, ...}: {
       imports = [inputs.dms.homeModules.dank-material-shell];
 
+      home.packages = [
+        pkgs.dgop
+      ];
+
       programs.dank-material-shell = {
         enable = true;
         package = pkgs.dms-shell;
