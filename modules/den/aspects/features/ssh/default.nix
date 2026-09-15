@@ -1,5 +1,11 @@
 {
   den.aspects.ssh = {
+    nixos = {
+      services.openssh = {
+        enable = true;
+      };
+    };
+
     homeManager = {
       host,
       user,

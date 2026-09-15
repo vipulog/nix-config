@@ -81,8 +81,6 @@
       };
 
       services.openssh = {
-        enable = true;
-
         hostKeys = [
           {
             path = resolved.sshHostKeyPath;
