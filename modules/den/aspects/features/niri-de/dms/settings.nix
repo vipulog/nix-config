@@ -1,6 +1,6 @@
 {
   den.aspects.niri-de.dms.settings = {
-    homeManager = {config, ...}: {
+    homeManager = {
       programs.dank-material-shell = {
         settings = {
           currentThemeCategory = "dynamic";
