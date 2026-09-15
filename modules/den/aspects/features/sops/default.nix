@@ -60,11 +60,7 @@
         else joinPath [homePath sshUserHostKeyPath];
     };
   in {
-    nixos = {
-      lib,
-      config,
-      ...
-    }: let
+    nixos = {config, ...}: let
       resolved = resolveKeyPaths {
         persistPoint = config.ephemeral-host.persistentMountpoint;
         homePath = config.users.users.${user.name}.home;
@@ -95,7 +91,6 @@
     };
 
     homeManager = {
-      lib,
       config,
       osConfig,
       ...
