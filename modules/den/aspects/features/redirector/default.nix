@@ -13,7 +13,7 @@
   };
 
   den.aspects.redirector = {
-    homeManager = {lib, ...}: {
+    homeManager = {
       imports = [inputs.redirector.homeModules.default];
 
       services.redirector = {
@@ -23,18 +23,6 @@
           port = 3030;
           default_search = "https://duckduckgo.com/?q={}";
           search_suggestions = "https://search.brave.com/api/suggest?q={}";
-
-          bangs = [
-            {
-              trigger = "hmopt";
-              url_template = "https://search.nixos.org/options?query={{{s}}}&source=home_manager&type=options";
-            }
-
-            {
-              trigger = "noog";
-              url_template = "https://noogle.dev/q?term={{{s}}}";
-            }
-          ];
         };
       };
     };
