@@ -27,7 +27,7 @@
       misc
     ];
 
-    nixos = {pkgs, ...}: {
+    nixos = {
       imports = [inputs.niri.nixosModules.default];
 
       programs.niri = {
@@ -35,7 +35,7 @@
       };
     };
 
-    homeManager = {pkgs, ...}: {
+    homeManager = {
       imports = [inputs.niri.homeModules.default];
 
       wayland.windowManager.niri = {
