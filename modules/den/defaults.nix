@@ -8,6 +8,7 @@
       includes = [
         den.batteries.inputs'
         den.batteries.self'
+        den.policies.expose-persist
       ];
     };
 
@@ -25,7 +26,6 @@
       user = {
         includes = [
           den.batteries.host-aspects
-          den.policies.expose-persist
         ];
 
         classes = lib.mkDefault ["homeManager"];
@@ -39,7 +39,7 @@
     };
 
     policies = {
-      expose-persist = {user, ...}: let
+      expose-persist = {...}: let
         inherit (den.lib.policy) pipe;
       in [(pipe.from "persist" [pipe.expose])];
     };
