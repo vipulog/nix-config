@@ -3,45 +3,37 @@
   den,
   ...
 }: {
-  den = {
+  den = let
+    inherit (den.lib) policy;
+  in {
     default = {
       includes = [
         den.batteries.inputs'
         den.batteries.self'
+        den.batteries.hostname
+
         den.policies.expose-persist
+
+        den.aspects.nix
+        den.aspects.nur
+        den.aspects.localization
+        den.aspects.home-manager
       ];
     };
 
-    schema = {
-      host = {
-        includes = [
-          den.batteries.hostname
-          den.aspects.nix
-          den.aspects.home-manager
-          den.aspects.nur
-          den.aspects.localization
-        ];
-      };
-
-      user = {
-        includes = [
-          den.batteries.host-aspects
-        ];
-
-        classes = lib.mkDefault ["homeManager"];
-      };
+    schema.user = {
+      includes = [den.batteries.host-aspects];
+      classes = lib.mkDefault ["homeManager"];
     };
 
     quirks = {
-      persist = {
-        description = "Preservation config contributed by aspects";
-      };
+      persist.description = "Preservation config contributed by aspects";
     };
 
     policies = {
-      expose-persist = _: let
-        inherit (den.lib.policy) pipe;
-      in [(pipe.from "persist" [pipe.expose])];
+      expose-persist = _: [
+        (policy.pipe.from "persist" [policy.pipe.expose])
+      ];
     };
   };
 }
