@@ -39,7 +39,7 @@
     };
 
     policies = {
-      expose-persist = {...}: let
+      expose-persist = _: let
         inherit (den.lib.policy) pipe;
       in [(pipe.from "persist" [pipe.expose])];
     };
