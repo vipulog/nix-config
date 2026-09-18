@@ -46,7 +46,80 @@
     };
 
     statusline = {
-      lualine.enable = true;
+      lualine = {
+        enable = true;
+
+        setupOpts = {
+          sections = {
+            lualine_a = [
+              {
+                "@1" = "mode";
+                separator = {
+                  left = "";
+                  right = "";
+                };
+              }
+            ];
+
+            lualine_b = [
+              {
+                "@1" = "filetype";
+                separator = {
+                  left = "";
+                  right = "";
+                };
+              }
+              {
+                "@1" = "filename";
+                separator = {
+                  left = "";
+                  right = "";
+                };
+              }
+            ];
+
+            lualine_c = [
+              {
+                "@1" = "diff";
+                separator = {
+                  left = "";
+                  right = "";
+                };
+              }
+            ];
+
+            lualine_x = [
+              {
+                "@1" = "diagnostics";
+                separator = {
+                  left = "";
+                  right = "";
+                };
+              }
+            ];
+
+            lualine_y = [
+              {
+                "@1" = "branch";
+                separator = {
+                  left = "";
+                  right = "";
+                };
+              }
+            ];
+
+            lualine_z = [
+              {
+                "@1" = "location";
+                separator = {
+                  left = "";
+                  right = "";
+                };
+              }
+            ];
+          };
+        };
+      };
     };
 
     terminal = {
