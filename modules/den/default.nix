@@ -13,8 +13,6 @@
       den.batteries.self'
       den.batteries.hostname
 
-      den.policies.expose-persist
-
       den.aspects.nix
       den.aspects.nur
       den.aspects.localization
@@ -22,19 +20,28 @@
     ];
 
     schema.user = {
-      includes = [den.batteries.host-aspects];
+      includes = [
+        den.batteries.host-aspects
+        den.policies.persist-user
+      ];
+
       classes = lib.mkDefault ["homeManager"];
     };
 
     quirks = {
-      persist.description = "Preservation config contributed by aspects";
+      persist-host.description = "Host-level persist";
+      persist-user.description = "User-level persist";
     };
 
     policies = let
       inherit (den.lib) policy;
+      inherit (policy) pipe;
     in {
-      expose-persist = _: [
-        (policy.pipe.from "persist" [policy.pipe.expose])
+      persist-user = {user, ...}: [
+        (pipe.from "persist-user" [
+          (pipe.transform (i: i // {username = user.name;}))
+          pipe.expose
+        ])
       ];
     };
   };

@@ -1,13 +1,13 @@
 {
-  den.aspects.bat = {user}: {
+  den.aspects.bat = {
     homeManager = {
       programs.bat = {
         enable = true;
       };
     };
 
-    persist = {
-      preserve.users.${user.name}.directories = [
+    persist-user = {
+      directories = [
         ".cache/bat"
       ];
     };

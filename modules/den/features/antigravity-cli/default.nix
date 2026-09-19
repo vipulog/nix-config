@@ -1,5 +1,5 @@
 {den, ...}: {
-  den.aspects.antigravity-cli = {user}: {
+  den.aspects.antigravity-cli = {
     includes = [
       (den.batteries.unfree ["antigravity-cli"])
       den.aspects.mcp
@@ -52,8 +52,8 @@
       };
     };
 
-    persist = {
-      preserve.users.${user.name}.directories = [
+    persist-user = {
+      directories = [
         ".gemini"
       ];
     };

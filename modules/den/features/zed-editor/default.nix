@@ -1,5 +1,5 @@
 {
-  den.aspects.zed-editor = {user}: {
+  den.aspects.zed-editor = {
     homeManager = {pkgs, ...}: {
       programs.zed-editor = {
         enable = true;
@@ -82,8 +82,8 @@
       };
     };
 
-    persist = {
-      preserve.users.${user.name}.directories = [
+    persist-user = {
+      directories = [
         ".config/zed"
         ".local/share/zed"
         ".cache/zed"

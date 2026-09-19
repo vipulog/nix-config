@@ -1,13 +1,13 @@
 {
-  den.aspects.qutebrowser = {user}: {
+  den.aspects.qutebrowser = {
     homeManager = {
       programs.qutebrowser = {
         enable = true;
       };
     };
 
-    persist = {
-      preserve.users.${user.name}.directories = [
+    persist-user = {
+      directories = [
         ".local/share/qutebrowser"
         ".cache/qutebrowser"
       ];

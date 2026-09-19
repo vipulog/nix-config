@@ -1,5 +1,5 @@
 {den, ...}: {
-  den.aspects.waydroid = {user}: {
+  den.aspects.waydroid = {
     includes = [den.aspects.polkit];
 
     nixos = {pkgs, ...}: {
@@ -14,17 +14,17 @@
       };
     };
 
-    persist = {
-      preserve = {
-        directories = [
-          "/var/lib/waydroid"
-          "/etc/waydroid-extra"
-        ];
+    persist-host = {
+      directories = [
+        "/var/lib/waydroid"
+        "/etc/waydroid-extra"
+      ];
+    };
 
-        users.${user.name}.directories = [
-          ".local/share/waydroid"
-        ];
-      };
+    persist-user = {
+      directories = [
+        ".local/share/waydroid"
+      ];
     };
   };
 }

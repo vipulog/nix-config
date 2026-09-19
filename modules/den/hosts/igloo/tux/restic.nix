@@ -64,8 +64,8 @@
       };
     };
 
-    persist = {
-      preserve.users.tux.directories = [
+    persist-user = {
+      directories = [
         ".cache/restic-backups-b2"
       ];
     };

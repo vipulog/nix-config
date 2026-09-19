@@ -10,7 +10,7 @@
     };
   };
 
-  den.aspects.niri-de.dms = {user}: {
+  den.aspects.niri-de.dms = {
     includes = with den.aspects.niri-de.dms; [
       settings
       niri
@@ -56,8 +56,8 @@
       };
     };
 
-    persist = {
-      preserve.users.${user.name}.directories = [
+    persist-user = {
+      directories = [
         ".config/DankMaterialShell"
         ".local/state/DankMaterialShell"
         ".cache/DankMaterialShell"

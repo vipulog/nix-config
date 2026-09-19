@@ -1,5 +1,5 @@
 {
-  den.aspects.firefox = {user}: {
+  den.aspects.firefox = {
     homeManager = {pkgs, ...}: {
       programs.firefox = {
         enable = true;
@@ -47,8 +47,8 @@
       };
     };
 
-    persist = {
-      preserve.users.${user.name}.directories = [
+    persist-user = {
+      directories = [
         ".config/mozilla"
         ".cache/mozilla"
       ];

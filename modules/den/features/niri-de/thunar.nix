@@ -1,5 +1,5 @@
 {
-  den.aspects.niri-de.thunar = {user}: {
+  den.aspects.niri-de.thunar = {
     nixos = {
       programs = {
         thunar.enable = true;
@@ -12,8 +12,8 @@
       };
     };
 
-    persist = {
-      preserve.users.${user.name}.directories = [
+    persist-user = {
+      directories = [
         ".config/Thunar"
         ".config/xfce4"
       ];

@@ -1,5 +1,5 @@
 {
-  den.aspects.lazygit = {user}: {
+  den.aspects.lazygit = {
     homeManager = {pkgs, ...}: {
       programs.lazygit = {
         enable = true;
@@ -17,8 +17,8 @@
       };
     };
 
-    persist = {
-      preserve.users.${user.name}.directories = [
+    persist-user = {
+      directories = [
         ".local/state/lazygit"
       ];
     };

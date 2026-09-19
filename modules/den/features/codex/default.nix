@@ -1,5 +1,5 @@
 {den, ...}: {
-  den.aspects.codex = {user}: {
+  den.aspects.codex = {
     includes = [den.aspects.mcp];
 
     homeManager = {
@@ -47,8 +47,8 @@
       };
     };
 
-    persist = {
-      preserve.users.${user.name}.directories = [
+    persist-user = {
+      directories = [
         ".codex"
       ];
     };

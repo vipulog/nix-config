@@ -1,5 +1,5 @@
 {
-  den.aspects.home-manager = {user}: {
+  den.aspects.home-manager = {
     os = {pkgs, ...}: {
       home-manager = {
         useGlobalPkgs = true;
@@ -8,8 +8,8 @@
       };
     };
 
-    persist = {
-      preserve.users.${user.name}.directories = [
+    persist-user = {
+      directories = [
         ".local/state/home-manager"
       ];
     };

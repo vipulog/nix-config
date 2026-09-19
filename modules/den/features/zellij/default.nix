@@ -1,5 +1,5 @@
 {
-  den.aspects.zellij = {user}: {
+  den.aspects.zellij = {
     homeManager = {
       osConfig,
       pkgs,
@@ -59,8 +59,8 @@
       };
     };
 
-    persist = {
-      preserve.users.${user.name}.directories = [
+    persist-user = {
+      directories = [
         ".config/zellij"
         ".cache/zellij"
       ];

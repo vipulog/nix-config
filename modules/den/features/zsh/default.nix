@@ -1,5 +1,5 @@
 {
-  den.aspects.zsh = {user}: {
+  den.aspects.zsh = {
     homeManager = {
       lib,
       pkgs,
@@ -23,18 +23,18 @@
       };
     };
 
-    persist = {
-      preserve.users.${user.name} = {
-        files = [
-          {
-            how = "symlink";
-            file = ".zsh_history";
-            mode = "0600";
-          }
-        ];
+    persist-user = {
+      files = [
+        {
+          how = "symlink";
+          file = ".zsh_history";
+          mode = "0600";
+        }
+      ];
 
-        directories = [".cache/fastfetch"];
-      };
+      directories = [
+        ".cache/fastfetch"
+      ];
     };
   };
 }

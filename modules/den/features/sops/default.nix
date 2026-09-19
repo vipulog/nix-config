@@ -113,29 +113,29 @@
       };
     };
 
-    persist = {
-      preserve = {
-        files = [
-          {
-            file = sshHostKeyPath;
-            how = "symlink";
-            configureParent = true;
-          }
+    persist-host = {
+      files = [
+        {
+          file = sshHostKeyPath;
+          how = "symlink";
+          configureParent = true;
+        }
 
-          {
-            file = "${sshHostKeyPath}.pub";
-            how = "symlink";
-            configureParent = true;
-          }
-        ];
+        {
+          file = "${sshHostKeyPath}.pub";
+          how = "symlink";
+          configureParent = true;
+        }
+      ];
+    };
 
-        users.${user.name}.directories = [
-          {
-            directory = ".ssh";
-            mode = "0700";
-          }
-        ];
-      };
+    persist-user = {
+      directories = [
+        {
+          directory = ".ssh";
+          mode = "0700";
+        }
+      ];
     };
   };
 }

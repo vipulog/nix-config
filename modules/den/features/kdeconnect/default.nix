@@ -1,5 +1,5 @@
 {
-  den.aspects.kdeconnect = {user}: {
+  den.aspects.kdeconnect = {
     nixos = {
       programs.kdeconnect.enable = true;
     };
@@ -8,8 +8,8 @@
       services.kdeconnect.enable = true;
     };
 
-    persist = {
-      preserve.users.${user.name}.directories = [
+    persist-user = {
+      directories = [
         ".config/kdeconnect"
       ];
     };

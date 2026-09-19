@@ -23,8 +23,8 @@
       home.stateVersion = "26.05";
     };
 
-    persist = {
-      preserve.users.tux.directories = [
+    persist-user = {
+      directories = [
         "DCIM"
         "Recordings"
       ];

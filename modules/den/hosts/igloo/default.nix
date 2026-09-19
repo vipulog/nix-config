@@ -6,6 +6,10 @@
 
       den.aspects.ephemeral-host
       den.aspects.sops-nix
+
+      den.aspects.sudo
+      den.aspects.tailscale
+      den.aspects.waydroid
     ];
 
     nixos = {config, ...}: {
@@ -36,8 +40,8 @@
       system.stateVersion = "26.05";
     };
 
-    persist = {
-      preserve.directories = [
+    persist-host = {
+      directories = [
         "/var/lib/bluetooth"
         "/etc/NetworkManager/system-connections"
       ];

@@ -1,5 +1,5 @@
 {
-  den.aspects.starship = {user}: {
+  den.aspects.starship = {
     homeManager = {
       programs.starship = {
         enable = true;
@@ -80,8 +80,8 @@
       };
     };
 
-    persist = {
-      preserve.users.${user.name}.directories = [
+    persist-user = {
+      directories = [
         ".cache/starship"
       ];
     };

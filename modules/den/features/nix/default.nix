@@ -3,7 +3,7 @@
     my-templates.url = "github:vipulog/nix-templates";
   };
 
-  den.aspects.nix = {user}: {
+  den.aspects.nix = {
     nixos = {
       nix = {
         settings = {
@@ -48,8 +48,8 @@
       };
     };
 
-    persist = {
-      preserve.users.${user.name}.directories = [
+    persist-user = {
+      directories = [
         ".local/state/nix"
         ".cache/nix"
       ];

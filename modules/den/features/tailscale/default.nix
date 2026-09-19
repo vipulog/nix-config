@@ -36,8 +36,8 @@
       };
     };
 
-    persist = {
-      preserve.directories = [
+    persist-host = {
+      directories = [
         "/var/lib/tailscale"
       ];
     };

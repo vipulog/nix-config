@@ -43,8 +43,8 @@
       };
     };
 
-    persist = {
-      preserve.users.tux.directories = [
+    persist-user = {
+      directories = [
         ".config/syncthing"
       ];
     };

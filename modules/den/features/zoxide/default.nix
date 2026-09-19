@@ -1,5 +1,5 @@
 {
-  den.aspects.zoxide = {user}: {
+  den.aspects.zoxide = {
     homeManager = {
       programs.zoxide = {
         enable = true;
@@ -7,8 +7,8 @@
       };
     };
 
-    persist = {
-      preserve.users.${user.name}.directories = [
+    persist-user = {
+      directories = [
         ".local/share/zoxide"
       ];
     };

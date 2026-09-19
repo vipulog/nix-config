@@ -4,8 +4,8 @@
       security.sudo.enable = true;
     };
 
-    persist = {
-      preserve.directories = [
+    persist-host = {
+      directories = [
         "/var/db/sudo"
       ];
     };
