@@ -5,7 +5,7 @@
         settings = {
           currentThemeCategory = "dynamic";
           currentThemeName = "dynamic";
-          matugenScheme = "scheme-content";
+          matugenScheme = "scheme-smart";
           gtkThemingEnabled = true;
 
           blurEnabled = true;
