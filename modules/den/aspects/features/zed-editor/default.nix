@@ -5,16 +5,10 @@
         enable = true;
         enableMcpIntegration = true;
 
-        extraPackages = [
-          pkgs.nixd
-          pkgs.nil
-          pkgs.alejandra
-        ];
-
         extensions = [
           "nix"
-          "toml"
           "html"
+          "toml"
           "justfile"
           "dockerfile"
           "xy-zed"
@@ -46,10 +40,18 @@
 
           languages = {
             Nix = {
-              formatter = {
-                external = {
-                  command = "alejandra";
-                  arguments = ["--quiet" "--"];
+              language_servers = ["nil"];
+              formatter = "language_server";
+            };
+          };
+
+          lsp = {
+            nil = {
+              binary.path = "${pkgs.nil}/bin/nil";
+
+              initialization_options = {
+                formatting = {
+                  command = ["${pkgs.alejandra}/bin/alejandra" "--quiet" "--"];
                 };
               };
             };
