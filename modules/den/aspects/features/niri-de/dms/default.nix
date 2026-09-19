@@ -15,6 +15,7 @@
       settings
       niri
       alacritty
+      zed-editor
     ];
 
     nixos = {pkgs, ...}: {
