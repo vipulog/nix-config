@@ -11,13 +11,16 @@
     default.includes = [
       den.batteries.inputs'
       den.batteries.self'
-      den.batteries.hostname
 
       den.aspects.nix
       den.aspects.nur
       den.aspects.localization
       den.aspects.home-manager
     ];
+
+    schema.host = {
+      includes = [den.batteries.hostname];
+    };
 
     schema.user = {
       includes = [den.policies.persist-user];
