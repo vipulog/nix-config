@@ -1,17 +1,11 @@
 {
   den,
   inputs,
+  self,
   ...
 }: {
-  den.aspects.mcp = let
-    inherit (den.lib) policy;
-
-    hasSops = {user ? null, ...}:
-      user != null && user.hasAspect den.aspects.sops-nix;
-  in {
-    includes = [
-      (policy.when hasSops (policy.include den.aspects.mcp.secrets))
-    ];
+  den.aspects.mcp = {
+    includes = [den.aspects.mcp.secrets];
 
     homeManager = {pkgs, ...}: let
       mcpRemote = pkgs.writeShellApplication {
@@ -37,19 +31,27 @@
       };
     };
 
-    secrets = {
-      homeManager = {config, ...}: {
-        sops.secrets.github-mcp-pat = {
-          sopsFile = "${inputs.my-secrets}/secrets/sops/shared.yaml";
-        };
+    secrets = let
+      inherit (self.lib.den.sops-nix) userHasSops;
+    in {
+      homeManager = {
+        lib,
+        user,
+        config,
+        ...
+      }:
+        lib.mkIf (userHasSops {inherit den user;}) {
+          sops.secrets.github-mcp-pat = {
+            sopsFile = "${inputs.my-secrets}/secrets/sops/shared.yaml";
+          };
 
-        programs.mcp.servers = {
-          github = {
-            env.GITHUB_MCP_PAT.file = config.sops.secrets.github-mcp-pat.path;
-            args = ["--header" "Authorization:Bearer \$\{GITHUB_MCP_PAT\}"];
+          programs.mcp.servers = {
+            github = {
+              env.GITHUB_MCP_PAT.file = config.sops.secrets.github-mcp-pat.path;
+              args = ["--header" "Authorization:Bearer \$\{GITHUB_MCP_PAT\}"];
+            };
           };
         };
-      };
     };
   };
 }

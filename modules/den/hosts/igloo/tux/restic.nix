@@ -1,31 +1,20 @@
 {
+  den,
+  self,
+  ...
+}: {
   den.aspects.igloo.provides.tux.restic = {
+    includes = [den.aspects.igloo.provides.tux.restic.secrets];
+
     homeManager = {config, ...}: let
       homeDir = config.home.homeDirectory;
     in {
-      sops = {
-        secrets = {
-          b2-app-key-id = {};
-          b2-app-key = {};
-          restic-password = {};
-        };
-
-        templates.restic-b2-env = {
-          content = ''
-            B2_ACCOUNT_ID=${config.sops.placeholder.b2-app-key-id}
-            B2_ACCOUNT_KEY=${config.sops.placeholder.b2-app-key}
-          '';
-        };
-      };
-
       services.restic = {
         enable = true;
 
         backups.b2 = {
           initialize = true;
           repository = "b2:vipulog-restic:backups";
-          environmentFile = config.sops.templates.restic-b2-env.path;
-          passwordFile = config.sops.secrets.restic-password.path;
 
           runCheck = true;
           extraBackupArgs = ["--exclude-if-present=.nobackup"];
@@ -62,6 +51,38 @@
           ];
         };
       };
+    };
+
+    secrets = let
+      inherit (self.lib.den.sops-nix) userHasSops;
+    in {
+      homeManager = {
+        lib,
+        user,
+        config,
+        ...
+      }:
+        lib.mkIf (userHasSops {inherit den user;}) {
+          sops = {
+            secrets = {
+              b2-app-key-id = {};
+              b2-app-key = {};
+              restic-password = {};
+            };
+
+            templates.restic-b2-env = {
+              content = ''
+                B2_ACCOUNT_ID=${config.sops.placeholder.b2-app-key-id}
+                B2_ACCOUNT_KEY=${config.sops.placeholder.b2-app-key}
+              '';
+            };
+          };
+
+          services.restic.backups.b2 = {
+            environmentFile = config.sops.templates.restic-b2-env.path;
+            passwordFile = config.sops.secrets.restic-password.path;
+          };
+        };
     };
 
     persist-user = {

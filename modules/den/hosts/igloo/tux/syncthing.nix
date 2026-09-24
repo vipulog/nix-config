@@ -1,17 +1,16 @@
 {
+  den,
+  self,
+  ...
+}: {
   den.aspects.igloo.provides.tux.syncthing = {
-    homeManager = {config, ...}: {
-      sops.secrets.syncthing-password = {};
+    includes = [den.aspects.igloo.provides.tux.syncthing.secrets];
 
+    homeManager = {
       services.syncthing = {
         enable = true;
 
         settings = {
-          guiCredentials = {
-            username = "tux";
-            passwordFile = config.sops.secrets.syncthing-password.path;
-          };
-
           devices = {
             "igloo".id = "56QERGR-JFANNUO-Q4RUWTF-W3QWMRT-54XRAHL-E2DEQRZ-LF727VM-F7IVRAQ";
             "np2".id = "WCL2VTA-FIYGHZ2-KAF4EDY-IVM3JDJ-5EUUGNX-5R3DP6F-ZNKEA7A-7SMNWQJ";
@@ -41,6 +40,25 @@
           };
         };
       };
+    };
+
+    secrets = let
+      inherit (self.lib.den.sops-nix) userHasSops;
+    in {
+      homeManager = {
+        lib,
+        user,
+        config,
+        ...
+      }:
+        lib.mkIf (userHasSops {inherit den user;}) {
+          sops.secrets.syncthing-password = {};
+
+          services.syncthing.settings.guiCredentials = {
+            username = "tux";
+            passwordFile = config.sops.secrets.syncthing-password.path;
+          };
+        };
     };
 
     persist-user = {

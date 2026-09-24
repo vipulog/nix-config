@@ -1,13 +1,10 @@
-{den, ...}: {
-  den.aspects.tailscale = let
-    inherit (den.lib) policy;
-
-    hasSops = {host ? null, ...}:
-      host != null && host.hasAspect den.aspects.sops-nix;
-  in {
-    includes = [
-      (policy.when hasSops (policy.include den.aspects.tailscale.secrets))
-    ];
+{
+  den,
+  self,
+  ...
+}: {
+  den.aspects.tailscale = {
+    includes = [den.aspects.tailscale.secrets];
 
     nixos = {
       services.tailscale = {
@@ -26,14 +23,22 @@
       };
     };
 
-    secrets = {
-      nixos = {config, ...}: {
-        sops.secrets.tailscale-auth-key = {};
+    secrets = let
+      inherit (self.lib.den.sops-nix) hostHasSops;
+    in {
+      nixos = {
+        lib,
+        host,
+        config,
+        ...
+      }:
+        lib.mkIf (hostHasSops {inherit den host;}) {
+          sops.secrets.tailscale-auth-key = {};
 
-        services.tailscale = {
-          authKeyFile = config.sops.secrets.tailscale-auth-key.path;
+          services.tailscale = {
+            authKeyFile = config.sops.secrets.tailscale-auth-key.path;
+          };
         };
-      };
     };
 
     persist-host = {
