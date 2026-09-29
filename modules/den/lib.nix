@@ -3,10 +3,6 @@
   den,
   ...
 }: {
-  perSystem = {pkgs, ...}: {
-    packages = den.lib.nh.denPackages {fromFlake = true;} pkgs;
-  };
-
   flake.lib.den = {
     withHostNh = pkgs: cmd: let
       denNhPackages = den.lib.nh.denPackages {fromFlake = true;} pkgs;
