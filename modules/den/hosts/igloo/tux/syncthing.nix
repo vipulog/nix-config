@@ -1,5 +1,5 @@
 {
-  den.aspects.igloo.tux.syncthing = {
+  den.aspects.igloo.provides.tux.syncthing = {
     homeManager = {config, ...}: {
       sops.secrets.syncthing-password = {};
 

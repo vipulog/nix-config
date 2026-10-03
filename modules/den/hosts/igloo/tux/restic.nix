@@ -1,5 +1,5 @@
 {
-  den.aspects.igloo.tux.restic = {
+  den.aspects.igloo.provides.tux.restic = {
     homeManager = {config, ...}: let
       homeDir = config.home.homeDirectory;
     in {

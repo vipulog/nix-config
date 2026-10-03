@@ -1,8 +1,8 @@
 {den, ...}: {
-  den.aspects.igloo.tux = {
+  den.aspects.igloo.provides.tux = {
     includes = [
-      den.aspects.igloo.tux.syncthing
-      den.aspects.igloo.tux.restic
+      den.aspects.igloo.provides.tux.syncthing
+      den.aspects.igloo.provides.tux.restic
     ];
 
     nixos = {
