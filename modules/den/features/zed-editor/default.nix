@@ -1,5 +1,7 @@
-{
+{den, ...}: {
   den.aspects.zed-editor = {
+    includes = [den.aspects.mcp];
+
     homeManager = {pkgs, ...}: {
       programs.zed-editor = {
         enable = true;
