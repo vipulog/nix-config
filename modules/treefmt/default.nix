@@ -12,12 +12,7 @@
     treefmt = {
       programs = {
         alejandra.enable = true;
-
-        deadnix = {
-          enable = true;
-          no-lambda-pattern-names = true;
-        };
-
+        deadnix.enable = true;
         shellcheck.enable = true;
         shfmt.enable = true;
       };
