@@ -32,17 +32,8 @@
       den.aspects.codex
       den.aspects.antigravity-cli
 
-      # Virtualization / containers
-      den.aspects.podman
-      den.aspects.waydroid
-
       # Networking / remote access
       den.aspects.ssh
-      den.aspects.tailscale
-      den.aspects.kdeconnect
-
-      # System / security
-      den.aspects.sudo
 
       # Desktop environment
       den.aspects.niri-de

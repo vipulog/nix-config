@@ -1,6 +1,11 @@
 {den, ...}: {
   den.aspects.igloo.provides.tux = {
     includes = [
+      den.aspects.sops-nix
+      den.aspects.tailscale
+      den.aspects.waydroid
+      den.aspects.niri-de
+      den.aspects.kdeconnect
       den.aspects.igloo.provides.tux.syncthing
       den.aspects.igloo.provides.tux.restic
     ];

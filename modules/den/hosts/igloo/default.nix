@@ -3,13 +3,15 @@
     includes = [
       den.aspects.igloo.hardware
       den.aspects.igloo.disko
-
       den.aspects.ephemeral-host
       den.aspects.sops-nix
-
       den.aspects.sudo
       den.aspects.tailscale
+      den.aspects.podman
+      den.aspects.neovim
       den.aspects.waydroid
+      den.aspects.niri-de
+      den.aspects.kdeconnect
     ];
 
     nixos = {config, ...}: {

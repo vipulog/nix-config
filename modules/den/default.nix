@@ -20,11 +20,7 @@
     ];
 
     schema.user = {
-      includes = [
-        den.batteries.host-aspects
-        den.policies.persist-user
-      ];
-
+      includes = [den.policies.persist-user];
       classes = lib.mkDefault ["homeManager"];
     };
 
