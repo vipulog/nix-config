@@ -15,5 +15,11 @@
         docker-compose
       ];
     };
+
+    persist-user = {
+      directories = [
+        ".local/share/containers"
+      ];
+    };
   };
 }
