@@ -3,6 +3,7 @@
     includes = [
       den.aspects.igloo.hardware
       den.aspects.igloo.disko
+      den.aspects.igloo.snapper
       den.aspects.ephemeral-host
       den.aspects.sops-nix
       den.aspects.sudo

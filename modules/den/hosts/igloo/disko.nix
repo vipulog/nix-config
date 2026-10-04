@@ -65,6 +65,8 @@
                         mountOptions = ["compress=zstd" "noatime"];
                       };
 
+                      "persistent/.snapshots" = {};
+
                       nix = {
                         mountpoint = "/nix";
                         mountOptions = ["compress=zstd" "noatime"];
