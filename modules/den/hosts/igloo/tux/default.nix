@@ -8,6 +8,7 @@
       den.aspects.sops-nix
       den.aspects.tailscale
       den.aspects.podman
+      den.aspects.distrobox
       den.aspects.waydroid
       den.aspects.niri-de
       den.aspects.kdeconnect
