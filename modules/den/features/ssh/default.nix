@@ -2,7 +2,7 @@
   inherit (self.lib.den.ssh) mkHostIdFilePath mkUserIdFilePath;
 in {
   den.aspects.ssh = {
-    nixos = {host, ...}: {
+    os = {host, ...}: {
       services.openssh = {
         enable = true;
 

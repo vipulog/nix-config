@@ -6,7 +6,7 @@
   den.aspects.tailscale = {
     includes = [den.aspects.tailscale.secrets];
 
-    nixos = {
+    os = {
       services.tailscale = {
         enable = true;
       };

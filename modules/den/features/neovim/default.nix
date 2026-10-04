@@ -4,7 +4,7 @@
   ...
 }: {
   den.aspects.neovim = {
-    nixos = {
+    os = {
       environment.variables = {
         EDITOR = "nvim";
       };

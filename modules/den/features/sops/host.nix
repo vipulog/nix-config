@@ -32,5 +32,16 @@
         age.sshKeyPaths = [hostIdFilePath];
       };
     };
+
+    darwin = {host, ...}: let
+      hostIdFilePath = mkHostIdFilePath {inherit host;};
+    in {
+      imports = [inputs.sops-nix.darwinModules.sops];
+
+      sops = {
+        defaultSopsFile = mkHostSecretsFilePath {inherit host;};
+        age.sshKeyPaths = [hostIdFilePath];
+      };
+    };
   };
 }
