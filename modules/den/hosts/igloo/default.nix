@@ -13,6 +13,7 @@
       den.aspects.waydroid
       den.aspects.niri-de
       den.aspects.kdeconnect
+      den.aspects.lutris
     ];
 
     nixos = {config, ...}: {

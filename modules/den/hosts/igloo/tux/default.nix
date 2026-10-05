@@ -12,6 +12,7 @@
       den.aspects.waydroid
       den.aspects.niri-de
       den.aspects.kdeconnect
+      den.aspects.lutris
       den.aspects.igloo.provides.tux.secrets
       den.aspects.igloo.provides.tux.syncthing
       den.aspects.igloo.provides.tux.restic
