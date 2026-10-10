@@ -290,6 +290,26 @@
         "type": "github"
       }
     },
+    "mcp-servers-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1791584098,
+        "narHash": "sha256-vUKpZao/sExKmV2m3mkdyMaWVJ5X07GBc+edkfJHP+U=",
+        "owner": "natsukium",
+        "repo": "mcp-servers-nix",
+        "rev": "1e69e55cd3416427f54df7216f771d68162a32cb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "natsukium",
+        "repo": "mcp-servers-nix",
+        "type": "github"
+      }
+    },
     "mk-naked-shell": {
       "flake": false,
       "locked": {
@@ -697,6 +717,7 @@
         "git-hooks-nix": "git-hooks-nix",
         "home-manager": "home-manager",
         "import-tree": "import-tree",
+        "mcp-servers-nix": "mcp-servers-nix",
         "my-secrets": "my-secrets",
         "my-templates": "my-templates",
         "niri": "niri",

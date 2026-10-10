@@ -4,35 +4,30 @@
   self,
   ...
 }: {
+  flake-file.inputs = {
+    mcp-servers-nix = {
+      url = "github:natsukium/mcp-servers-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
+
   den.aspects.mcp = {
     includes = [den.aspects.mcp.secrets];
 
-    homeManager = {pkgs, ...}: let
-      mcpRemote = pkgs.writeShellApplication {
-        name = "mcp-remote";
-        runtimeInputs = [pkgs.nodejs_26];
-        text = "exec npx -y mcp-remote \"$@\"";
-      };
-    in {
-      programs.mcp = {
-        enable = true;
+    homeManager = {pkgs, ...}: {
+      imports = [inputs.mcp-servers-nix.homeManagerModules.default];
 
-        servers = {
-          deepwiki = {
-            command = "${mcpRemote}/bin/mcp-remote";
-            args = ["https://mcp.deepwiki.com/mcp"];
-          };
+      programs.mcp.enable = true;
 
-          github = {
-            command = "${mcpRemote}/bin/mcp-remote";
-            args = ["https://api.githubcopilot.com/mcp"];
-          };
-        };
+      mcp-servers.programs = {
+        nixos.enable = true;
+        github.enable = true;
+        chrome-devtools.enable = true;
       };
     };
 
     secrets = let
-      inherit (self.lib.den.sops-nix) userHasSops;
+      inherit (self.lib.den.sops-nix) sharedSecretsFilePath userHasSops;
     in {
       homeManager = {
         lib,
@@ -41,15 +36,22 @@
         ...
       }:
         lib.mkIf (userHasSops {inherit user;}) {
-          sops.secrets.github-mcp-pat = {
-            sopsFile = "${inputs.my-secrets}/secrets/sops/shared.yaml";
+          sops = {
+            secrets.github-mcp-pat = {
+              sopsFile = sharedSecretsFilePath;
+            };
+
+            templates.github-mcp-env = {
+              content = ''
+                GITHUB_PERSONAL_ACCESS_TOKEN=${
+                  config.sops.placeholder.github-mcp-pat
+                }
+              '';
+            };
           };
 
-          programs.mcp.servers = {
-            github = {
-              env.GITHUB_MCP_PAT.file = config.sops.secrets.github-mcp-pat.path;
-              args = ["--header" "Authorization:Bearer \$\{GITHUB_MCP_PAT\}"];
-            };
+          mcp-servers.programs = {
+            github.envFile = config.sops.templates.github-mcp-env.path;
           };
         };
     };

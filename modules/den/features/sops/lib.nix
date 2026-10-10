@@ -7,6 +7,8 @@
   flake.lib.den.sops-nix = let
     secretsDir = "${inputs.my-secrets}/secrets/sops";
   in {
+    sharedSecretsFilePath = "${secretsDir}/shared.yaml";
+
     mkHostSecretsFilePath = {host}: "${secretsDir}/${host.name}.yaml";
 
     mkUserSecretsFilePath = {
