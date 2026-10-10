@@ -1,4 +1,5 @@
 {
+  den,
   lib,
   inputs,
   ...
@@ -35,14 +36,10 @@
         else "${username}_${hostname}";
     in "${secretsDir}/${name}.yaml";
 
-    hostHasSops = {
-      den,
-      host,
-    }:
+    hostHasSops = {host}:
       host.hasAspect den.aspects.sops-nix;
 
     userHasSops = {
-      den,
       user ? null,
       home ? null,
     }:

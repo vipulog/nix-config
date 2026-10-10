@@ -62,7 +62,7 @@
         config,
         ...
       }:
-        lib.mkIf (userHasSops {inherit den user;}) {
+        lib.mkIf (userHasSops {inherit user;}) {
           sops = {
             secrets = {
               b2-app-key-id = {};

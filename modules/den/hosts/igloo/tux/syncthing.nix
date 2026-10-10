@@ -51,7 +51,7 @@
         config,
         ...
       }:
-        lib.mkIf (userHasSops {inherit den user;}) {
+        lib.mkIf (userHasSops {inherit user;}) {
           sops.secrets.syncthing-password = {};
 
           services.syncthing.settings.guiCredentials = {

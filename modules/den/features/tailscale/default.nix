@@ -32,7 +32,7 @@
         config,
         ...
       }:
-        lib.mkIf (hostHasSops {inherit den host;}) {
+        lib.mkIf (hostHasSops {inherit host;}) {
           sops.secrets.tailscale-auth-key = {};
 
           services.tailscale = {

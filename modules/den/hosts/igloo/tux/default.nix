@@ -36,7 +36,7 @@
         host,
         ...
       }:
-        lib.mkIf (hostHasSops {inherit den host;}) {
+        lib.mkIf (hostHasSops {inherit host;}) {
           sops.secrets.tux-password = {
             neededForUsers = true;
           };
@@ -48,7 +48,7 @@
         config,
         ...
       }:
-        lib.mkIf (hostHasSops {inherit den host;}) {
+        lib.mkIf (hostHasSops {inherit host;}) {
           hashedPasswordFile = config.sops.secrets.tux-password.path;
         };
     };

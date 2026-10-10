@@ -40,7 +40,7 @@
         config,
         ...
       }:
-        lib.mkIf (userHasSops {inherit den user;}) {
+        lib.mkIf (userHasSops {inherit user;}) {
           sops.secrets.github-mcp-pat = {
             sopsFile = "${inputs.my-secrets}/secrets/sops/shared.yaml";
           };
