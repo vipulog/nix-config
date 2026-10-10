@@ -31,6 +31,7 @@
       # AI / coding agents
       den.aspects.codex
       den.aspects.antigravity-cli
+      den.aspects.opencode
 
       # Networking / remote access
       den.aspects.ssh
