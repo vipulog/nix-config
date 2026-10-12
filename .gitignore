@@ -1,5 +1,4 @@
-result
-*.qcow2
-*efi-vars.fd
-.pre-commit-config.yaml
-.direnv
+/.pre-commit-config.yaml
+/.direnv
+/result
+/*.qcow2
