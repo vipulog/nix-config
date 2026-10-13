@@ -14,7 +14,7 @@
   den.aspects.mcp = {
     includes = [den.aspects.mcp.secrets];
 
-    homeManager = {pkgs, ...}: {
+    homeManager = {
       imports = [inputs.mcp-servers-nix.homeManagerModules.default];
 
       programs.mcp.enable = true;
