@@ -38,13 +38,13 @@
 
           exclude = [
             "**/.stversions"
+            "**/.stfolder"
+            "**/.thumbnails"
+            "**/.trashed**"
             "**/node_modules"
             "**/.venv"
             "**/venv"
             "**/__pycache__"
-            "**/target"
-            "**/dist"
-            "**/build"
             "**/.cache"
             "*.tmp"
             "*.swp"
