@@ -25,7 +25,7 @@
 
       programs.dank-material-shell = {
         enable = true;
-        package = pkgs.dms-shell;
+        package = pkgs.dux-shell;
         quickshell.package = pkgs.quickshell;
 
         enableVPN = true;
@@ -46,12 +46,12 @@
       imports = [inputs.dms.homeModules.dank-material-shell];
 
       home.packages = [
-        pkgs.dgop
+        pkgs.dux-gop
       ];
 
       programs.dank-material-shell = {
         enable = true;
-        package = pkgs.dms-shell;
+        package = pkgs.dux-shell;
         quickshell.package = pkgs.quickshell;
       };
     };
