@@ -4,6 +4,7 @@
       den.aspects.igloo.hardware
       den.aspects.igloo.disko
       den.aspects.igloo.snapper
+      den.aspects.igloo.niri-de
       den.aspects.ephemeral-host
       den.aspects.sops-nix
       den.aspects.sudo
@@ -11,7 +12,6 @@
       den.aspects.podman
       den.aspects.neovim
       den.aspects.waydroid
-      den.aspects.niri-de
       den.aspects.kdeconnect
       den.aspects.lutris
     ];

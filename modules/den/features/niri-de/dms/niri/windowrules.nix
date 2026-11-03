@@ -1,3 +1,4 @@
 {
-  den.aspects.niri-de.dms.niri.windowrules.configKdl = "";
+  den.aspects.niri-de.dms.niri.windowrules.configKdl = ''
+  '';
 }

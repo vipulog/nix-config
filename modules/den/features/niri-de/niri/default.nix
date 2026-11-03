@@ -35,7 +35,7 @@
       };
     };
 
-    homeManager = {
+    homeManager = {pkgs, ...}: {
       imports = [inputs.niri.homeModules.default];
 
       wayland.windowManager.niri = {
@@ -57,6 +57,11 @@
           ${misc.configKdl}
         '';
       };
+
+      home.packages = [
+        pkgs.xwayland-satellite
+        pkgs.wl-clipboard
+      ];
     };
   };
 }

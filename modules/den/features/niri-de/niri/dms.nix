@@ -8,5 +8,6 @@
     include "dms/outputs.kdl"
     include "dms/windowrules.kdl"
     include "dms/wpblur.kdl"
+    include "dms/input.kdl"
   '';
 }

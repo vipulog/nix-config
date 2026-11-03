@@ -9,6 +9,7 @@
       outputs
       windowrules
       wpblur
+      input
     ];
 
     homeManager = {lib, ...}:
@@ -22,6 +23,7 @@
           "outputs.kdl" = outputs.configKdl;
           "windowrules.kdl" = windowrules.configKdl;
           "wpblur.kdl" = wpblur.configKdl;
+          "input.kdl" = input.configKdl;
         };
       in {
         home.activation.dmsNiriConfig = lib.hm.dag.entryAfter ["writeBoundary"] (

@@ -5,24 +5,13 @@
 }: {
   flake-file.inputs = {
     dms = {
-      url = "github:AvengeMedia/DankMaterialShell/stable";
+      url = "github:duxlabs-dev/dux-shell/stable";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  den.aspects.niri-de.dms = {
-    includes = with den.aspects.niri-de.dms; [
-      settings
-      niri
-      alacritty
-      zed-editor
-    ];
-
-    nixos = {pkgs, ...}: {
-      imports = [inputs.dms.nixosModules.dank-material-shell];
-
-      services.upower.enable = true;
-
+  den.aspects.niri-de.dms = let
+    commonDmsConfig = {pkgs, ...}: {
       programs.dank-material-shell = {
         enable = true;
         package = pkgs.dux-shell;
@@ -42,27 +31,48 @@
       };
     };
 
-    homeManager = {pkgs, ...}: {
-      imports = [inputs.dms.homeModules.dank-material-shell];
+    mkCommonDmsPackages = pkgs: [
+      pkgs.dux-gop
+      pkgs.qt6.qtimageformats
+      pkgs.kdePackages.kimageformats
+      pkgs.adw-gtk3
+      pkgs.wtype
+    ];
+  in {
+    includes = with den.aspects.niri-de.dms; [
+      greeter
+      settings
+      dsearch
+      plugins
+      niri
+      alacritty
+      zed-editor
+    ];
 
-      home.packages = [
-        pkgs.dux-gop
+    nixos = {pkgs, ...}: {
+      imports = [
+        inputs.dms.nixosModules.dank-material-shell
+        commonDmsConfig
       ];
 
-      programs.dank-material-shell = {
-        enable = true;
-        package = pkgs.dux-shell;
-        quickshell.package = pkgs.quickshell;
-      };
+      services.upower.enable = true;
+      environment.systemPackages = mkCommonDmsPackages pkgs;
+    };
+
+    homeManager = {pkgs, ...}: {
+      imports = [
+        inputs.dms.homeModules.dank-material-shell
+        commonDmsConfig
+      ];
+
+      home.packages = mkCommonDmsPackages pkgs;
     };
 
     persist-user = {
       directories = [
-        ".config/DankMaterialShell"
-        ".local/state/DankMaterialShell"
-        ".cache/DankMaterialShell"
-        ".cache/quickshell"
-        ".local/share/color-schemes"
+        ".config/dms"
+        ".local/state/dms"
+        ".cache/dms"
       ];
     };
   };

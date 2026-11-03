@@ -239,12 +239,12 @@
         Mod+Shift+Equal { set-window-height "+10%"; }
 
         // === Screenshots ===
-        XF86Launch1      { screenshot; }
-        Ctrl+XF86Launch1 { screenshot-screen; }
-        Alt+XF86Launch1  { screenshot-window; }
-        Print            { screenshot; }
-        Ctrl+Print       { screenshot-screen; }
-        Alt+Print        { screenshot-window; }
+        XF86Launch1      { spawn "dms" "ipc" "call" "quickCapture" "screenshot" "region" "edit"; }
+        Ctrl+XF86Launch1 { spawn "dms" "ipc" "call" "quickCapture" "screenshot" "full" "edit"; }
+        Alt+XF86Launch1  { spawn "dms" "ipc" "call" "quickCapture" "screenshot" "window" "edit"; }
+        Print            { spawn "dms" "ipc" "call" "quickCapture" "screenshot" "region" "edit"; }
+        Ctrl+Print       { spawn "dms" "ipc" "call" "quickCapture" "screenshot" "full" "edit"; }
+        Alt+Print        { spawn "dms" "ipc" "call" "quickCapture" "screenshot" "window" "edit"; }
 
         // === System Controls ===
         Mod+Escape  allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
