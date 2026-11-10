@@ -13,8 +13,7 @@
         enable = true;
 
         backups.b2 = {
-          initialize = true;
-          repository = "b2:vipulog-restic:backups";
+          repository = "b2:vipulog:restic/home";
 
           runCheck = true;
           extraBackupArgs = ["--exclude-if-present=.nobackup"];
