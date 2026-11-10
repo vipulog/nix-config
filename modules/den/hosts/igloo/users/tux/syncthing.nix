@@ -1,43 +1,196 @@
 {
   den.aspects."tux@igloo".syncthing = {
-    homeManager = {config, ...}: {
-      sops.secrets.syncthing-password = {};
-
-      services.syncthing.settings.guiCredentials = {
-        username = "tux";
-        passwordFile = config.sops.secrets.syncthing-password.path;
-      };
-
+    homeManager = {
       services.syncthing = {
         enable = true;
 
         settings = {
-          devices = {
-            "igloo".id = "56QERGR-JFANNUO-Q4RUWTF-W3QWMRT-54XRAHL-E2DEQRZ-LF727VM-F7IVRAQ";
-            "np2".id = "WCL2VTA-FIYGHZ2-KAF4EDY-IVM3JDJ-5EUUGNX-5R3DP6F-ZNKEA7A-7SMNWQJ";
-          };
+          devices.glacier.id = "GWKJUX2-RIITNN7-RCYJ3IH-TQQ25E6-CNU5GIU-X2BF25J-RGFHJLK-73XAXQ7";
 
-          folders = let
-            mkFolder = path: id: {
-              inherit id path;
-              devices = ["igloo" "np2"];
+          folders = {
+            DCIM = {
+              id = "dcim";
+              path = "~/DCIM";
+              devices = ["glacier"];
+              ignorePerms = true;
+
+              ignorePatterns = [
+                "(?d)**/.thumbnails"
+                "(?d)**/.trashed*"
+              ];
 
               versioning = {
-                type = "simple";
+                type = "staggered";
 
                 params = {
-                  keep = "5";
-                  cleanoutDays = "7";
+                  cleanInterval = "3600";
+                  maxAge = "604800"; # 7 days
                 };
               };
             };
-          in {
-            "DCIM" = mkFolder "~/DCIM" "guvp4-i7xpn";
-            "Documents" = mkFolder "~/Documents" "3n7aj-zpwlu";
-            "Music" = mkFolder "~/Music" "snamy-u3fah";
-            "Pictures" = mkFolder "~/Pictures" "fedze-lelvp";
-            "Videos" = mkFolder "~/Videos" "7enrc-ap4hp";
-            "Recordings" = mkFolder "~/Recordings" "k8vqm-r2nfd";
+
+            Documents = {
+              id = "documents";
+              path = "~/Documents";
+              devices = ["glacier"];
+              ignorePerms = true;
+
+              versioning = {
+                type = "staggered";
+
+                params = {
+                  cleanInterval = "3600";
+                  maxAge = "604800"; # 7 days
+                };
+              };
+            };
+
+            Music = {
+              id = "music";
+              path = "~/Music";
+              devices = ["glacier"];
+              ignorePerms = true;
+
+              ignorePatterns = [
+                "(?d)**/.thumbnails"
+                "(?d)**/.trashed*"
+              ];
+
+              versioning = {
+                type = "staggered";
+
+                params = {
+                  cleanInterval = "3600";
+                  maxAge = "604800"; # 7 days
+                };
+              };
+            };
+
+            Pictures = {
+              id = "pictures";
+              path = "~/Pictures";
+              devices = ["glacier"];
+              ignorePerms = true;
+
+              ignorePatterns = [
+                "(?d)**/.thumbnails"
+                "(?d)**/.trashed*"
+              ];
+
+              versioning = {
+                type = "staggered";
+
+                params = {
+                  cleanInterval = "3600";
+                  maxAge = "604800"; # 7 days
+                };
+              };
+            };
+
+            Projects = {
+              id = "projects";
+              path = "~/Projects";
+              devices = ["glacier"];
+              fsWatcherDelayS = 30;
+              ignorePerms = true;
+
+              ignorePatterns = [
+                "*.swp"
+                "*.swo"
+                "*~"
+                ".#*"
+                "#*#"
+                "(?d).direnv"
+                "(?d).devenv"
+                "(?d)node_modules"
+                "(?d).next"
+                "(?d).nuxt"
+                "(?d).svelte-kit"
+                "(?d).astro"
+                "(?d).turbo"
+                "(?d).parcel-cache"
+                "(?d).vite"
+                "(?d).eslintcache"
+                "(?d).stylelintcache"
+                "(?d)*.tsbuildinfo"
+                "npm-debug.log*"
+                "yarn-debug.log*"
+                "yarn-error.log*"
+                ".pnpm-debug.log*"
+                "(?d).venv"
+                "(?d)venv"
+                "(?d)__pycache__"
+                "(?d)*.py[cod]"
+                "(?d)*.egg-info"
+                "(?d).pytest_cache"
+                "(?d).mypy_cache"
+                "(?d).ruff_cache"
+                "(?d).tox"
+                "(?d).nox"
+                "(?d).ipynb_checkpoints"
+                "(?d)htmlcov"
+                "(?d).coverage"
+                "(?d).clangd"
+                "(?d).ccls-cache"
+                "(?d)CMakeFiles"
+                "(?d)CMakeCache.txt"
+                "(?d)*.o"
+                "(?d)*.obj"
+                "(?d).gradle"
+                "(?d).mvn"
+              ];
+
+              versioning = {
+                type = "staggered";
+
+                params = {
+                  cleanInterval = "3600";
+                  maxAge = "604800"; # 7 days
+                };
+              };
+            };
+
+            Recordings = {
+              id = "recordings";
+              path = "~/Recordings";
+              devices = ["glacier"];
+              ignorePerms = true;
+
+              ignorePatterns = [
+                "(?d)**/.thumbnails"
+                "(?d)**/.trashed*"
+              ];
+
+              versioning = {
+                type = "staggered";
+
+                params = {
+                  cleanInterval = "3600";
+                  maxAge = "604800"; # 7 days
+                };
+              };
+            };
+
+            Videos = {
+              id = "videos";
+              path = "~/Videos";
+              devices = ["glacier"];
+              ignorePerms = true;
+
+              ignorePatterns = [
+                "(?d)**/.thumbnails"
+                "(?d)**/.trashed*"
+              ];
+
+              versioning = {
+                type = "staggered";
+
+                params = {
+                  cleanInterval = "3600";
+                  maxAge = "604800"; # 7 days
+                };
+              };
+            };
           };
         };
       };

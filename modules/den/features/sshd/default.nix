@@ -19,6 +19,7 @@ in {
       services.openssh.settings = {
         PermitRootLogin = "prohibit-password";
         PasswordAuthentication = false;
+        KbdInteractiveAuthentication = false;
       };
     };
 

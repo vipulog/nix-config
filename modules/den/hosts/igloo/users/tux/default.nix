@@ -14,7 +14,6 @@
       den.aspects.redirector
       den.aspects.kdeconnect
       den.aspects.lutris
-      den.aspects."tux@igloo".restic
       den.aspects."tux@igloo".syncthing
     ];
 

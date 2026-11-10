@@ -165,7 +165,7 @@
             "Music".enable = true;
             "Pictures".enable = true;
             "Videos".enable = true;
-            "Dev".enable = true;
+            "Projects".enable = true;
 
             ".local/share/keyrings" = {
               enable = true;

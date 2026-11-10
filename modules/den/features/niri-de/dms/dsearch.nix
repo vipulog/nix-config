@@ -31,7 +31,7 @@
               exclude_dirs = ["node_modules" "venv" "target"];
             }
             {
-              path = "~/Dev";
+              path = "~/Projects";
               max_depth = 6;
               exclude_hidden = true;
               exclude_dirs = ["node_modules" ".git" "target" "dist"];
