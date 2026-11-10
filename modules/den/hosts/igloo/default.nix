@@ -8,6 +8,7 @@
       den.aspects.ephemeral-host
       den.aspects.sops-nix
       den.aspects.sudo
+      den.aspects.bootvine
       den.aspects.tailscale
       den.aspects.podman
       den.aspects.neovim
