@@ -9,14 +9,6 @@
         protonPackages = [pkgs.proton-ge-bin];
         winePackages = [pkgs.wineWow64Packages.stable];
         defaultWinePackage = pkgs.proton-ge-bin;
-
-        extraPackages = with pkgs; [
-          winetricks
-          umu-launcher
-          gamescope
-          gamemode
-          mangohud
-        ];
       };
     };
 
@@ -24,6 +16,7 @@
       directories = [
         ".config/lutris"
         ".local/share/lutris"
+        ".cache/lutris"
       ];
     };
   };
