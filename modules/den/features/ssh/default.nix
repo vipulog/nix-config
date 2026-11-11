@@ -6,6 +6,11 @@ in {
       services.openssh = {
         enable = true;
 
+        settings = {
+          PermitRootLogin = "prohibit-password";
+          PasswordAuthentication = false;
+        };
+
         hostKeys = [
           {
             path = mkHostIdFilePath {inherit host;};
