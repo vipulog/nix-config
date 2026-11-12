@@ -12,9 +12,9 @@
       den.aspects.btop
       den.aspects.nix-index
       den.aspects.zellij
-      den.aspects.tux.git
+      den.aspects.git
       den.aspects.delta
-      den.aspects.tux.jujutsu
+      den.aspects.jujutsu
       den.aspects.lazygit
       den.aspects.neovim
       den.aspects.direnv
@@ -26,6 +26,11 @@
 
     homeManager = {
       home.file.".face".source = ./res/avatar.png;
+
+      programs.git.settings.user = {
+        name = "vipulog";
+        email = "90324465+vipulog@users.noreply.github.com";
+      };
     };
   };
 }
