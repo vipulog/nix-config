@@ -61,15 +61,21 @@
         imports = [inputs.preservation.nixosModules.default];
 
         options.ephemeral-host = {
-          enable = lib.mkEnableOption "ephemeral host";
+          enable = lib.mkOption {
+            type = lib.types.bool;
+            default = true;
+            description = "Whether to enable ephemeral host.";
+          };
 
-          nixMountpoint = lib.mkOption {
+          nixMp = lib.mkOption {
             type = lib.types.str;
+            default = "/nix";
             description = "Mountpoint for the nix store.";
           };
 
-          persistentMountpoint = lib.mkOption {
+          persistMp = lib.mkOption {
             type = lib.types.str;
+            default = "/persistent";
             description = "Mountpoint for the persistent data.";
           };
 
@@ -88,14 +94,14 @@
 
         config = lib.mkIf cfg.enable {
           fileSystems = {
-            "${cfg.nixMountpoint}".neededForBoot = true;
-            "${cfg.persistentMountpoint}".neededForBoot = true;
+            "${cfg.nixMp}".neededForBoot = true;
+            "${cfg.persistMp}".neededForBoot = true;
           };
 
           preservation = {
             enable = true;
 
-            preserveAt.${cfg.persistentMountpoint} = {
+            preserveAt.${cfg.persistMp} = {
               files = persistToPreservation cfg.persist-host.files;
               directories = persistToPreservation cfg.persist-host.directories;
 
@@ -112,7 +118,7 @@
 
       persist-defaults = {
         nixos = {config, ...}: let
-          inherit (config.ephemeral-host) persistentMountpoint;
+          inherit (config.ephemeral-host) persistMp;
         in {
           boot.initrd.systemd.tmpfiles.settings.preservation."/sysroot/state/etc/machine-id".f = {
             argument = "uninitialized";
@@ -121,12 +127,12 @@
           systemd.services.systemd-machine-id-commit = {
             unitConfig.ConditionPathIsMountPoint = [
               ""
-              "${persistentMountpoint}/etc/machine-id"
+              "${persistMp}/etc/machine-id"
             ];
 
             serviceConfig.ExecStart = [
               ""
-              "systemd-machine-id-setup --commit --root ${persistentMountpoint}"
+              "systemd-machine-id-setup --commit --root ${persistMp}"
             ];
           };
         };

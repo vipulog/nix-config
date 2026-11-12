@@ -1,13 +1,9 @@
 {
   den.aspects.igloo.snapper = {
-    nixos = {config, ...}: let
-      mainDiskCfg = config.disko.devices.disk.main;
-      subVols = mainDiskCfg.content.partitions.root.content.subvolumes;
-      persistentMountpoint = subVols.persistent.mountpoint;
-    in {
+    nixos = {config, ...}: {
       services.snapper = {
         configs.persistent = {
-          SUBVOLUME = persistentMountpoint;
+          SUBVOLUME = config.ephemeral-host.persistMp;
           ALLOW_USERS = ["tux"];
           SYNC_ACL = true;
           TIMELINE_CREATE = true;

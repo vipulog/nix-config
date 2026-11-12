@@ -6,10 +6,10 @@
   den.aspects.igloo = {
     includes = [
       den.aspects.igloo.hardware
-      den.aspects.igloo.disko
       den.aspects.igloo.snapper
       den.aspects.igloo.niri-de
       den.aspects.ephemeral-host
+      den.aspects.disko.btrfs-impermanence
       den.aspects.sops-nix
       den.aspects.sudo
       den.aspects.bootvine
@@ -22,7 +22,7 @@
       den.aspects.lutris
     ];
 
-    nixos = {config, ...}: {
+    nixos = {
       boot.loader = {
         efi.canTouchEfiVariables = true;
 
@@ -35,20 +35,17 @@
       hardware.bluetooth.enable = true;
       networking.networkmanager.enable = true;
 
-      ephemeral-host = let
-        mainDiskCfg = config.disko.devices.disk.main;
-        subVols = mainDiskCfg.content.partitions.root.content.subvolumes;
-      in {
-        enable = true;
-        nixMountpoint = subVols.nix.mountpoint;
-        persistentMountpoint = subVols.persistent.mountpoint;
-      };
-
       zramSwap = {
         enable = true;
         algorithm = "zstd";
         memoryPercent = 50;
         priority = 100;
+      };
+
+      disko.btrfs-impermanence = {
+        device = "/dev/nvme0n1";
+        swap.enable = true;
+        snapshots = true;
       };
 
       sops.secrets.tux-password.neededForUsers = true;

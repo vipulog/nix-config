@@ -35,7 +35,7 @@
       isEphemeralHost = config.ephemeral-host.enable or false;
 
       hostIdFilePath = joinPath [
-        (lib.optionalString isEphemeralHost config.ephemeral-host.persistentMountpoint)
+        (lib.optionalString isEphemeralHost config.ephemeral-host.persistMp)
         (mkHostIdFilePath {hostname = host.name;})
       ];
     in {
