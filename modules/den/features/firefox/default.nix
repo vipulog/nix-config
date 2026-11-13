@@ -48,10 +48,10 @@
     };
 
     persist-user = {
-      directories = [
-        ".config/mozilla"
-        ".cache/mozilla"
-      ];
+      directories = {
+        ".config/mozilla".enable = true;
+        ".cache/mozilla".enable = true;
+      };
     };
   };
 }

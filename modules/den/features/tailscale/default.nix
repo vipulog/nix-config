@@ -43,9 +43,9 @@
     };
 
     persist-host = {
-      directories = [
-        "/var/lib/tailscale"
-      ];
+      directories = {
+        "/var/lib/tailscale".enable = true;
+      };
     };
   };
 }

@@ -85,11 +85,11 @@
     };
 
     persist-user = {
-      directories = [
-        ".config/zed"
-        ".local/share/zed"
-        ".cache/zed"
-      ];
+      directories = {
+        ".config/zed".enable = true;
+        ".local/share/zed".enable = true;
+        ".cache/zed".enable = true;
+      };
     };
   };
 }

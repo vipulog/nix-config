@@ -53,10 +53,10 @@
     };
 
     persist-user = {
-      directories = [
-        "DCIM"
-        "Recordings"
-      ];
+      directories = {
+        "DCIM".enable = true;
+        "Recordings".enable = true;
+      };
     };
   };
 }

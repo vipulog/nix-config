@@ -7,9 +7,9 @@
     };
 
     persist-user = {
-      directories = [
-        ".cache/bat"
-      ];
+      directories = {
+        ".cache/bat".enable = true;
+      };
     };
   };
 }

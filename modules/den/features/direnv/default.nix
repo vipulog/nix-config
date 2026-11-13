@@ -8,9 +8,9 @@
     };
 
     persist-user = {
-      directories = [
-        ".local/share/direnv"
-      ];
+      directories = {
+        ".local/share/direnv".enable = true;
+      };
     };
   };
 }

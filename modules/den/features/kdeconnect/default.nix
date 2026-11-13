@@ -9,9 +9,9 @@
     };
 
     persist-user = {
-      directories = [
-        ".config/kdeconnect"
-      ];
+      directories = {
+        ".config/kdeconnect".enable = true;
+      };
     };
   };
 }

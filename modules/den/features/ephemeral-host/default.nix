@@ -1,32 +1,171 @@
-{den, ...}: {
-  den.aspects.ephemeral-host = {
-    includes = [den.aspects.ephemeral-host.preservation];
+{
+  den,
+  lib,
+  inputs,
+  self,
+  ...
+}: {
+  flake-file.inputs = {
+    preservation.url = "github:nix-community/preservation";
+  };
 
-    nixos = {
-      lib,
-      config,
-      ...
-    }: let
-      cfg = config.ephemeral-host;
+  den = {
+    classes = {
+      persist-host.description = "Host-level persist module.";
+      persist-user.description = "User-level persist module.";
+    };
+
+    policies = let
+      inherit (den.lib) policy;
     in {
-      options.ephemeral-host = {
-        enable = lib.mkEnableOption "ephemeral host";
+      persist-host = {host, ...}:
+        lib.optional (host ? class) (
+          policy.route {
+            fromClass = "persist-host";
+            intoClass = host.class;
+            path = ["ephemeral-host" "persist-host"];
+            guard = {options, ...}: options ? ephemeral-host;
+          }
+        );
 
-        nixMountpoint = lib.mkOption {
-          type = lib.types.str;
-          description = "Mountpoint for the nix store.";
+      persist-user = {
+        host,
+        user,
+        home ? null,
+        ...
+      }:
+        lib.optional (host ? class && home == null) (
+          policy.route {
+            fromClass = "persist-user";
+            intoClass = host.class;
+            path = ["ephemeral-host" "persist-users" user.name];
+            receiver = host;
+            guard = {options, ...}: options ? ephemeral-host;
+          }
+        );
+    };
+
+    aspects.ephemeral-host = {
+      includes = [den.aspects.ephemeral-host.persist-defaults];
+
+      nixos = {
+        lib,
+        options,
+        config,
+        ...
+      }: let
+        cfg = config.ephemeral-host;
+        inherit (self.lib.den.ephemeral-host) mkPersistSubmodule persistToPreservation;
+        persistSubmodule = mkPersistSubmodule {inherit options;};
+      in {
+        imports = [inputs.preservation.nixosModules.default];
+
+        options.ephemeral-host = {
+          enable = lib.mkEnableOption "ephemeral host";
+
+          nixMountpoint = lib.mkOption {
+            type = lib.types.str;
+            description = "Mountpoint for the nix store.";
+          };
+
+          persistentMountpoint = lib.mkOption {
+            type = lib.types.str;
+            description = "Mountpoint for the persistent data.";
+          };
+
+          persist-host = lib.mkOption {
+            type = persistSubmodule;
+            default = {};
+            description = "Host-level persist definitions.";
+          };
+
+          persist-users = lib.mkOption {
+            type = lib.types.attrsOf persistSubmodule;
+            default = {};
+            description = "User-level persist definitions.";
+          };
         };
 
-        persistentMountpoint = lib.mkOption {
-          type = lib.types.str;
-          description = "Mountpoint for the persistent data.";
+        config = lib.mkIf cfg.enable {
+          fileSystems = {
+            "${cfg.nixMountpoint}".neededForBoot = true;
+            "${cfg.persistentMountpoint}".neededForBoot = true;
+          };
+
+          preservation = {
+            enable = true;
+
+            preserveAt.${cfg.persistentMountpoint} = {
+              files = persistToPreservation cfg.persist-host.files;
+              directories = persistToPreservation cfg.persist-host.directories;
+
+              users =
+                lib.mapAttrs (_username: userPersist: {
+                  files = persistToPreservation userPersist.files;
+                  directories = persistToPreservation userPersist.directories;
+                })
+                cfg.persist-users;
+            };
+          };
         };
       };
 
-      config = lib.mkIf cfg.enable {
-        fileSystems = {
-          "${cfg.nixMountpoint}".neededForBoot = true;
-          "${cfg.persistentMountpoint}".neededForBoot = true;
+      persist-defaults = {
+        nixos = {config, ...}: let
+          inherit (config.ephemeral-host) persistentMountpoint;
+        in {
+          boot.initrd.systemd.tmpfiles.settings.preservation."/sysroot/state/etc/machine-id".f = {
+            argument = "uninitialized";
+          };
+
+          systemd.services.systemd-machine-id-commit = {
+            unitConfig.ConditionPathIsMountPoint = [
+              ""
+              "${persistentMountpoint}/etc/machine-id"
+            ];
+
+            serviceConfig.ExecStart = [
+              ""
+              "systemd-machine-id-setup --commit --root ${persistentMountpoint}"
+            ];
+          };
+        };
+
+        persist-host = {
+          directories = {
+            "/var/lib/nixos" = {
+              enable = true;
+              inInitrd = true;
+            };
+          };
+
+          files = {
+            "/etc/machine-id" = {
+              enable = true;
+              inInitrd = true;
+              how = "symlink";
+              configureParent = true;
+            };
+          };
+        };
+
+        persist-user = {
+          files = {
+            ".config/mimeapps.list".enable = true;
+          };
+
+          directories = {
+            "Documents".enable = true;
+            "Music".enable = true;
+            "Pictures".enable = true;
+            "Videos".enable = true;
+            "Dev".enable = true;
+
+            ".local/share/keyrings" = {
+              enable = true;
+              mode = "0700";
+            };
+          };
         };
       };
     };

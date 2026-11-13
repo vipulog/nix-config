@@ -16,9 +16,9 @@
     };
 
     persist-user = {
-      directories = [
-        ".local/share/opencode"
-      ];
+      directories = {
+        ".local/share/opencode".enable = true;
+      };
     };
   };
 }

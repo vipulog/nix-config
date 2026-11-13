@@ -9,9 +9,9 @@
     };
 
     persist-user = {
-      directories = [
-        ".local/state/home-manager"
-      ];
+      directories = {
+        ".local/state/home-manager".enable = true;
+      };
     };
   };
 }

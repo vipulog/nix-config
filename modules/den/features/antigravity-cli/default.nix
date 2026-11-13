@@ -18,9 +18,9 @@
     };
 
     persist-user = {
-      directories = [
-        ".gemini"
-      ];
+      directories = {
+        ".gemini".enable = true;
+      };
     };
   };
 }

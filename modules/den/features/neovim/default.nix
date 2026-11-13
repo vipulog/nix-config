@@ -28,10 +28,10 @@
     };
 
     persist-user = {
-      directories = [
-        ".local/share/nvf"
-        ".local/state/nvf"
-      ];
+      directories = {
+        ".local/share/nvf".enable = true;
+        ".local/state/nvf".enable = true;
+      };
     };
   };
 }

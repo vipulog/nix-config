@@ -38,9 +38,9 @@
     };
 
     persist-user = {
-      directories = [
-        ".cache/dsearch"
-      ];
+      directories = {
+        ".cache/dsearch".enable = true;
+      };
     };
   };
 }

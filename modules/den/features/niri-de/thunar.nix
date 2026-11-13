@@ -13,10 +13,10 @@
     };
 
     persist-user = {
-      directories = [
-        ".config/Thunar"
-        ".config/xfce4"
-      ];
+      directories = {
+        ".config/Thunar".enable = true;
+        ".config/xfce4".enable = true;
+      };
     };
   };
 }

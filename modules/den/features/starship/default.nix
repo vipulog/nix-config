@@ -81,9 +81,9 @@
     };
 
     persist-user = {
-      directories = [
-        ".cache/starship"
-      ];
+      directories = {
+        ".cache/starship".enable = true;
+      };
     };
   };
 }

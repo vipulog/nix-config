@@ -5,9 +5,9 @@
     };
 
     persist-host = {
-      directories = [
-        "/var/db/sudo"
-      ];
+      directories = {
+        "/var/db/sudo".enable = true;
+      };
     };
   };
 }

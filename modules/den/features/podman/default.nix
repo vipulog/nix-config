@@ -17,9 +17,9 @@
     };
 
     persist-user = {
-      directories = [
-        ".local/share/containers"
-      ];
+      directories = {
+        ".local/share/containers".enable = true;
+      };
     };
   };
 }

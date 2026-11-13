@@ -15,16 +15,16 @@
     };
 
     persist-host = {
-      directories = [
-        "/var/lib/waydroid"
-        "/etc/waydroid-extra"
-      ];
+      directories = {
+        "/var/lib/waydroid".enable = true;
+        "/etc/waydroid-extra".enable = true;
+      };
     };
 
     persist-user = {
-      directories = [
-        ".local/share/waydroid"
-      ];
+      directories = {
+        ".local/share/waydroid".enable = true;
+      };
     };
   };
 }

@@ -13,11 +13,11 @@
     };
 
     persist-user = {
-      directories = [
-        ".config/lutris"
-        ".local/share/lutris"
-        ".cache/lutris"
-      ];
+      directories = {
+        ".config/lutris".enable = true;
+        ".local/share/lutris".enable = true;
+        ".cache/lutris".enable = true;
+      };
     };
   };
 }

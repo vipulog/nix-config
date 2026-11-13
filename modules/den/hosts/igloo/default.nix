@@ -54,10 +54,10 @@
     };
 
     persist-host = {
-      directories = [
-        "/var/lib/bluetooth"
-        "/etc/NetworkManager/system-connections"
-      ];
+      directories = {
+        "/var/lib/bluetooth".enable = true;
+        "/etc/NetworkManager/system-connections".enable = true;
+      };
     };
   };
 }

@@ -85,9 +85,9 @@
     };
 
     persist-user = {
-      directories = [
-        ".cache/restic-backups-b2"
-      ];
+      directories = {
+        ".cache/restic-backups-b2".enable = true;
+      };
     };
   };
 }

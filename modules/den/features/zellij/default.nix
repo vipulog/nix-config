@@ -60,10 +60,10 @@
     };
 
     persist-user = {
-      directories = [
-        ".config/zellij"
-        ".cache/zellij"
-      ];
+      directories = {
+        ".config/zellij".enable = true;
+        ".cache/zellij".enable = true;
+      };
     };
   };
 }

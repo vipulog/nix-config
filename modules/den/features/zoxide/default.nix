@@ -8,9 +8,9 @@
     };
 
     persist-user = {
-      directories = [
-        ".local/share/zoxide"
-      ];
+      directories = {
+        ".local/share/zoxide".enable = true;
+      };
     };
   };
 }

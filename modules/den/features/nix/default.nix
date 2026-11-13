@@ -124,10 +124,10 @@
     };
 
     persist-user = {
-      directories = [
-        ".local/state/nix"
-        ".cache/nix"
-      ];
+      directories = {
+        ".local/state/nix".enable = true;
+        ".cache/nix".enable = true;
+      };
     };
   };
 }

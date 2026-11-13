@@ -18,9 +18,9 @@
     };
 
     persist-user = {
-      directories = [
-        ".local/state/lazygit"
-      ];
+      directories = {
+        ".local/state/lazygit".enable = true;
+      };
     };
   };
 }

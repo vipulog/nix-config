@@ -39,14 +39,14 @@ in {
     };
 
     persist-host = {host, ...}: {
-      files = [
-        {
-          file = mkHostIdFilePath {inherit host;};
+      files = {
+        "${mkHostIdFilePath {inherit host;}}" = {
+          enable = true;
           how = "symlink";
           configureParent = true;
           mode = "0600";
-        }
-      ];
+        };
+      };
     };
 
     persist-user = {
@@ -54,19 +54,19 @@ in {
       host ? null,
       ...
     }: {
-      directories = [
-        {
-          directory = ".ssh";
+      directories = {
+        ".ssh" = {
+          enable = true;
           mode = "0700";
-        }
-      ];
+        };
+      };
 
-      files = [
-        {
-          file = mkUserIdFilePath {inherit host user;};
+      files = {
+        "${mkUserIdFilePath {inherit host user;}}" = {
+          enable = true;
           mode = "0600";
-        }
-      ];
+        };
+      };
     };
   };
 }

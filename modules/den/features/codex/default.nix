@@ -15,9 +15,9 @@
     };
 
     persist-user = {
-      directories = [
-        ".codex"
-      ];
+      directories = {
+        ".codex".enable = true;
+      };
     };
   };
 }

@@ -69,11 +69,11 @@
     };
 
     persist-user = {
-      directories = [
-        ".config/dms"
-        ".local/state/dms"
-        ".cache/dms"
-      ];
+      directories = {
+        ".config/dms".enable = true;
+        ".local/state/dms".enable = true;
+        ".cache/dms".enable = true;
+      };
     };
   };
 }

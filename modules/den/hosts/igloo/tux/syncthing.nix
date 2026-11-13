@@ -62,9 +62,9 @@
     };
 
     persist-user = {
-      directories = [
-        ".config/syncthing"
-      ];
+      directories = {
+        ".config/syncthing".enable = true;
+      };
     };
   };
 }

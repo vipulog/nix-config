@@ -24,17 +24,17 @@
     };
 
     persist-user = {
-      files = [
-        {
+      files = {
+        ".zsh_history" = {
+          enable = true;
           how = "symlink";
-          file = ".zsh_history";
           mode = "0600";
-        }
-      ];
+        };
+      };
 
-      directories = [
-        ".cache/fastfetch"
-      ];
+      directories = {
+        ".cache/fastfetch".enable = true;
+      };
     };
   };
 }

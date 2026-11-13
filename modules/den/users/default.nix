@@ -1,6 +1,10 @@
-{lib, ...}: {
+{
+  den,
+  lib,
+  ...
+}: {
   den.schema.user = {
-    includes = [];
+    includes = [den.policies.persist-user];
     classes = lib.mkDefault ["homeManager"];
   };
 }

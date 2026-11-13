@@ -53,22 +53,22 @@
     };
 
     persist-user = {
-      directories = [
-        "Games"
+      directories = {
+        "Games".enable = true;
 
-        ".wine"
-        ".local/share/umu"
-        ".local/share/Steam/compatibilitytools.d"
-        ".config/pupgui"
-        ".config/MangoHud"
+        ".wine".enable = true;
+        ".local/share/umu".enable = true;
+        ".local/share/Steam/compatibilitytools.d".enable = true;
+        ".config/pupgui".enable = true;
+        ".config/MangoHud".enable = true;
 
-        ".cache/umu"
-        ".cache/wine"
-        ".cache/winetricks"
-        ".cache/protontricks"
-        ".cache/mesa_shader_cache"
-        ".cache/mesa_shader_cache_db"
-      ];
+        ".cache/umu".enable = true;
+        ".cache/wine".enable = true;
+        ".cache/winetricks".enable = true;
+        ".cache/protontricks".enable = true;
+        ".cache/mesa_shader_cache".enable = true;
+        ".cache/mesa_shader_cache_db".enable = true;
+      };
     };
   };
 }

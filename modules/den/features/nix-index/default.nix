@@ -17,9 +17,9 @@
     };
 
     persist-user = {
-      directories = [
-        ".cache/nix-index"
-      ];
+      directories = {
+        ".cache/nix-index".enable = true;
+      };
     };
   };
 }

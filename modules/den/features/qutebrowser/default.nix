@@ -7,10 +7,10 @@
     };
 
     persist-user = {
-      directories = [
-        ".local/share/qutebrowser"
-        ".cache/qutebrowser"
-      ];
+      directories = {
+        ".local/share/qutebrowser".enable = true;
+        ".cache/qutebrowser".enable = true;
+      };
     };
   };
 }

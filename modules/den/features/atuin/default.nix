@@ -37,10 +37,10 @@
     };
 
     persist-user = {
-      directories = [
-        ".local/share/atuin"
-        ".atuin"
-      ];
+      directories = {
+        ".local/share/atuin".enable = true;
+        ".atuin".enable = true;
+      };
     };
   };
 }
