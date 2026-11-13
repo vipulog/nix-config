@@ -1,8 +1,4 @@
-{
-  den,
-  self,
-  ...
-}: {
+{den, ...}: {
   den.aspects.tailscale = {
     includes = [den.aspects.tailscale.secrets];
 
@@ -24,16 +20,14 @@
       };
     };
 
-    secrets = let
-      inherit (self.lib.den.sops-nix) hostHasSops;
-    in {
+    secrets = {
       nixos = {
         lib,
         host,
         config,
         ...
       }:
-        lib.mkIf (hostHasSops {inherit host;}) {
+        lib.mkIf (host.hasAspect den.aspects.sops-nix) {
           sops.secrets.tailscale-auth-key = {};
 
           services.tailscale = {

@@ -28,7 +28,7 @@
       imports = [inputs.sops-nix.nixosModules.sops];
 
       sops = {
-        defaultSopsFile = mkHostSecretsFilePath {inherit host;};
+        defaultSopsFile = mkHostSecretsFilePath {hostname = host.name;};
         age.sshKeyPaths = [hostIdFilePath];
       };
     };
@@ -39,7 +39,7 @@
       imports = [inputs.sops-nix.darwinModules.sops];
 
       sops = {
-        defaultSopsFile = mkHostSecretsFilePath {inherit host;};
+        defaultSopsFile = mkHostSecretsFilePath {hostname = host.name;};
         age.sshKeyPaths = [hostIdFilePath];
       };
     };

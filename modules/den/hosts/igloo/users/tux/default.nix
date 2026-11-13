@@ -1,8 +1,4 @@
-{
-  den,
-  self,
-  ...
-}: {
+{den, ...}: {
   den.aspects.igloo.provides.tux = {
     includes = [
       den.aspects.sops-nix
@@ -27,15 +23,13 @@
       home.stateVersion = "26.05";
     };
 
-    secrets = let
-      inherit (self.lib.den.sops-nix) hostHasSops;
-    in {
+    secrets = {
       nixos = {
         lib,
         host,
         ...
       }:
-        lib.mkIf (hostHasSops {inherit host;}) {
+        lib.mkIf (host.hasAspect den.aspects.sops-nix) {
           sops.secrets.tux-password = {
             neededForUsers = true;
           };
@@ -47,7 +41,7 @@
         config,
         ...
       }:
-        lib.mkIf (hostHasSops {inherit host;}) {
+        lib.mkIf (host.hasAspect den.aspects.sops-nix) {
           hashedPasswordFile = config.sops.secrets.tux-password.path;
         };
     };

@@ -25,7 +25,11 @@
       imports = [inputs.sops-nix.homeManagerModules.sops];
 
       sops = {
-        defaultSopsFile = mkUserSecretsFilePath {inherit host user;};
+        defaultSopsFile = mkUserSecretsFilePath {
+          username = user.name;
+          hostname = host.name or null;
+        };
+
         age.sshKeyPaths = [userIdFilePath];
       };
     };

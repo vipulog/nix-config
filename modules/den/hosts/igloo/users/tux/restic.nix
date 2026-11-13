@@ -1,8 +1,4 @@
-{
-  den,
-  self,
-  ...
-}: {
+{den, ...}: {
   den.aspects.igloo.provides.tux.restic = {
     includes = [den.aspects.igloo.provides.tux.restic.secrets];
 
@@ -52,16 +48,14 @@
       };
     };
 
-    secrets = let
-      inherit (self.lib.den.sops-nix) userHasSops;
-    in {
+    secrets = {
       homeManager = {
         lib,
         user,
         config,
         ...
       }:
-        lib.mkIf (userHasSops {inherit user;}) {
+        lib.mkIf (user.hasAspect den.aspects.sops-nix) {
           sops = {
             secrets = {
               b2-app-key-id = {};

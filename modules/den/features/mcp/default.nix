@@ -27,7 +27,7 @@
     };
 
     secrets = let
-      inherit (self.lib.den.sops-nix) sharedSecretsFilePath userHasSops;
+      inherit (self.lib.den.sops-nix) sharedSecretsFilePath;
     in {
       homeManager = {
         lib,
@@ -35,7 +35,7 @@
         config,
         ...
       }:
-        lib.mkIf (userHasSops {inherit user;}) {
+        lib.mkIf (user.hasAspect den.aspects.sops-nix) {
           sops = {
             secrets.github-mcp-pat = {
               sopsFile = sharedSecretsFilePath;
