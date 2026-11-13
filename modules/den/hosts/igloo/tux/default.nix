@@ -10,7 +10,6 @@
       den.aspects.podman
       den.aspects.distrobox
       den.aspects.waydroid
-      den.aspects.niri-de
       den.aspects.kdeconnect
       den.aspects.lutris
       den.aspects.igloo.provides.tux.secrets
