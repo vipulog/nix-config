@@ -13,7 +13,7 @@ in {
 
         hostKeys = [
           {
-            path = mkHostIdFilePath {inherit host;};
+            path = mkHostIdFilePath {hostname = host.name;};
             type = "ed25519";
           }
         ];
@@ -30,7 +30,13 @@ in {
         enableDefaultConfig = false;
 
         settings."*" = {
-          IdentityFile = "~/${mkUserIdFilePath {inherit host user;}}";
+          IdentityFile = "~/${
+            mkUserIdFilePath {
+              username = user.name;
+              hostname = host.name or null;
+            }
+          }";
+
           IdentitiesOnly = "yes";
           AddKeysToAgent = "yes";
           ForwardAgent = "yes";
@@ -40,7 +46,7 @@ in {
 
     persist-host = {host, ...}: {
       files = {
-        "${mkHostIdFilePath {inherit host;}}" = {
+        "${mkHostIdFilePath {hostname = host.name;}}" = {
           enable = true;
           how = "symlink";
           configureParent = true;
@@ -62,7 +68,10 @@ in {
       };
 
       files = {
-        "${mkUserIdFilePath {inherit host user;}}" = {
+        "${mkUserIdFilePath {
+          username = user.name;
+          hostname = host.name or null;
+        }}" = {
           enable = true;
           mode = "0600";
         };

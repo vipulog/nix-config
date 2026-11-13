@@ -14,7 +14,12 @@
       ...
     }: let
       homeDir = config.home.homeDirectory;
-      userIdFilePathRel = mkUserIdFilePath {inherit host user;};
+
+      userIdFilePathRel = mkUserIdFilePath {
+        username = user.name;
+        hostname = host.name or null;
+      };
+
       userIdFilePath = "${homeDir}/${userIdFilePathRel}";
     in {
       imports = [inputs.sops-nix.homeManagerModules.sops];

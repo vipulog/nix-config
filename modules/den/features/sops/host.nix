@@ -22,8 +22,8 @@
 
       hostIdFilePath =
         if isEphemeral
-        then joinPath [persistMp (mkHostIdFilePath {inherit host;})]
-        else (mkHostIdFilePath {inherit host;});
+        then joinPath [persistMp (mkHostIdFilePath {hostname = host.name;})]
+        else (mkHostIdFilePath {hostname = host.name;});
     in {
       imports = [inputs.sops-nix.nixosModules.sops];
 
@@ -34,7 +34,7 @@
     };
 
     darwin = {host, ...}: let
-      hostIdFilePath = mkHostIdFilePath {inherit host;};
+      hostIdFilePath = mkHostIdFilePath {hostname = host.name;};
     in {
       imports = [inputs.sops-nix.darwinModules.sops];
 
