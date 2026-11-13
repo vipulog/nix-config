@@ -46,7 +46,7 @@
     ];
 
     homeManager = {
-      home.file.".face".source = ./avatar.png;
+      home.file.".face".source = ./res/avatar.png;
     };
   };
 }
