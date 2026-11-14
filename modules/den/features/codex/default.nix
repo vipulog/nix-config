@@ -6,6 +6,10 @@
   den.aspects.codex = {
     includes = [den.aspects.mcp];
 
+    os = {pkgs, ...}: {
+      environment.systemPackages = [pkgs.codex];
+    };
+
     homeManager = {
       programs.codex = {
         enable = true;

@@ -1,9 +1,21 @@
 {
-  den.aspects.firefox = {
-    homeManager = {pkgs, ...}: {
-      programs.firefox = {
-        enable = true;
+  den.aspects.firefox = let
+    sharedModule = {
+      programs.firefox.enable = true;
+    };
+  in {
+    nixos = {
+      imports = [sharedModule];
+    };
 
+    darwin = {pkgs, ...}: {
+      environment.systemPackages = [pkgs.firefox];
+    };
+
+    homeManager = {pkgs, ...}: {
+      imports = [sharedModule];
+
+      programs.firefox = {
         profiles.default = {
           isDefault = true;
 

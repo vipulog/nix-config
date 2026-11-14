@@ -2,6 +2,10 @@
   den.aspects.zed-editor = {
     includes = [den.aspects.mcp];
 
+    os = {pkgs, ...}: {
+      environment.systemPackages = [pkgs.zed-editor];
+    };
+
     homeManager = {pkgs, ...}: {
       programs.zed-editor = {
         enable = true;

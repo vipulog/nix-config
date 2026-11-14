@@ -9,6 +9,10 @@
       den.aspects.mcp
     ];
 
+    os = {pkgs, ...}: {
+      environment.systemPackages = [pkgs.antigravity-cli];
+    };
+
     homeManager = {
       programs.antigravity-cli = {
         enable = true;

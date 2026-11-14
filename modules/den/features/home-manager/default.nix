@@ -8,6 +8,10 @@
       };
     };
 
+    homeManager = {pkgs, ...}: {
+      home.packages = [pkgs.home-manager];
+    };
+
     persist-user = {
       directories = {
         ".local/state/home-manager".enable = true;

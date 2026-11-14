@@ -7,6 +7,10 @@
   };
 
   den.aspects.niri-de.dms.dsearch = {
+    nixos = {
+      programs.dux-search.enable = true;
+    };
+
     homeManager = {pkgs, ...}: {
       imports = [inputs.dsearch.homeModules.dsearch];
 

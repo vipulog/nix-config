@@ -14,6 +14,10 @@
       };
     };
 
+    homeManager = {pkgs, ...}: {
+      home.packages = [pkgs.waydroid-nftables];
+    };
+
     persist-host = {
       directories = {
         "/var/lib/waydroid".enable = true;

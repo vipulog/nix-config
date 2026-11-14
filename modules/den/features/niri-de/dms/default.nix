@@ -11,7 +11,7 @@
   };
 
   den.aspects.niri-de.dms = let
-    commonDmsConfig = {pkgs, ...}: {
+    sharedModule = {pkgs, ...}: {
       programs.dank-material-shell = {
         enable = true;
         package = pkgs.dux-shell;
@@ -31,7 +31,7 @@
       };
     };
 
-    mkCommonDmsPackages = pkgs: [
+    mkCommonPkgs = pkgs: [
       pkgs.dux-gop
       pkgs.qt6.qtimageformats
       pkgs.kdePackages.kimageformats
@@ -52,20 +52,20 @@
     nixos = {pkgs, ...}: {
       imports = [
         inputs.dms.nixosModules.dank-material-shell
-        commonDmsConfig
+        sharedModule
       ];
 
       services.upower.enable = true;
-      environment.systemPackages = mkCommonDmsPackages pkgs;
+      environment.systemPackages = mkCommonPkgs pkgs;
     };
 
     homeManager = {pkgs, ...}: {
       imports = [
         inputs.dms.homeModules.dank-material-shell
-        commonDmsConfig
+        sharedModule
       ];
 
-      home.packages = mkCommonDmsPackages pkgs;
+      home.packages = mkCommonPkgs pkgs;
     };
 
     persist-user = {

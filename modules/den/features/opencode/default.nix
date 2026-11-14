@@ -6,6 +6,10 @@
   den.aspects.opencode = {
     includes = [den.aspects.mcp];
 
+    os = {pkgs, ...}: {
+      environment.systemPackages = [pkgs.opencode];
+    };
+
     homeManager = {
       programs.opencode = {
         enable = true;

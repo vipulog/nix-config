@@ -12,6 +12,10 @@
       };
     };
 
+    homeManager = {pkgs, ...}: {
+      home.packages = [pkgs.thunar];
+    };
+
     persist-user = {
       directories = {
         ".config/Thunar".enable = true;

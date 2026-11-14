@@ -11,6 +11,18 @@
   };
 
   den.aspects.mcp = {
+    os = {
+      pkgs,
+      inputs',
+      ...
+    }: {
+      environment.systemPackages = [
+        pkgs.mcp-nixos
+        pkgs.github-mcp-server
+        inputs'.mcp-servers-nix.packages.chrome-devtools-mcp
+      ];
+    };
+
     homeManager = {
       lib,
       config,

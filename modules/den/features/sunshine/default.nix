@@ -21,6 +21,10 @@
       ];
     };
 
+    homeManager = {pkgs, ...}: {
+      home.packages = [pkgs.sunshine];
+    };
+
     persist-user = {
       directories = [
         ".config/sunshine"

@@ -17,6 +17,10 @@
       };
     };
 
+    homeManager = {pkgs, ...}: {
+      home.packages = [pkgs.steam];
+    };
+
     persist-user = {
       directories = [
         ".local/share/Steam"

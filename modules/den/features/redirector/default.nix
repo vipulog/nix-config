@@ -13,6 +13,10 @@
   };
 
   den.aspects.redirector = {
+    os = {inputs', ...}: {
+      environment.systemPackages = [inputs'.redirector.packages.default];
+    };
+
     homeManager = {
       imports = [inputs.redirector.homeModules.default];
 

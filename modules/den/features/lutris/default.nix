@@ -2,6 +2,12 @@
   den.aspects.lutris = {
     includes = [den.aspects.gaming];
 
+    os = {pkgs, ...}: {
+      environment.systemPackages = [
+        (pkgs.lutris.override {steamSupport = false;})
+      ];
+    };
+
     homeManager = {pkgs, ...}: {
       programs.lutris = {
         enable = true;

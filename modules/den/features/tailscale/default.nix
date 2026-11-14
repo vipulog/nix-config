@@ -1,6 +1,10 @@
 {
   den.aspects.tailscale = {
     os = {
+      services.tailscale.enable = true;
+    };
+
+    nixos = {
       lib,
       config,
       options,
@@ -9,7 +13,6 @@
       config = lib.mkMerge [
         {
           services.tailscale = {
-            enable = true;
             extraSetFlags = ["--ssh"];
           };
         }
@@ -24,15 +27,9 @@
       ];
     };
 
-    homeManager = {pkgs, ...}: let
-      package = pkgs.trayscale;
-    in {
-      home.packages = [package];
-
-      services.trayscale = {
-        enable = true;
-        inherit package;
-      };
+    homeManager = {pkgs, ...}: {
+      home.packages = [pkgs.tailscale];
+      services.trayscale.enable = true;
     };
 
     persist-host = {

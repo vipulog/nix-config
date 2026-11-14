@@ -1,6 +1,6 @@
 {
-  den.aspects.atuin = {
-    homeManager = {
+  den.aspects.atuin = let
+    sharedModule = {
       programs.atuin = {
         enable = true;
         daemon.enable = true;
@@ -34,6 +34,18 @@
           daemon.autostart = true;
         };
       };
+    };
+  in {
+    nixos = {
+      imports = [sharedModule];
+    };
+
+    darwin = {pkgs, ...}: {
+      environment.systemPackages = [pkgs.atuin];
+    };
+
+    homeManager = {
+      imports = [sharedModule];
     };
 
     persist-user = {

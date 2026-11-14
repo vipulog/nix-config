@@ -1,9 +1,19 @@
 {
-  den.aspects.bat = {
+  den.aspects.bat = let
+    sharedModule = {
+      programs.bat.enable = true;
+    };
+  in {
+    nixos = {
+      imports = [sharedModule];
+    };
+
+    darwin = {pkgs, ...}: {
+      environment.systemPackages = [pkgs.bat];
+    };
+
     homeManager = {
-      programs.bat = {
-        enable = true;
-      };
+      imports = [sharedModule];
     };
 
     persist-user = {

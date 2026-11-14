@@ -3,6 +3,12 @@
     configKdl = ''
     '';
 
+    nixos = {pkgs, ...}: {
+      environment.systemPackages = [
+        pkgs.bibata-cursors
+      ];
+    };
+
     homeManager = {pkgs, ...}: {
       home.pointerCursor = {
         enable = true;

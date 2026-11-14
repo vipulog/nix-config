@@ -29,6 +29,10 @@ in {
       '';
     };
 
+    homeManager = {pkgs, ...}: {
+      home.packages = [pkgs.openssh];
+    };
+
     persist-host = {host, ...}: {
       files = {
         "${mkHostIdFilePath {hostname = host.name;}}" = {

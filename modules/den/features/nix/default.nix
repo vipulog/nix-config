@@ -14,8 +14,10 @@
   };
 
   den.aspects.nix = let
-    shared = {
+    sharedModule = {
       nix = {
+        registry.my-templates.flake = inputs.my-templates;
+
         settings = {
           connect-timeout = 5;
           fallback = true;
@@ -36,12 +38,12 @@
             "nvf.cachix.org-1:GMQWiUhZ6ux9D5CvFFMwnc2nFrUHTeGaXRlVBXo+naI="
           ];
         };
-
-        registry.my-templates.flake = inputs.my-templates;
       };
     };
   in {
-    os = shared;
+    os = {
+      imports = [sharedModule];
+    };
 
     nixos = {
       nix = {
@@ -108,7 +110,7 @@
       pkgs,
       ...
     }: {
-      imports = [shared];
+      imports = [sharedModule];
 
       nix = {
         package = lib.mkDefault pkgs.nix;

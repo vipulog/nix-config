@@ -1,5 +1,16 @@
 {
   den.aspects.niri-de.gtk = {
+    nixos = {pkgs, ...}: {
+      programs.dconf.enable = true;
+
+      environment.systemPackages = [
+        pkgs.colloid-gtk-theme
+        pkgs.colloid-icon-theme
+        pkgs.bibata-cursors
+        pkgs.inter
+      ];
+    };
+
     homeManager = {pkgs, ...}: {
       gtk = {
         enable = true;

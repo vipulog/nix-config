@@ -1,5 +1,9 @@
 {
   den.aspects.btop = {
+    os = {pkgs, ...}: {
+      environment.systemPackages = [pkgs.btop];
+    };
+
     homeManager = {
       programs.btop = {
         enable = true;

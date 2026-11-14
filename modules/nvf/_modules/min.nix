@@ -26,7 +26,7 @@
 
     clipboard = {
       enable = true;
-      providers.wl-copy.enable = true;
+      providers.wl-copy.enable = pkgs.stdenv.hostPlatform.isLinux;
     };
 
     theme = {

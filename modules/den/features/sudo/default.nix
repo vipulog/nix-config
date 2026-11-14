@@ -9,5 +9,9 @@
         "/var/db/sudo".enable = true;
       };
     };
+
+    homeManager = {pkgs, ...}: {
+      home.packages = [pkgs.sudo];
+    };
   };
 }

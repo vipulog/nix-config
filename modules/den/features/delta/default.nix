@@ -1,5 +1,9 @@
 {
   den.aspects.delta = {
+    os = {pkgs, ...}: {
+      environment.systemPackages = [pkgs.delta];
+    };
+
     homeManager = {config, ...}: {
       programs.delta = {
         enable = true;

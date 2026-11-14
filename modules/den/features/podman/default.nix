@@ -1,5 +1,11 @@
 {
-  den.aspects.podman = {
+  den.aspects.podman = let
+    mkCommonPkgs = pkgs: [
+      pkgs.dive
+      pkgs.podman-tui
+      pkgs.docker-compose
+    ];
+  in {
     nixos = {pkgs, ...}: {
       virtualisation = {
         podman = {
@@ -9,11 +15,12 @@
         };
       };
 
-      environment.systemPackages = with pkgs; [
-        dive
-        podman-tui
-        docker-compose
-      ];
+      environment.systemPackages = mkCommonPkgs pkgs;
+    };
+
+    homeManager = {pkgs, ...}: {
+      services.podman.enable = true;
+      home.packages = mkCommonPkgs pkgs;
     };
 
     persist-user = {

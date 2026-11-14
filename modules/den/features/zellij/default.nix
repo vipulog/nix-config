@@ -1,5 +1,9 @@
 {
   den.aspects.zellij = {
+    os = {pkgs, ...}: {
+      environment.systemPackages = [pkgs.zellij];
+    };
+
     homeManager = {
       osConfig,
       pkgs,

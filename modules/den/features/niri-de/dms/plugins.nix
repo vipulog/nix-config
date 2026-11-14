@@ -7,7 +7,7 @@
   };
 
   den.aspects.niri-de.dms.plugins = let
-    commonDmsPluginsConfig = {
+    sharedModule = {
       programs.dank-material-shell.plugins = {
         dankKDEConnect = {
           enable = true;
@@ -144,7 +144,7 @@
       };
     };
 
-    mkCommonDmsPluginsExtraPackages = pkgs: [
+    mkCommonPkgs = pkgs: [
       pkgs.inotify-tools
       pkgs.evtest
       pkgs.libinput
@@ -156,19 +156,19 @@
     nixos = {pkgs, ...}: {
       imports = [
         inputs.dms-plugin-registry.nixosModules.default
-        commonDmsPluginsConfig
+        sharedModule
       ];
 
-      environment.systemPackages = mkCommonDmsPluginsExtraPackages pkgs;
+      environment.systemPackages = mkCommonPkgs pkgs;
     };
 
     homeManager = {pkgs, ...}: {
       imports = [
         inputs.dms-plugin-registry.homeModules.default
-        commonDmsPluginsConfig
+        sharedModule
       ];
 
-      home.packages = mkCommonDmsPluginsExtraPackages pkgs;
+      home.packages = mkCommonPkgs pkgs;
     };
 
     user = {

@@ -2,6 +2,10 @@
   inherit (self.lib.den.ssh) mkUserIdFilePath;
 in {
   den.aspects.ssh = {
+    os = {pkgs, ...}: {
+      environment.systemPackages = [pkgs.openssh];
+    };
+
     homeManager = {
       user,
       host ? null,

@@ -2,6 +2,10 @@
   den.aspects.distrobox = {
     includes = [den.aspects.podman];
 
+    os = {pkgs, ...}: {
+      environment.systemPackages = [pkgs.distrobox];
+    };
+
     homeManager = {
       programs.distrobox = {
         enable = true;

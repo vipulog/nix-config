@@ -3,16 +3,8 @@
   self,
   ...
 }: {
-  den.aspects.neovim = {
-    os = {
-      environment.variables = {
-        EDITOR = "nvim";
-      };
-    };
-
-    homeManager = {
-      imports = [inputs.nvf.homeManagerModules.default];
-
+  den.aspects.neovim = let
+    sharedModule = {
       programs.nvf = {
         enable = true;
 
@@ -20,6 +12,30 @@
           imports = [self.nvfModules.default];
         };
       };
+    };
+  in {
+    os = {
+      imports = [sharedModule];
+
+      environment.variables = {
+        EDITOR = "nvim";
+        VISUAL = "nvim";
+      };
+    };
+
+    nixos = {
+      imports = [inputs.nvf.nixosModules.default];
+    };
+
+    darwin = {
+      imports = [inputs.nvf.darwinModules.default];
+    };
+
+    homeManager = {
+      imports = [
+        inputs.nvf.homeManagerModules.default
+        sharedModule
+      ];
 
       systemd.user.sessionVariables = {
         EDITOR = "nvim";

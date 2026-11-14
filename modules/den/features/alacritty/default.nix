@@ -1,5 +1,9 @@
 {
   den.aspects.alacritty = {
+    os = {pkgs, ...}: {
+      environment.systemPackages = [pkgs.alacritty];
+    };
+
     homeManager = {pkgs, ...}: {
       home.packages = [pkgs.nerd-fonts.jetbrains-mono];
 

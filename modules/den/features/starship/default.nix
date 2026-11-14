@@ -1,6 +1,6 @@
 {
-  den.aspects.starship = {
-    homeManager = {
+  den.aspects.starship = let
+    sharedModule = {
       programs.starship = {
         enable = true;
 
@@ -78,6 +78,18 @@
           solidity.format = "\\[[$symbol($version)]($style)\\]";
         };
       };
+    };
+  in {
+    nixos = {
+      imports = [sharedModule];
+    };
+
+    darwin = {pkgs, ...}: {
+      environment.systemPackages = [pkgs.starship];
+    };
+
+    homeManager = {
+      imports = [sharedModule];
     };
 
     persist-user = {

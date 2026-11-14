@@ -10,7 +10,12 @@
     };
   };
 
-  den.aspects.niri-de.niri = {
+  den.aspects.niri-de.niri = let
+    mkCommonPkgs = pkgs: [
+      pkgs.xwayland-satellite
+      pkgs.wl-clipboard
+    ];
+  in {
     includes = with den.aspects.niri-de;
     with niri; [
       environment
@@ -27,12 +32,11 @@
       misc
     ];
 
-    nixos = {
+    nixos = {pkgs, ...}: {
       imports = [inputs.niri.nixosModules.default];
 
-      programs.niri = {
-        enable = true;
-      };
+      programs.niri.enable = true;
+      environment.systemPackages = mkCommonPkgs pkgs;
     };
 
     homeManager = {pkgs, ...}: {
@@ -58,10 +62,7 @@
         '';
       };
 
-      home.packages = [
-        pkgs.xwayland-satellite
-        pkgs.wl-clipboard
-      ];
+      home.packages = mkCommonPkgs pkgs;
     };
   };
 }

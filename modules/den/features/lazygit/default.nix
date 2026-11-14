@@ -1,6 +1,6 @@
 {
-  den.aspects.lazygit = {
-    homeManager = {pkgs, ...}: {
+  den.aspects.lazygit = let
+    sharedModule = {pkgs, ...}: {
       programs.lazygit = {
         enable = true;
 
@@ -15,6 +15,18 @@
           };
         };
       };
+    };
+  in {
+    nixos = {
+      imports = [sharedModule];
+    };
+
+    darwin = {pkgs, ...}: {
+      environment.systemPackages = [pkgs.lazygit];
+    };
+
+    homeManager = {
+      imports = [sharedModule];
     };
 
     persist-user = {
