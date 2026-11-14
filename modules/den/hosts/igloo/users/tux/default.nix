@@ -8,42 +8,45 @@
       den.aspects.waydroid
       den.aspects.kdeconnect
       den.aspects.lutris
-      den.aspects.igloo.provides.tux.secrets
       den.aspects.igloo.provides.tux.syncthing
       den.aspects.igloo.provides.tux.restic
     ];
 
     nixos = {
-      services.tailscale.extraSetFlags = [
-        "--operator=tux"
+      lib,
+      host,
+      ...
+    }: {
+      config = lib.mkMerge [
+        {
+          services.tailscale.extraSetFlags = [
+            "--operator=tux"
+          ];
+        }
+
+        (lib.mkIf (host.hasAspect den.aspects.sops-nix) {
+          sops.secrets.tux-password = {
+            neededForUsers = true;
+          };
+        })
+      ];
+    };
+
+    user = {
+      lib,
+      host,
+      config,
+      ...
+    }: {
+      config = lib.mkMerge [
+        (lib.mkIf (host.hasAspect den.aspects.sops-nix) {
+          hashedPasswordFile = config.sops.secrets.tux-password.path;
+        })
       ];
     };
 
     homeManager = {
       home.stateVersion = "26.05";
-    };
-
-    secrets = {
-      nixos = {
-        lib,
-        host,
-        ...
-      }:
-        lib.mkIf (host.hasAspect den.aspects.sops-nix) {
-          sops.secrets.tux-password = {
-            neededForUsers = true;
-          };
-        };
-
-      user = {
-        lib,
-        host,
-        config,
-        ...
-      }:
-        lib.mkIf (host.hasAspect den.aspects.sops-nix) {
-          hashedPasswordFile = config.sops.secrets.tux-password.path;
-        };
     };
 
     persist-user = {

@@ -12,33 +12,29 @@
   };
 
   den.aspects.mcp = {
-    includes = [den.aspects.mcp.secrets];
-
     homeManager = {
+      user,
+      lib,
+      config,
+      ...
+    }: {
       imports = [inputs.mcp-servers-nix.homeManagerModules.default];
 
-      programs.mcp.enable = true;
+      config = lib.mkMerge [
+        {
+          programs.mcp.enable = true;
 
-      mcp-servers.programs = {
-        nixos.enable = true;
-        github.enable = true;
-        chrome-devtools.enable = true;
-      };
-    };
+          mcp-servers.programs = {
+            nixos.enable = true;
+            github.enable = true;
+            chrome-devtools.enable = true;
+          };
+        }
 
-    secrets = let
-      inherit (self.lib.den.sops-nix) sharedSecretsFilePath;
-    in {
-      homeManager = {
-        lib,
-        user,
-        config,
-        ...
-      }:
-        lib.mkIf (user.hasAspect den.aspects.sops-nix) {
+        (lib.mkIf (user.hasAspect den.aspects.sops-nix) {
           sops = {
             secrets.github-mcp-pat = {
-              sopsFile = sharedSecretsFilePath;
+              sopsFile = self.lib.den.sops-nix.sharedSecretsFilePath;
             };
 
             templates.github-mcp-env = {
@@ -53,7 +49,8 @@
           mcp-servers.programs = {
             github.envFile = config.sops.templates.github-mcp-env.path;
           };
-        };
+        })
+      ];
     };
   };
 }
