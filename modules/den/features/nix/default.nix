@@ -66,10 +66,6 @@
           randomizedDelaySec = "15min";
         };
       };
-
-      nixpkgs.config = {
-        problems.handlers."gtk+".broken = "warn";
-      };
     };
 
     darwin = {

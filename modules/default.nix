@@ -1,15 +1,38 @@
-{
-  inputs,
-  lib,
-  ...
-}: {
+{inputs, ...}: {
+  imports = [
+    inputs.flake-file.flakeModules.dendritic
+    inputs.den.flakeModules.dendritic
+  ];
+
   # other inputs may be defined at a module using them.
   flake-file.inputs = {
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    import-tree.url = "github:vic/import-tree";
+    den.url = "github:denful/den";
+    flake-file.url = "github:vic/flake-file";
+
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-26.05";
+
     nix-darwin = {
-      url = "github:nix-darwin/nix-darwin";
+      url = "github:nix-darwin/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nix-darwin-stable = {
+      url = "github:nix-darwin/nix-darwin/nix-darwin-26.05";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
+    };
+
+    home-manager = {
+      url = "github:nix-community/home-manager/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    home-manager-stable = {
+      url = "github:nix-community/home-manager/release-26.05";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
     nixos-hardware = {
@@ -17,43 +40,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    flake-parts = {
-      url = "github:hercules-ci/flake-parts";
-      inputs.nixpkgs-lib.follows = "nixpkgs";
-    };
-
-    import-tree.url = "github:vic/import-tree";
-    den.url = "github:denful/den";
-    flake-file.url = "github:vic/flake-file";
-
     nur = {
       url = "github:nix-community/NUR";
-
       inputs = {
         nixpkgs.follows = "nixpkgs";
         flake-parts.follows = "flake-parts";
-      };
-    };
-
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-  };
-
-  imports = [
-    inputs.flake-file.flakeModules.dendritic
-    inputs.den.flakeModules.dendritic
-  ];
-
-  perSystem = {system, ...}: let
-    mkAllowPredicate = names: pkg: builtins.elem (lib.getName pkg) names;
-  in {
-    _module.args = {
-      pkgs = import inputs.nixpkgs {
-        inherit system;
-        overlays = [inputs.nur.overlays.default];
-        config.allowUnfreePredicate = mkAllowPredicate [];
       };
     };
   };

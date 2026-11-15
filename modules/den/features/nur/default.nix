@@ -1,11 +1,7 @@
 {inputs, ...}: {
   den.aspects.nur = {
-    nixos = {
-      imports = [inputs.nur.modules.nixos.default];
-    };
-
-    darwin = {
-      imports = [inputs.nur.modules.darwin.default];
-    };
+    nixpkgs-overlays = _: [
+      inputs.nur.overlays.default
+    ];
   };
 }
