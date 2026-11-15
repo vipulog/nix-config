@@ -1,25 +1,7 @@
 {self, ...}: let
-  inherit (self.lib.den.ssh) mkHostIdFilePath mkUserIdFilePath;
+  inherit (self.lib.den.ssh) mkUserIdFilePath;
 in {
   den.aspects.ssh = {
-    os = {host, ...}: {
-      services.openssh = {
-        enable = true;
-
-        settings = {
-          PermitRootLogin = "prohibit-password";
-          PasswordAuthentication = false;
-        };
-
-        hostKeys = [
-          {
-            path = mkHostIdFilePath {hostname = host.name;};
-            type = "ed25519";
-          }
-        ];
-      };
-    };
-
     homeManager = {
       user,
       host ? null,
@@ -40,17 +22,6 @@ in {
           IdentitiesOnly = "yes";
           AddKeysToAgent = "yes";
           ForwardAgent = "yes";
-        };
-      };
-    };
-
-    persist-host = {host, ...}: {
-      files = {
-        "${mkHostIdFilePath {hostname = host.name;}}" = {
-          enable = true;
-          how = "symlink";
-          configureParent = true;
-          mode = "0600";
         };
       };
     };

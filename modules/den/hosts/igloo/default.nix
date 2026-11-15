@@ -14,6 +14,7 @@
       den.aspects.sudo
       den.aspects.bootvine
       den.aspects.tailscale
+      den.aspects.sshd
       den.aspects.podman
       den.aspects.neovim
       den.aspects.waydroid

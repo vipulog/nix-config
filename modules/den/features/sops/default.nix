@@ -27,8 +27,6 @@
     inherit (self.lib.den.sops-nix) mkHostSecretsFilePath mkUserSecretsFilePath joinPath;
     inherit (self.lib.den.ssh) mkHostIdFilePath mkUserIdFilePath;
   in {
-    includes = [den.aspects.ssh];
-
     nixos = {
       host,
       lib,
