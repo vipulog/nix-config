@@ -1,48 +1,25 @@
 {den, ...}: {
-  den.aspects.igloo.provides.tux = {
+  den.aspects."tux@igloo" = {
     includes = [
+      den.batteries.primary-user
       den.aspects.sops-nix
       den.aspects.tailscale
       den.aspects.podman
       den.aspects.distrobox
       den.aspects.waydroid
+      den.aspects.zed-editor
+      den.aspects.niri-de
+      den.aspects.chromium
+      den.aspects.firefox
+      den.aspects.redirector
       den.aspects.kdeconnect
       den.aspects.lutris
-      den.aspects.igloo.provides.tux.syncthing
-      den.aspects.igloo.provides.tux.restic
+      den.aspects."tux@igloo".syncthing
+      den.aspects."tux@igloo".restic
     ];
 
-    nixos = {
-      lib,
-      host,
-      ...
-    }: {
-      config = lib.mkMerge [
-        {
-          services.tailscale.extraSetFlags = [
-            "--operator=tux"
-          ];
-        }
-
-        (lib.mkIf (host.hasAspect den.aspects.sops-nix) {
-          sops.secrets.tux-password = {
-            neededForUsers = true;
-          };
-        })
-      ];
-    };
-
-    user = {
-      lib,
-      host,
-      config,
-      ...
-    }: {
-      config = lib.mkMerge [
-        (lib.mkIf (host.hasAspect den.aspects.sops-nix) {
-          hashedPasswordFile = config.sops.secrets.tux-password.path;
-        })
-      ];
+    user = {config, ...}: {
+      hashedPasswordFile = config.sops.secrets.tux-password.path;
     };
 
     homeManager = {

@@ -1,5 +1,4 @@
 {
-  den,
   inputs,
   self,
   ...
@@ -33,7 +32,7 @@
       config,
       ...
     }: let
-      isEphemeralHost = host.hasAspect den.aspects.ephemeral-host;
+      isEphemeralHost = config.ephemeral-host.enable or false;
 
       hostIdFilePath = joinPath [
         (lib.optionalString isEphemeralHost config.ephemeral-host.persistentMountpoint)

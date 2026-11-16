@@ -1,9 +1,9 @@
-{den, ...}: {
+{
   den.aspects.tailscale = {
     os = {
       lib,
-      host,
       config,
+      options,
       ...
     }: {
       config = lib.mkMerge [
@@ -14,7 +14,7 @@
           };
         }
 
-        (lib.mkIf (host.hasAspect den.aspects.sops-nix) {
+        (lib.optionalAttrs (options ? sops) {
           sops.secrets.tailscale-auth-key = {};
 
           services.tailscale = {

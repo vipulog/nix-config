@@ -1,5 +1,4 @@
 {
-  den,
   inputs,
   self,
   ...
@@ -13,9 +12,9 @@
 
   den.aspects.mcp = {
     homeManager = {
-      user,
       lib,
       config,
+      options,
       ...
     }: {
       imports = [inputs.mcp-servers-nix.homeManagerModules.default];
@@ -31,7 +30,7 @@
           };
         }
 
-        (lib.mkIf (user.hasAspect den.aspects.sops-nix) {
+        (lib.optionalAttrs (options ? sops) {
           sops = {
             secrets.github-mcp-pat = {
               sopsFile = self.lib.den.sops-nix.sharedSecretsFilePath;

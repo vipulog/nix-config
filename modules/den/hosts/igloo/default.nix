@@ -51,6 +51,9 @@
         priority = 100;
       };
 
+      sops.secrets.tux-password.neededForUsers = true;
+      services.tailscale.extraSetFlags = ["--operator=tux"];
+
       system.stateVersion = "26.05";
     };
 

@@ -1,80 +1,69 @@
-{den, ...}: {
-  den.aspects.igloo.provides.tux.restic = {
-    homeManager = {
-      lib,
-      user,
-      config,
-      ...
-    }: let
+{
+  den.aspects."tux@igloo".restic = {
+    homeManager = {config, ...}: let
       homeDir = config.home.homeDirectory;
     in {
-      config = lib.mkMerge [
-        {
-          services.restic = {
-            enable = true;
+      sops = {
+        secrets = {
+          b2-app-key-id = {};
+          b2-app-key = {};
+          restic-password = {};
+        };
 
-            backups.b2 = {
-              repository = "b2:vipulog:restic/home";
+        templates.restic-b2-env = {
+          content = ''
+            B2_ACCOUNT_ID=${config.sops.placeholder.b2-app-key-id}
+            B2_ACCOUNT_KEY=${config.sops.placeholder.b2-app-key}
+          '';
+        };
+      };
 
-              runCheck = true;
-              extraBackupArgs = ["--exclude-if-present=.nobackup"];
-              pruneOpts = ["--keep-within 14d"];
+      services.restic.backups.b2 = {
+        environmentFile = config.sops.templates.restic-b2-env.path;
+        passwordFile = config.sops.secrets.restic-password.path;
+      };
 
-              timerConfig = {
-                OnCalendar = "daily";
-                Persistent = true;
-                RandomizedDelaySec = "1h";
-              };
+      services.restic = {
+        enable = true;
 
-              paths = [
-                "${homeDir}/Documents"
-                "${homeDir}/Pictures"
-                "${homeDir}/DCIM"
-                "${homeDir}/Videos"
-                "${homeDir}/Music"
-                "${homeDir}/Recordings"
-                "${homeDir}/Dev"
-              ];
+        backups.b2 = {
+          repository = "b2:vipulog:restic/home";
 
-              exclude = [
-                "**/.stversions"
-                "**/.stfolder"
-                "**/.thumbnails"
-                "**/.trashed**"
-                "**/node_modules"
-                "**/.venv"
-                "**/venv"
-                "**/__pycache__"
-                "**/.cache"
-                "*.tmp"
-                "*.swp"
-              ];
-            };
-          };
-        }
+          runCheck = true;
+          extraBackupArgs = ["--exclude-if-present=.nobackup"];
+          pruneOpts = ["--keep-within 14d"];
 
-        (lib.mkIf (user.hasAspect den.aspects.sops-nix) {
-          sops = {
-            secrets = {
-              b2-app-key-id = {};
-              b2-app-key = {};
-              restic-password = {};
-            };
-
-            templates.restic-b2-env = {
-              content = ''
-                B2_ACCOUNT_ID=${config.sops.placeholder.b2-app-key-id}
-                B2_ACCOUNT_KEY=${config.sops.placeholder.b2-app-key}
-              '';
-            };
+          timerConfig = {
+            OnCalendar = "daily";
+            Persistent = true;
+            RandomizedDelaySec = "1h";
           };
 
-          services.restic.backups.b2 = {
-            environmentFile = config.sops.templates.restic-b2-env.path;
-            passwordFile = config.sops.secrets.restic-password.path;
-          };
-        })
-      ];
+          paths = [
+            "${homeDir}/Documents"
+            "${homeDir}/Pictures"
+            "${homeDir}/DCIM"
+            "${homeDir}/Videos"
+            "${homeDir}/Music"
+            "${homeDir}/Recordings"
+            "${homeDir}/Dev"
+          ];
+
+          exclude = [
+            "**/.stversions"
+            "**/.stfolder"
+            "**/.thumbnails"
+            "**/.trashed**"
+            "**/node_modules"
+            "**/.venv"
+            "**/venv"
+            "**/__pycache__"
+            "**/.cache"
+            "*.tmp"
+            "*.swp"
+          ];
+        };
+      };
     };
 
     persist-user = {
