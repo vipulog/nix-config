@@ -5,31 +5,32 @@
     in {
       sops = {
         secrets = {
-          b2-app-key-id = {};
-          b2-app-key = {};
-          restic-password = {};
+          personal-backup-b2-app-key-id = {};
+          personal-backup-b2-app-key = {};
+          personal-backup-restic-password = {};
         };
 
-        templates.restic-b2-env = {
+        templates.personal-backup-restic-env = {
           content = ''
-            B2_ACCOUNT_ID=${config.sops.placeholder.b2-app-key-id}
-            B2_ACCOUNT_KEY=${config.sops.placeholder.b2-app-key}
+            B2_ACCOUNT_ID=${config.sops.placeholder.personal-backup-b2-app-key-id}
+            B2_ACCOUNT_KEY=${config.sops.placeholder.personal-backup-b2-app-key}
           '';
         };
       };
 
-      services.restic.backups.b2 = {
-        environmentFile = config.sops.templates.restic-b2-env.path;
-        passwordFile = config.sops.secrets.restic-password.path;
+      services.restic.backups.personal-backup = {
+        environmentFile = config.sops.templates.personal-backup-restic-env.path;
+        passwordFile = config.sops.secrets.personal-backup-restic-password.path;
       };
 
       services.restic = {
         enable = true;
 
-        backups.b2 = {
-          repository = "b2:vipulog:restic/home";
-
+        backups.personal-backup = {
+          repository = "b2:vipulog:personal-backup";
+          initialize = true;
           runCheck = true;
+
           extraBackupArgs = ["--exclude-if-present=.nobackup"];
           pruneOpts = ["--keep-within 14d"];
 
@@ -68,7 +69,7 @@
 
     persist-user = {
       directories = {
-        ".cache/restic-backups-b2".enable = true;
+        ".cache/restic-backups-personal-backup".enable = true;
       };
     };
   };
