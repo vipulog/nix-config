@@ -14,7 +14,7 @@
       den.aspects.sudo
       den.aspects.sshd
       den.aspects.tailscale
-      den.aspects.igloo.niri-de
+      den.aspects.niri-de
       den.aspects.podman
       den.aspects.waydroid
       den.aspects.kdeconnect
@@ -46,6 +46,17 @@
         device = "/dev/nvme0n1";
         swap.enable = true;
         snapshots = true;
+      };
+
+      services.displayManager = {
+        autoLogin = {
+          enable = true;
+          user = "tux";
+        };
+
+        dux-greeter = {
+          configHome = "/home/tux";
+        };
       };
 
       sops.secrets.tux-password.neededForUsers = true;

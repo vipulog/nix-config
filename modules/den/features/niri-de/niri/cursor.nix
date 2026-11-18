@@ -1,8 +1,5 @@
 {
   den.aspects.niri-de.niri.cursor = {
-    configKdl = ''
-    '';
-
     nixos = {pkgs, ...}: {
       environment.systemPackages = [
         pkgs.bibata-cursors

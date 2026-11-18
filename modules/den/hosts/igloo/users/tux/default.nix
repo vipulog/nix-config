@@ -24,6 +24,22 @@
 
     homeManager = {
       home.stateVersion = "26.05";
+
+      wayland.windowManager.niri.extraConfig = ''
+        output "eDP-1" {
+            scale 1.25
+            transform "normal"
+            mode "1920x1080@60"
+        }
+
+        input {
+            touchpad {
+                tap
+                dwt
+                natural-scroll
+            }
+        }
+      '';
     };
 
     persist-user = {
