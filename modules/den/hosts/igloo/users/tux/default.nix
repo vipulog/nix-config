@@ -4,18 +4,18 @@
       den.batteries.primary-user
       den.aspects.sops-nix
       den.aspects.tailscale
+      den.aspects.niri-de
       den.aspects.podman
       den.aspects.distrobox
       den.aspects.waydroid
       den.aspects.zed-editor
-      den.aspects.niri-de
       den.aspects.chromium
       den.aspects.firefox
       den.aspects.redirector
       den.aspects.kdeconnect
       den.aspects.lutris
-      den.aspects."tux@igloo".syncthing
       den.aspects."tux@igloo".restic
+      den.aspects."tux@igloo".syncthing
     ];
 
     user = {config, ...}: {

@@ -4,22 +4,22 @@
       den.batteries.define-user
       (den.batteries.user-shell "zsh")
       den.aspects.zsh
-      den.aspects.starship
       den.aspects.atuin
+      den.aspects.direnv
+      den.aspects.starship
+      den.aspects.zellij
       den.aspects.zoxide
-      den.aspects.eza
       den.aspects.bat
       den.aspects.btop
+      den.aspects.eza
       den.aspects.nix-index
-      den.aspects.zellij
-      den.aspects.git
       den.aspects.delta
+      den.aspects.git
       den.aspects.jujutsu
       den.aspects.lazygit
       den.aspects.neovim
-      den.aspects.direnv
-      den.aspects.codex
       den.aspects.antigravity-cli
+      den.aspects.codex
       den.aspects.opencode
       den.aspects.ssh
     ];

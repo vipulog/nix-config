@@ -6,20 +6,20 @@
   den.aspects.igloo = {
     includes = [
       den.aspects.igloo.hardware
-      den.aspects.igloo.snapper
-      den.aspects.igloo.niri-de
       den.aspects.ephemeral-host
       den.aspects.disko.btrfs-impermanence
+      den.aspects.igloo.snapper
+      den.aspects.bootvine
       den.aspects.sops-nix
       den.aspects.sudo
-      den.aspects.bootvine
-      den.aspects.tailscale
       den.aspects.sshd
+      den.aspects.tailscale
+      den.aspects.igloo.niri-de
       den.aspects.podman
-      den.aspects.neovim
       den.aspects.waydroid
       den.aspects.kdeconnect
       den.aspects.lutris
+      den.aspects.neovim
     ];
 
     nixos = {
