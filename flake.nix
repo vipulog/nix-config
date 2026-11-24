@@ -114,6 +114,10 @@
         treefmt-nix.follows = "treefmt-nix";
       };
     };
+    sable = {
+      url = "github:SableClient/sable-next/v26.11.4";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";

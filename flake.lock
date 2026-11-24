@@ -912,6 +912,7 @@
         "nvf": "nvf",
         "preservation": "preservation",
         "redirector": "redirector",
+        "sable": "sable",
         "sops-nix": "sops-nix",
         "treefmt-nix": "treefmt-nix"
       }
@@ -956,6 +957,27 @@
       "original": {
         "owner": "oxalica",
         "repo": "rust-overlay",
+        "type": "github"
+      }
+    },
+    "sable": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1795077806,
+        "narHash": "sha256-dapUFACRlFqp4/QysOPgrvCy1jCd6SRm/hIiSxzIwe4=",
+        "owner": "SableClient",
+        "repo": "sable-next",
+        "rev": "0280a39acacb2df93382b7419ace324eee265c03",
+        "type": "github"
+      },
+      "original": {
+        "owner": "SableClient",
+        "ref": "v26.11.4",
+        "repo": "sable-next",
         "type": "github"
       }
     },
