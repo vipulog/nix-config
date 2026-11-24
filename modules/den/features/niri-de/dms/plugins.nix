@@ -25,6 +25,7 @@
           settings = builtins.fromJSON ''
             {
               "enabled": true,
+              "recordingDirectory": "~/Videos",
               "saveFilenamePattern": "%Y-%m-%d_%H-%M-%S",
               "postNotification": "toast",
               "show_shortcut_hints": true
