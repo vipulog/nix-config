@@ -1,8 +1,4 @@
-{
-  inputs,
-  self,
-  ...
-}: {
+{inputs, ...}: {
   flake-file.inputs = {
     mcp-servers-nix = {
       url = "github:natsukium/mcp-servers-nix";
@@ -44,9 +40,7 @@
 
         (lib.optionalAttrs (options ? sops) {
           sops = {
-            secrets.github-mcp-pat = {
-              sopsFile = self.lib.den.sops-nix.sharedSecretsFilePath;
-            };
+            secrets.github-mcp-pat.sopsFile = config.sops-nix.sharedSopsFile;
 
             templates.github-mcp-env = {
               content = ''

@@ -10,7 +10,7 @@
       den.aspects.disko.btrfs-impermanence
       den.aspects.igloo.snapper
       den.aspects.bootvine
-      den.aspects.sops-nix
+      den.aspects.my-secrets
       den.aspects.sudo
       den.aspects.sshd
       den.aspects.tailscale

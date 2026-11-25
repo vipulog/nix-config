@@ -2,7 +2,7 @@
   den.aspects."tux@igloo" = {
     includes = [
       den.batteries.primary-user
-      den.aspects.sops-nix
+      den.aspects.my-secrets
       den.aspects.tailscale
       den.aspects.niri-de
       den.aspects.podman

@@ -16,7 +16,7 @@
       den.aspects.glacier.hardware
       den.aspects.ephemeral-host
       den.aspects.disko.btrfs-impermanence
-      den.aspects.sops-nix
+      den.aspects.my-secrets
       den.aspects.sshd
       den.aspects.tailscale
       den.aspects.glacier.postgresql
