@@ -46,6 +46,7 @@
 
     persist-user = {
       directories = {
+        "Backups".enable = true;
         "DCIM".enable = true;
         "Recordings".enable = true;
       };

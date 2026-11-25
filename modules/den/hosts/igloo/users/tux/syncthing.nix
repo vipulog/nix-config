@@ -8,6 +8,22 @@
           devices.glacier.id = "GWKJUX2-RIITNN7-RCYJ3IH-TQQ25E6-CNU5GIU-X2BF25J-RGFHJLK-73XAXQ7";
 
           folders = {
+            Backups = {
+              id = "backups";
+              path = "~/Backups";
+              devices = ["glacier"];
+              ignorePerms = true;
+
+              versioning = {
+                type = "staggered";
+
+                params = {
+                  cleanInterval = "3600";
+                  maxAge = "604800"; # 7 days
+                };
+              };
+            };
+
             DCIM = {
               id = "dcim";
               path = "~/DCIM";

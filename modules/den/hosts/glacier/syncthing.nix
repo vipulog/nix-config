@@ -15,6 +15,22 @@
           };
 
           folders = {
+            Backups = {
+              id = "backups";
+              path = "/srv/syncthing/Backups";
+              devices = ["igloo" "np2"];
+              ignorePerms = true;
+
+              versioning = {
+                type = "staggered";
+
+                params = {
+                  cleanInterval = "3600";
+                  maxAge = "604800"; # 7 days
+                };
+              };
+            };
+
             DCIM = {
               id = "dcim";
               path = "/srv/syncthing/DCIM";
@@ -209,6 +225,7 @@
       users = {
         groups = {
           synced = {};
+          synced-backups = {};
           synced-docs = {};
           synced-media = {};
           synced-music = {};
@@ -221,6 +238,7 @@
 
           extraGroups = [
             "synced"
+            "synced-backups"
             "synced-docs"
             "synced-media"
             "synced-music"
@@ -233,6 +251,7 @@
       systemd.tmpfiles.rules = [
         "d /srv/syncthing 0710 syncthing synced -"
 
+        "d /srv/syncthing/Backups 2770 syncthing synced-backups -"
         "d /srv/syncthing/DCIM 2770 syncthing synced-media -"
         "d /srv/syncthing/Documents 2770 syncthing synced-docs -"
         "d /srv/syncthing/Music 2770 syncthing synced-music -"

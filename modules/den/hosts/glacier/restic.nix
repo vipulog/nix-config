@@ -39,6 +39,7 @@
           runCheck = true;
 
           paths = [
+            "/srv/syncthing/Backups"
             "/srv/syncthing/DCIM"
             "/srv/syncthing/Documents"
             "/srv/syncthing/Pictures"
