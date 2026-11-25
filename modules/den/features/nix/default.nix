@@ -1,39 +1,21 @@
-{inputs, ...}: {
-  flake-file.inputs = {
-    my-templates = {
-      url = "github:vipulog/nix-templates";
-
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        flake-parts.follows = "flake-parts";
-        import-tree.follows = "import-tree";
-        git-hooks-nix.follows = "git-hooks-nix";
-        treefmt-nix.follows = "treefmt-nix";
-      };
-    };
-  };
-
+{
   den.aspects.nix = let
     sharedModule = {
-      nix = {
-        registry.my-templates.flake = inputs.my-templates;
+      nix.settings = {
+        connect-timeout = 5;
+        fallback = true;
+        experimental-features = ["nix-command" "flakes"];
 
-        settings = {
-          connect-timeout = 5;
-          fallback = true;
-          experimental-features = ["nix-command" "flakes"];
+        min-free = 128000000;
+        max-free = 1000000000;
 
-          min-free = 128000000;
-          max-free = 1000000000;
+        extra-substituters = [
+          "https://nix-community.cachix.org"
+        ];
 
-          extra-substituters = [
-            "https://nix-community.cachix.org"
-          ];
-
-          extra-trusted-public-keys = [
-            "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-          ];
-        };
+        extra-trusted-public-keys = [
+          "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+        ];
       };
     };
   in {

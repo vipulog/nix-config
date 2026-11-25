@@ -22,6 +22,7 @@
       den.aspects.codex
       den.aspects.opencode
       den.aspects.ssh
+      den.aspects.my-templates
     ];
 
     homeManager = {
