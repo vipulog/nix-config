@@ -22,10 +22,10 @@
     };
 
     persist-user = {
-      directories = [
-        ".local/share/Steam"
-        ".steam"
-      ];
+      directories = {
+        ".local/share/Steam".enable = true;
+        ".steam".enable = true;
+      };
     };
   };
 }

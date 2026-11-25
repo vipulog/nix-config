@@ -26,9 +26,9 @@
     };
 
     persist-user = {
-      directories = [
-        ".config/sunshine"
-      ];
+      directories = {
+        ".config/sunshine".enable = true;
+      };
     };
   };
 }

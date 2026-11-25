@@ -39,38 +39,38 @@
     };
 
     persist-host = {
-      directories = [
-        "/var/lib/sddm"
-      ];
+      directories = {
+        "/var/lib/sddm".enable = true;
+      };
     };
 
     persist-user = {
-      directories = [
-        ".local/share/kwalletd"
-        ".local/share/kscreen"
-        ".local/share/plasma"
-        ".local/share/dolphin"
-        ".local/share/konsole"
-        ".config/kde.org"
-        ".config/gtk-3.0"
-        ".config/gtk-4.0"
-      ];
+      directories = {
+        ".local/share/kwalletd".enable = true;
+        ".local/share/kscreen".enable = true;
+        ".local/share/plasma".enable = true;
+        ".local/share/dolphin".enable = true;
+        ".local/share/konsole".enable = true;
+        ".config/kde.org".enable = true;
+        ".config/gtk-3.0".enable = true;
+        ".config/gtk-4.0".enable = true;
+      };
 
-      files = [
-        ".config/kwinoutputconfig.json"
-        ".config/kcminputrc"
-        ".config/powerdevilrc"
-        ".config/kscreenlockerrc"
+      files = {
+        ".config/kwinoutputconfig.json".enable = true;
+        ".config/kcminputrc".enable = true;
+        ".config/powerdevilrc".enable = true;
+        ".config/kscreenlockerrc".enable = true;
 
-        ".config/kdeglobals"
-        ".config/kwinrc"
-        ".config/plasma-org.kde.plasma.desktop-appletsrc"
-        ".config/plasmashellrc"
-        ".config/plasmarc"
-        ".config/kglobalshortcutsrc"
-        ".config/dolphinrc"
-        ".config/konsolerc"
-      ];
+        ".config/kdeglobals".enable = true;
+        ".config/kwinrc".enable = true;
+        ".config/plasma-org.kde.plasma.desktop-appletsrc".enable = true;
+        ".config/plasmashellrc".enable = true;
+        ".config/plasmarc".enable = true;
+        ".config/kglobalshortcutsrc".enable = true;
+        ".config/dolphinrc".enable = true;
+        ".config/konsolerc".enable = true;
+      };
     };
   };
 }
