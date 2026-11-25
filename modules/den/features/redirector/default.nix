@@ -12,13 +12,29 @@
     };
   };
 
-  den.aspects.redirector = {
+  den.aspects.redirector = let
+    sharedModule = {
+      nix.settings = {
+        extra-substituters = [
+          "https://redirector.cachix.org"
+        ];
+
+        extra-trusted-public-keys = [
+          "redirector.cachix.org-1:lx9grKUxrkiq/H1qkIV/oEgRB9SmYGD2Yg37fHs6TlE="
+        ];
+      };
+    };
+  in {
     os = {inputs', ...}: {
+      imports = [sharedModule];
       environment.systemPackages = [inputs'.redirector.packages.default];
     };
 
     homeManager = {
-      imports = [inputs.redirector.homeModules.default];
+      imports = [
+        inputs.redirector.homeModules.default
+        sharedModule
+      ];
 
       services.redirector = {
         enable = true;
