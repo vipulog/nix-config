@@ -5,7 +5,7 @@
     };
 
     homeManager = {
-      osConfig,
+      osConfig ? null,
       pkgs,
       ...
     }: let
