@@ -1,6 +1,6 @@
 {
   den.aspects.niri-de.dms.settings = {
-    homeManager = {
+    homeManager = {config, ...}: {
       programs.dank-material-shell = {
         settings = builtins.fromJSON ''
           {
@@ -90,7 +90,7 @@
                   "syncPositionAcrossScreens": true
                 },
                 "enabled": true,
-                "id": "lw_1793704622837_vnekvv91t",
+                "id": "lock_date",
                 "name": "Date",
                 "widgetType": "lockDate"
               }
@@ -169,7 +169,7 @@
                   "syncPositionAcrossScreens": true
                 },
                 "enabled": true,
-                "id": "lw_1793704622837_vnekvv91t",
+                "id": "lock_date",
                 "name": "Date",
                 "widgetType": "lockDate"
               },
@@ -1005,7 +1005,7 @@
                 "followInterfaceStyle": false,
                 "fontScale": 0.8,
                 "gothCornersEnabled": false,
-                "id": "dot1793707104506",
+                "id": "dot",
                 "innerPadding": 2,
                 "island": false,
                 "leftWidgets": [
@@ -1060,7 +1060,7 @@
                   "soundEnabled": false
                 },
                 "enabled": true,
-                "id": "dw_1793783266690_1dnkoluia",
+                "id": "bongo_cat",
                 "name": "Bongo Cat",
                 "widgetType": "bongoCat"
               }
@@ -1103,45 +1103,32 @@
           }
         '';
 
-        session = builtins.fromJSON ''
-          {
-            "wallpaperCyclingEnabled": false,
-            "wallpaperCyclingRecursive": true,
-            "wallpaperCyclingFolderPath": "/home/tux/Pictures/Wallpapers",
-            "wallpaperCyclingRandom": true,
-            "wallpaperTransition": "random",
-            "terminalOverride": "alacritty",
-            "dockPins": {
-              "dock": [
-                "Alacritty",
-                "firefox",
-                "thunar",
-                "net.lutris.Lutris",
-                "nvim",
-                "dev.zed.Zed"
-              ]
-            },
-            "desktopWidgetInstancePositions": {
-              "dw_1793783266690_1dnkoluia": {
-                "eDP-1": {
-                  "anchorX": "end",
-                  "anchorY": "end",
-                  "height": 200,
-                  "width": 200,
-                  "x": 24,
-                  "y": 24
-                }
-              },
-              "lw_1793704622837_vnekvv91t": {
-                "_synced": {
-                  "x": 0.016,
-                  "y": 0.028
-                }
-              }
-            },
-            "configVersion": 7
-          }
-        '';
+        session = {
+          wallpaperCyclingEnabled = false;
+          wallpaperCyclingRecursive = true;
+          wallpaperCyclingFolderPath = "${config.home.homeDirectory}/Pictures/Wallpapers";
+          wallpaperCyclingRandom = true;
+          wallpaperTransition = "random";
+          terminalOverride = "alacritty";
+
+          dockPins.dock = [
+            "Alacritty"
+            "firefox"
+            "thunar"
+            "net.lutris.Lutris"
+            "nvim"
+            "dev.zed.Zed"
+          ];
+
+          desktopWidgetInstancePositions = {
+            lock_date._synced = {
+              x = 0.016;
+              y = 0.028;
+            };
+          };
+
+          configVersion = 7;
+        };
 
         clipboardSettings = {
           maxHistory = 100;

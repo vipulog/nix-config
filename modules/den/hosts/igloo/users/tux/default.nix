@@ -42,6 +42,19 @@
             }
         }
       '';
+
+      programs.dank-material-shell = {
+        session.desktopWidgetInstancePositions = {
+          bongo_cat.eDP-1 = {
+            anchorX = "end";
+            anchorY = "end";
+            height = 200;
+            width = 200;
+            x = 24;
+            y = 24;
+          };
+        };
+      };
     };
 
     persist-user = {
