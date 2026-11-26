@@ -1,11 +1,37 @@
 {
   den.aspects.glacier.paperless = {
-    nixos = {lib, ...}: {
+    nixos = {
+      config,
+      lib,
+      ...
+    }: let
+      svc = config.glacier.services.paperless;
+    in {
+      glacier.services.paperless = {
+        subdomain = "docs";
+        port = 28981;
+
+        proxy.extraConfig = ''
+          proxy_request_buffering off;
+          proxy_read_timeout 600s;
+          proxy_send_timeout 600s;
+          send_timeout 600s;
+        '';
+
+        homepage = {
+          group = "Your data";
+          order = 40;
+          title = "Paperless";
+          icon = "paperless-ngx.svg";
+          description = "Document Archive";
+        };
+      };
+
       services.paperless = {
         enable = true;
-        address = "127.0.0.1";
-        port = 28981;
-        domain = "docs.vipulog.duckdns.org";
+        address = svc.host;
+        inherit (svc) port;
+        domain = svc.fqdn;
         dataDir = "/srv/paperless";
 
         settings = {

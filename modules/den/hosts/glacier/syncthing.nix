@@ -1,10 +1,36 @@
 {
   den.aspects.glacier.syncthing = {
-    nixos = {lib, ...}: {
+    nixos = {
+      config,
+      lib,
+      ...
+    }: let
+      svc = config.glacier.services.syncthing;
+    in {
+      glacier.services.syncthing = {
+        subdomain = "sync";
+        port = 8384;
+
+        proxy.extraConfig = ''
+          proxy_buffering off;
+          proxy_read_timeout 600s;
+          proxy_send_timeout 600s;
+          send_timeout 600s;
+        '';
+
+        homepage = {
+          group = "Your data";
+          order = 10;
+          title = "Syncthing";
+          icon = "syncthing.svg";
+          description = "File Synchronization";
+        };
+      };
+
       services.syncthing = {
         enable = true;
         dataDir = "/srv/syncthing";
-        guiAddress = "127.0.0.1:8384";
+        guiAddress = svc.localAddr;
 
         settings = {
           gui.insecureSkipHostcheck = true;

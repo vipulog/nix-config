@@ -1,16 +1,48 @@
 {
   den.aspects.glacier.homepage = {
-    nixos = let
-      domain = "vipulog.duckdns.org";
+    nixos = {
+      config,
+      lib,
+      ...
+    }: let
+      inherit (config.glacier) domain services;
+      svc = services.homepage;
 
       homepageRes = builtins.fetchTarball {
         url = "https://gist.github.com/vipulog/fccca0741532e09aba17a243ddc4fd28/archive/7f80daf36e97793407e040016c285c97ab90dba6.tar.gz";
         sha256 = "sha256-JGYElV1X41LCjpUICOEqczC1jt222E6ehXHX/4W9NNg=";
       };
+
+      homepageSvcs = builtins.filter (s: s.homepage != null) (builtins.attrValues services);
+
+      groups = ["Your data" "Monitoring"];
+
+      groupOrder = lib.unique (
+        (builtins.filter (g: builtins.any (s: s.homepage.group == g) homepageSvcs) groups)
+        ++ map (s: s.homepage.group) homepageSvcs
+      );
+
+      mkGroup = groupName: {
+        ${groupName} = lib.pipe homepageSvcs [
+          (builtins.filter (s: s.homepage.group == groupName))
+          (builtins.sort (a: b: a.homepage.order < b.homepage.order))
+          (map (s: {
+            ${s.homepage.title} = {
+              inherit (s.homepage) icon description;
+              href = s.url;
+              siteMonitor = "http://${s.localAddr}";
+            };
+          }))
+        ];
+      };
     in {
+      glacier.services.homepage = {
+        port = 8082;
+      };
+
       services.homepage-dashboard = {
         enable = true;
-        listenPort = 8082;
+        listenPort = svc.port;
         allowedHosts = domain;
 
         settings = {
@@ -36,78 +68,7 @@
           }
         ];
 
-        services = [
-          {
-            "Your data" = [
-              {
-                "Syncthing" = {
-                  icon = "syncthing.svg";
-                  href = "https://sync.${domain}";
-                  description = "File Synchronization";
-                  siteMonitor = "http://127.0.0.1:8384";
-                };
-              }
-
-              {
-                "Vaultwarden" = {
-                  icon = "vaultwarden.svg";
-                  href = "https://vault.${domain}";
-                  description = "Password Manager";
-                  siteMonitor = "http://127.0.0.1:8000";
-                };
-              }
-
-              {
-                "Immich" = {
-                  icon = "immich.svg";
-                  href = "https://photos.${domain}";
-                  description = "Photos & Videos";
-                  siteMonitor = "http://127.0.0.1:2283";
-                };
-              }
-
-              {
-                "Paperless" = {
-                  icon = "paperless-ngx.svg";
-                  href = "https://docs.${domain}";
-                  description = "Document Archive";
-                  siteMonitor = "http://127.0.0.1:28981";
-                };
-              }
-            ];
-          }
-
-          {
-            "Monitoring" = [
-              {
-                "ntfy" = {
-                  icon = "ntfy.svg";
-                  href = "https://ntfy.${domain}";
-                  description = "Push Notifications";
-                  siteMonitor = "http://127.0.0.1:2586";
-                };
-              }
-
-              {
-                "Beszel" = {
-                  icon = "beszel.svg";
-                  href = "https://beszel.${domain}";
-                  description = "System Metrics";
-                  siteMonitor = "http://127.0.0.1:8090";
-                };
-              }
-
-              {
-                "Uptime Kuma" = {
-                  icon = "uptime-kuma.svg";
-                  href = "https://status.${domain}";
-                  description = "Service Health";
-                  siteMonitor = "http://127.0.0.1:3001";
-                };
-              }
-            ];
-          }
-        ];
+        services = map mkGroup groupOrder;
       };
     };
   };

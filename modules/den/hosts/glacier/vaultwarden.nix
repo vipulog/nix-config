@@ -1,6 +1,21 @@
 {
   den.aspects.glacier.vaultwarden = {
-    nixos = {config, ...}: {
+    nixos = {config, ...}: let
+      svc = config.glacier.services.vaultwarden;
+    in {
+      glacier.services.vaultwarden = {
+        subdomain = "vault";
+        port = 8000;
+
+        homepage = {
+          group = "Your data";
+          order = 20;
+          title = "Vaultwarden";
+          icon = "vaultwarden.svg";
+          description = "Password Manager";
+        };
+      };
+
       sops = {
         secrets.vaultwarden-admin-token = {};
 
@@ -11,7 +26,7 @@
 
       services.vaultwarden = {
         enable = true;
-        domain = "vault.vipulog.duckdns.org";
+        domain = svc.fqdn;
         dbBackend = "sqlite";
         backupDir = "/var/backup/vaultwarden";
         environmentFile = config.sops.templates.vaultwarden-env.path;
@@ -19,8 +34,8 @@
         config = {
           DATA_FOLDER = "/srv/vaultwarden";
           SIGNUPS_ALLOWED = false;
-          ROCKET_ADDRESS = "127.0.0.1";
-          ROCKET_PORT = 8000;
+          ROCKET_ADDRESS = svc.host;
+          ROCKET_PORT = svc.port;
         };
       };
 

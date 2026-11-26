@@ -4,15 +4,36 @@
   ...
 }: {
   den.aspects.glacier.beszel = {
-    nixos = {
+    nixos = {config, ...}: let
+      svc = config.glacier.services.beszel;
+    in {
+      glacier.services.beszel = {
+        subdomain = "beszel";
+        port = 8090;
+
+        proxy.extraConfig = ''
+          proxy_buffering off;
+          proxy_read_timeout 600s;
+          proxy_send_timeout 600s;
+          send_timeout 600s;
+        '';
+
+        homepage = {
+          group = "Monitoring";
+          order = 20;
+          title = "Beszel";
+          icon = "beszel.svg";
+          description = "System Metrics";
+        };
+      };
+
       services.beszel = {
         hub = {
           enable = true;
-          host = "127.0.0.1";
-          port = 8090;
+          inherit (svc) host port;
 
           environment = {
-            APP_URL = "https://beszel.vipulog.duckdns.org";
+            APP_URL = svc.url;
           };
         };
 

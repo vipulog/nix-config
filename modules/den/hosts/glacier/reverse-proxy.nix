@@ -1,7 +1,27 @@
 {
   den.aspects.glacier.reverse-proxy = {
-    nixos = {config, ...}: let
-      domain = "vipulog.duckdns.org";
+    nixos = {
+      config,
+      lib,
+      ...
+    }: let
+      inherit (config.glacier) domain services;
+
+      mkVhost = svc: {
+        useACMEHost = domain;
+        onlySSL = true;
+
+        locations."/" = {
+          proxyPass = "http://${svc.localAddr}";
+          proxyWebsockets = true;
+          extraConfig = lib.mkIf (svc.proxy.extraConfig != "") svc.proxy.extraConfig;
+        };
+      };
+
+      serviceVhosts = lib.pipe services [
+        (lib.filterAttrs (_: svc: svc.proxy.enable))
+        (lib.mapAttrs' (_: svc: lib.nameValuePair svc.fqdn (mkVhost svc)))
+      ];
     in {
       sops = {
         secrets.duckdns-token = {};
@@ -30,130 +50,19 @@
         recommendedProxySettings = true;
         clientMaxBodySize = "5000M";
 
-        virtualHosts = {
-          "_" = {
-            default = true;
-            useACMEHost = domain;
-            onlySSL = true;
+        virtualHosts = lib.mkMerge [
+          {
+            "_" = {
+              default = true;
+              useACMEHost = domain;
+              onlySSL = true;
 
-            locations."/".return = "404";
-          };
-
-          "${domain}" = {
-            useACMEHost = domain;
-            onlySSL = true;
-
-            locations."/" = {
-              proxyPass = "http://127.0.0.1:8082";
-              proxyWebsockets = true;
+              locations."/".return = "404";
             };
-          };
+          }
 
-          "sync.${domain}" = {
-            useACMEHost = domain;
-            onlySSL = true;
-
-            locations."/" = {
-              proxyPass = "http://127.0.0.1:8384";
-              proxyWebsockets = true;
-
-              extraConfig = ''
-                proxy_buffering off;
-                proxy_read_timeout 600s;
-                proxy_send_timeout 600s;
-                send_timeout 600s;
-              '';
-            };
-          };
-
-          "vault.${domain}" = {
-            useACMEHost = domain;
-            onlySSL = true;
-
-            locations."/" = {
-              proxyPass = "http://127.0.0.1:8000";
-              proxyWebsockets = true;
-            };
-          };
-
-          "photos.${domain}" = {
-            useACMEHost = domain;
-            onlySSL = true;
-
-            locations."/" = {
-              proxyPass = "http://127.0.0.1:2283";
-              proxyWebsockets = true;
-
-              extraConfig = ''
-                proxy_request_buffering off;
-                proxy_read_timeout 600s;
-                proxy_send_timeout 600s;
-                send_timeout 600s;
-              '';
-            };
-          };
-
-          "docs.${domain}" = {
-            useACMEHost = domain;
-            onlySSL = true;
-
-            locations."/" = {
-              proxyPass = "http://127.0.0.1:28981";
-              proxyWebsockets = true;
-
-              extraConfig = ''
-                proxy_request_buffering off;
-                proxy_read_timeout 600s;
-                proxy_send_timeout 600s;
-                send_timeout 600s;
-              '';
-            };
-          };
-
-          "ntfy.${domain}" = {
-            useACMEHost = domain;
-            onlySSL = true;
-
-            locations."/" = {
-              proxyPass = "http://127.0.0.1:2586";
-              proxyWebsockets = true;
-
-              extraConfig = ''
-                proxy_buffering off;
-                proxy_read_timeout 600s;
-                proxy_send_timeout 600s;
-                send_timeout 600s;
-              '';
-            };
-          };
-
-          "status.${domain}" = {
-            useACMEHost = domain;
-            onlySSL = true;
-
-            locations."/" = {
-              proxyPass = "http://127.0.0.1:3001";
-              proxyWebsockets = true;
-            };
-          };
-
-          "beszel.${domain}" = {
-            useACMEHost = domain;
-            onlySSL = true;
-
-            locations."/" = {
-              proxyPass = "http://127.0.0.1:8090";
-              proxyWebsockets = true;
-
-              extraConfig = ''
-                proxy_buffering off;
-                proxy_read_timeout 600s;
-                proxy_send_timeout 600s;
-                send_timeout 600s;
-              '';
-            };
-          };
-        };
+          serviceVhosts
+        ];
       };
     };
 

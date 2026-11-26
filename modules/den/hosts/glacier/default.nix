@@ -19,6 +19,7 @@
       den.aspects.my-secrets
       den.aspects.sshd
       den.aspects.tailscale
+      den.aspects.glacier.services
       den.aspects.glacier.postgresql
       den.aspects.glacier.reverse-proxy
       den.aspects.glacier.homepage

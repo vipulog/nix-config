@@ -1,12 +1,27 @@
 {lib, ...}: {
   den.aspects.glacier.uptime-kuma = {
-    nixos = {
+    nixos = {config, ...}: let
+      svc = config.glacier.services."uptime-kuma";
+    in {
+      glacier.services."uptime-kuma" = {
+        subdomain = "status";
+        port = 3001;
+
+        homepage = {
+          group = "Monitoring";
+          order = 30;
+          title = "Uptime Kuma";
+          icon = "uptime-kuma.svg";
+          description = "Service Health";
+        };
+      };
+
       services.uptime-kuma = {
         enable = true;
 
         settings = {
-          HOST = "127.0.0.1";
-          PORT = "3001";
+          HOST = svc.host;
+          PORT = toString svc.port;
         };
       };
 

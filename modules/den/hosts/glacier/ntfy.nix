@@ -1,12 +1,34 @@
 {lib, ...}: {
   den.aspects.glacier.ntfy = {
-    nixos = {
+    nixos = {config, ...}: let
+      svc = config.glacier.services.ntfy;
+    in {
+      glacier.services.ntfy = {
+        subdomain = "ntfy";
+        port = 2586;
+
+        proxy.extraConfig = ''
+          proxy_buffering off;
+          proxy_read_timeout 600s;
+          proxy_send_timeout 600s;
+          send_timeout 600s;
+        '';
+
+        homepage = {
+          group = "Monitoring";
+          order = 10;
+          title = "ntfy";
+          icon = "ntfy.svg";
+          description = "Push Notifications";
+        };
+      };
+
       services.ntfy-sh = {
         enable = true;
 
         settings = {
-          base-url = "https://ntfy.vipulog.duckdns.org";
-          listen-http = "127.0.0.1:2586";
+          base-url = svc.url;
+          listen-http = svc.localAddr;
           behind-proxy = true;
         };
       };

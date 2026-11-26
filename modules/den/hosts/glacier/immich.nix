@@ -1,14 +1,35 @@
 {
   den.aspects.glacier.immich = {
-    nixos = {
+    nixos = {config, ...}: let
+      svc = config.glacier.services.immich;
+    in {
+      glacier.services.immich = {
+        subdomain = "photos";
+        port = 2283;
+
+        proxy.extraConfig = ''
+          proxy_request_buffering off;
+          proxy_read_timeout 600s;
+          proxy_send_timeout 600s;
+          send_timeout 600s;
+        '';
+
+        homepage = {
+          group = "Your data";
+          order = 30;
+          title = "Immich";
+          icon = "immich.svg";
+          description = "Photos & Videos";
+        };
+      };
+
       services.immich = {
         enable = true;
-        host = "127.0.0.1";
-        port = 2283;
+        inherit (svc) host port;
         mediaLocation = "/srv/immich/media";
 
         settings = {
-          server.externalDomain = "https://photos.vipulog.duckdns.org";
+          server.externalDomain = svc.url;
         };
       };
 
