@@ -1,19 +1,47 @@
-{self, ...}: let
-  inherit (self.lib.den.ssh) mkHostIdFilePath;
-in {
-  den.aspects.sshd = {
-    os = {host, ...}: {
-      services.openssh = {
-        enable = true;
+{
+  den.aspects.sshd = let
+    mkHostIdFilePath = {hostname}: "/etc/ssh/host_${hostname}";
+  in {
+    os = {
+      host,
+      lib,
+      config,
+      options,
+      ...
+    }: let
+      hostIdFilePath = mkHostIdFilePath {hostname = host.name;};
+      isEphemeralHost = config.ephemeral-host.enable or false;
 
-        hostKeys = [
-          {
-            path = mkHostIdFilePath {hostname = host.name;};
-            type = "ed25519";
-          }
-        ];
-      };
-    };
+      joinPath = segs: let
+        clean = builtins.filter (s: s != null) segs;
+        trimmed = map (s: lib.removeSuffix "/" (lib.removePrefix "/" s)) clean;
+        nonEmpty = builtins.filter (s: s != "") trimmed;
+      in
+        "/" + lib.concatStringsSep "/" nonEmpty;
+
+      sopsHostIdFilePath = joinPath [
+        (lib.optionalString isEphemeralHost config.ephemeral-host.persistMp)
+        hostIdFilePath
+      ];
+    in
+      lib.mkMerge [
+        {
+          services.openssh = {
+            enable = true;
+
+            hostKeys = [
+              {
+                path = hostIdFilePath;
+                type = "ed25519";
+              }
+            ];
+          };
+        }
+
+        (lib.optionalAttrs (options ? sops) {
+          sops.age.sshKeyPaths = [sopsHostIdFilePath];
+        })
+      ];
 
     nixos = {
       services.openssh.settings = {
